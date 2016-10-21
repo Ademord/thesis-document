@@ -1,0 +1,108 @@
+\documentclass[12pt, spanish]{report} % to have chapters
+\usepackage{blindtext} % to quickly get a full document
+\usepackage{import}
+% SPANISH TITLES, TOC, TOF, TOT
+\usepackage[spanish]{babel}
+% IMPORT CHAPTERS
+\usepackage{tikz}
+% TODOS PACKAGE -- DISABLE LATER
+\usepackage[colorinlistoftodos]{todonotes}
+\newcounter{todocounter}
+\newcommand{\todonum}[2][]{
+    \stepcounter{todocounter}
+    \todo[color=orange, #1]{\thetodocounter: #2}
+}
+\newcommand{\addref}[2][]{\todonum[color=blue!40, #1]{Add Ref. #2}}
+\newcommand{\rewrite}[2][]{\todonum[color=green!40, #1]{#2}}
+\newcommand{\urgent}[2][]{\todonum[color=red!40, #1]{#2}}
+% EXAMPLES
+% \todonum[inline]{hello}
+% \addref[inline]{asdasdas}
+% \rewrite{hello}
+% \urgent{hello}
+
+% STRIKETHROUGH -- DISABLE LATER
+\usepackage[normalem]{ulem}
+\definecolor{mypink2}{RGB}{170, 47, 55}
+
+% TOC LINKABLE -- DISABLE LATER
+\usepackage{hyperref}
+\hypersetup{
+    linktocpage,
+    % pdfhighlight=/N,
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\hypersetup{}
+
+% FONTS AND LANGUAGE
+\usepackage[T1]{fontenc}
+\usepackage{selinput}
+\SelectInputMappings{%
+    aacute={á},
+    ntilde={ñ},
+    Euro={€}
+    }
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\renewcommand{\baselinestretch}{1.5} 
+% IMAGES AND FIGURES
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+
+% PAGE STYLING & FORMAT
+\usepackage{fancyhdr}
+
+\usepackage[
+    top=2.5cm,
+    bottom=2.5cm,
+    left=4cm,
+    right=2.5cm,
+    headheight=17pt, % as per the warning by fancyhdr
+    includehead,includefoot,
+    heightrounded, % to avoid spurious underfull messages
+]{geometry} 
+
+\fancyhead[R]{\leftmark}
+\fancyhead[C,L]{}
+\fancyfoot[R]{\thepage}
+\fancyfoot[C]{}
+\fancyfoot[L]{\textit{
+    Aplicacion Nativa de la Nube con ALPR para el Control Vehicular para la Empresa QSS Bolivia
+}}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[R]{\thepage}
+    \fancyfoot[L]{\textit{Aplicacion Nativa de la Nube con ALPR para el Control Vehicular para la Empresa QSS Bolivia}}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+}
+
+% OTHER STYLINGS
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+\renewcommand{\chaptername}{CAPITULO }
+\renewcommand{\thechapter}{\Roman{chapter}}
+\renewcommand{\thesection}{\arabic{chapter}.\arabic{section}}
+\renewcommand{\thefigure}{\arabic{chapter}.\arabic{figure}}
+
+\pagestyle{fancy}
+
+% DOCUMENT
+\title{Aplicacion Nativa de la Nube con ALPR para el Control Vehicular para la Empresa QSS Bolivia}
+\author{Juan Francisco Ribera Laszkowski}
+\begin{document}
+\maketitle
+    \tableofcontents
+    \listoffigures
+    %\listoftables
+    \listoftodos
+
+    \foreach \c in {1,...,5}{\import{chapters/}{chapter\c.tex} }
+
+\end{document}

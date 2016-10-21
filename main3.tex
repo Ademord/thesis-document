@@ -1,0 +1,22 @@
+\documentclass{book}
+\usepackage{blindtext}
+\usepackage{fancyhdr}
+
+\fancyhead[R]{\leftmark}
+\fancyhead[C,L]{}
+\fancyfoot[R]{\thepage}
+\fancyfoot[C]{}
+\fancyfoot[L]{\textit{thesistitle}}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\fancypagestyle{plain}{%
+\fancyhf{}
+\fancyfoot[R]{\thepage}
+\fancyfoot[L]{\textit{thesistitle}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.4pt}}
+
+\pagestyle{fancy}   %%<----------- this added
+\begin{document}
+  \Blinddocument
+\end{document}

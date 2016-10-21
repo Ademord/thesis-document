@@ -1,0 +1,99 @@
+\chapter{Aplicaciones Nativas de la Nube}
+
+\section{Aplicaciones Nativas de la Nube}
+
+	\subsection{Contexto de Servicios}
+	\todonum{NFV}
+    In the march towards 5G, today’s mobile telecom industries finds themselves in challenging but opportune times. The challenge of optimizing and maximizing average revenue per user (ARPU) is an ever present one for this industry. According to GSMA, the mobile industry has had continued growth in 2015, where the mobile connections registered were more than 7.6 billion (representing 4.7 billion unique subscribers) and operator revenues of went over \$1 trillion. Also, the acceleration of 4G has been a major highlight; in late 2015, the global 4G connection base passed the 1 billion mark. It is forecasted that the global subscriber base will reach 5.8 billion by the end of the decade, by which point over 70\% of the world’s population will have a mobile subscription and represents a growth of 2.6 billion from the end of 2015. \addref{}(GSMA, 2016) With such a situation, this then poses two key questions of the telecom and mobile industries, namely:
+
+    \begin{itemize}
+    \item How can they optimise their CAPEX/OPEX, offering the same service at a lower cost or with greater profit and,
+    \item How can they incentivise their existing subscriber base to use new and innovative services by efficiently leveraging the vast amounts of infrastructure at their disposal and in doing so create new revenue streams?
+    \end{itemize}
+    
+    On order to address these challenges, the use of cloud computing technologies coupled with flexible and agile service composition technologies is one viable approach that is seen within the telecoms world. In order to use cloud computing technology within existing application/service domains, we need to understand what this means. Essentially to use cloud computing in the context of an existing application means that that application needs to be “cloudified”. Typically this application will not have been built for cloud computing resources, which can grow and shrink with the demands of the service’s end-user. As such for the application or service to efficiently take advantage, it often needs to be redesigned to adapt to the power that cloud computing brings. In order to base our further conversations, we should briefly define what cloud computing is, how it’s related to services and those to NFV.
+	
+	\subsection{Migrando hacia Aplicaciones Nativas de la Nube}
+	
+    The process of (re)architecting an application or service, the target, to take advantage of cloud principles is known as cloudification. The result of this process is a cloud-native target. Such targets exhibit common behaviours and characteristics. A key point to note is that it is the architecture of the target and not the choice of platform that makes it cloud-native. 
+
+    Drawing on service-oriented principles, the targets’ architecture is generally loosely coupled architectures and leverage asynchronous, non-blocking communication patterns. Key to a successful cloud-native design is accommodating features like resource pooling, multi tenancy, on demand and self-provisioning, and prominently scaling behaviour. The latter for instance, is based on monitoring target metrics as resources are added or removed. Against these metrics, logic runs such that when demand (indicated by metrics) increases new resources are automatically added based on proactive and/or reactive actions. This is known as scaling out. The inverse applies too; when demand reduces resources are removed and is known as scaling-in. This scaling behaviour bring further reliability into the target. Scaling behaviour can deal with events so the target has no perceived downtime or quality of experience degradation, including transient failures. Along with this, a cloud-native target should exhibit upgrades with no perceived downtime. As scaling actions are mainly part of the runtime phase of a target, it also presents the opportunity to carry out optimisations such as optimising for cost by reducing the number of resources when not necessary or placement of resources in the best geographical area to minimize latency. A cloud-native target must respect the basic cloud computing principles as follows.
+
+        \subsubsection{Principios de la Computacion en la Nube}
+        The key driving goal is to research the work required to augment and extend cloud infrastructure based on the Cloud Computing principles, as defined by \addref{} NIST (Grance):
+        \begin{itemize}
+            \item On-Demand, Self-Service: this means that cloud end users (from here on named end users) can come to a cloud service provider and, without any help from the cloud service provider, create a cloud service instance when the end user needs it, provided that billing details of the end user are available and validated by the provider.
+            \item Resource Pooling: this means that the resources that a cloud service provider uses in its service offering are shared across the service instances running upon those resources. Using technology like virtualisation allows the cloud service provider to more easily and optimally utilise those resources.
+            \item Broad Network Access: Cloud services are generally delivered over networking technologies and for end users to exploit cloud computing they need access to those networking technologies (generally TCP/IP/HTTP stacks).
+            \item Rapid Elasticity: this means that an end user can easily grow or shrink their cloud computing provisionings based on performance-based metrics. This is commonly done by scaling in and out the end user’s application by adding more service instances (based on performance-related metrics) to handle changes of workload. Less commonly (and not as recommended) is to scale up or down the service instance (i.e. increasing/decreasing the virtual resources assigned to it, i.e. CPU and memory) depending on a performance-based metric.
+            \item Measured Service / Pay-As-You-Go: cloud computing based services do charge on a once-off payment basis. These services charge based on how much of the service is used over time. With this attribute a marked difference between purchasing a service over a product is seen.
+        \end{itemize}
+        
+        There is a traditional view in cloud computing that splits and relates cloud computing services into three service types:
+        \begin{itemize}
+            \item Infrastructure as a Service (IaaS): generally compute, storage and networking services. These support the traditional system/network administrator in delivering infrastructure to support application developers to run their application stacks upon, however given the ease and programmatic use of these services application developers are now moving more into roles previously reserved for administrators. A movement known as DevOps embodies this. Examples of infrastructure as a service offerings include \addref{}OpenStack, \addref{}Amazon EC2 and \addref{}Joyent Triton.
+            \item Platform as a Service (PaaS): typically programming language execution environments, databases, and web servers. PaaS can be seen as a set of services that supports a programmer in delivering their software to end users. Examples of these include Google \addref{}AppEngine, \addref{}CloudFoundry, and \addref{}OpenShift.
+            \item Software as a Service (SaaS): this is the widest category of cloud computing services as it mirrors the diversity of application developer creativity and offers that they make to consumers. Examples of these include \addref{}Google Apps and \addref{}Salesforce.
+        \end{itemize}
+
+        \subsubsection{Arquitectura Orientada a Servicios y Ciclos de Vida}
+        
+        One important set of principles inherent to Cloud Computing is that which guides both Service-Oriented Architectures (SOA) and in general, distributed systems. Full adoption of other SOA aspects are not in scope but rather the principles of architecting SOA-based systems are adopted. Important to us are the following such that services are:
+        \begin{itemize}
+            \item Autonomous: The logic governed by a service resides within an explicit boundary. The service has control within this boundary, and is not tightly coupled to execute.
+            \item Share a formal contract: In order for services to interact, they need not share anything but a collection of published metadata that describes each service and defines the terms of information exchange.
+            \item Loosely coupled: Dependencies between the underlying logic of a service and its consumers are limited to conformance of the service contract. Services abstract underlying logic, which is invisible to the outside world, beyond what is expressed in the service contract metadata.
+            \item Composable: Services may compose others, allowing logic to be represented at different levels of granularity. This allows for reusability and the creation of service abstraction layers and/or platforms.
+            \item Reusable: Whether immediate reuse opportunities exist, services are designed to support potential reuse.
+            \item Stateless: Services should be designed to maximise statelessness even if that means deferring state management elsewhere.
+            \item Discoverable: Services should allow their descriptions to be discovered and understood by (possibly) humans and service requesters that may be able to make use of their logic. Services should be discovered through a service landscape.
+        \end{itemize}
+        
+        Providing functionality (network functions or services) as a services requires support of the entire service life-cycle by a Service Orchestration Framework. This life-cycle can be divided into two distinct phases: the business phase and the technical phase. The business phase, contains all activities related to the conceptualisation of the service plus the agreements of contracts between partners. This phase is largely a human- and manual-based process:
+        \begin{itemize}
+            \item Design: This is the phase where the service is conceptualised, the services that cannot be supplied by the organisation are sourced from other organisations, and requirements upon the external services to be combined are collected and studied. An appropriate place where services can be listed and understood is through the user of a service landscape, dealt with in the next section.
+            \item Agreement: Here items such as pricing, Service Level Agreement (SLA), Access, etc., are agreed between two or more organisations. The agreements are generally bilateral business ones. 
+        \end{itemize}
+        
+        The technical phase is guided and governed by the business phase decisions and agreements between providers. At this phase, all aspects related to the business phase have taken place:
+        \begin{itemize}
+            \item Design: Design of the architecture, implementation, deployment, provisioning and operation solutions. Supports Service Owner to "design" their service.
+            \item Implementation: of the designed architecture, functions, interfaces, controllers, APIs, etc.
+            \item Deployment: Deployment of the implemented elements. Supply of anything such that the service can be used, but does not provide access to the service. For example placing a VM image on the IaaS provider and creating an instance from it.
+            Provisioning: Provisioning of the service environment (e.g. NFs, interfaces, network, etc.). Activation of the service such that the EU can actually use it. For example installation and configuration of services.
+            \item Operation and Runtime Management: Activities such as scaling, reconfiguration of application components occur here. It is this particular lifecycle phase that receives little attention as many of the IT orchestrators concentrate on getting the services deployed in what is known as day-1 operations. What is given little attention is day-2 operations which are the processes around reconfiguring a service as it is maintained over a long period of time.
+            \item Disposal: Release of SICs and the SI itself and therefore all related resources.
+        \end{itemize}
+        The lifecycle presented takes inspiration from TM Forum's eTOM \addref{} and maps to it. Overall phases related to Design, Agreement and Implementation are not covered by eTOM, yet all other phases find a place in the eTOM model. The phases of Deploy and Provision map to the eTOM fulfilment process and Operations and Runtime Management map to the Assurance process.
+        
+        There are some basic entities that any Cloud-native-/SOA-based architecture which should be noted to further understand the architecture.
+        \begin{itemize}
+            \item Service: \addref{}OASIS defines service as "a mechanism to enable access to one or more capabilities, where the access is provided using a prescribed interface and is exercised consistent with constraints and policies as specified by the service description." A service can be uniquely identified by its interface. Its identity is known as its type.
+            \item Service Instance (SI): Is defined as a single instance of a service of a certain service type.
+            \item Service Instance Component (SIC): Is an integral, internal element of a SI
+            \item Resource: Any physical or virtual component of limited availability within a computer or information management system. Computer resources include means for input, processing, output, communication, and storage. A resource is owned by one or more entities.
+            \item Physical Resource: Any one element of hardware, software or data that is part of a larger system.
+            \item Virtual Resource: A virtual resource is a temporal partitioned fraction of any physical resource of limited availability within a computer or information management system.
+        \end{itemize}
+        
+        Drawing on all these architectural concepts, microservices are now the architectural style that is very topical currently. Microservices has its base in SOA and one can see Microservices as a domain specific and fine grained variant of SOA.
+        \subsubsection{Microservicios}
+
+	    
+	\subsection{Repositorios y Registros de Servicios}
+
+	    \subsubsection{Consul}
+
+	    \subsubsection{Zookeper}
+
+	    \subsubsection{Etcd}
+
+    \subsection{Orquestradores de Servicios}
+
+	    \subsubsection{Kubernetes}
+
+	    \subsubsection{Swarm}
+
+	    \subsubsection{Juju}
+
+	    \subsubsection{Heat}
