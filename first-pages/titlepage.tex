@@ -1,0 +1,49 @@
+\newgeometry{
+    top=-1cm,
+    bottom=2.5cm,
+    left=2.5cm,
+    right=2.5cm,
+    headheight=17pt, % as per the warning by fancyhdr
+    includehead,includefoot,
+    heightrounded, % to avoid spurious underfull messages
+}
+
+\begin{titlepage}
+    \begin{tikzpicture}[remember picture, overlay]
+      \draw[line width = 1pt] ($(current page.north west) + (2cm,-2cm)$) rectangle ($(current page.south east) + (-2cm, 2cm)$);
+    \end{tikzpicture}
+     
+    \begin{tikzpicture}[remember picture, overlay]
+      \draw[line width = 1pt, rounded corners=10pt,] ($(current page.north west) + (2.5cm, -5.55in)$) rectangle ($(current page.south east) + (-2.5cm, 4.45in)$);
+    \end{tikzpicture}
+    
+    \begin{center}
+        \includegraphics[width=0.6\textwidth]{upsa}
+        
+        \vspace{0.5cm}
+            \large \textbf{FACULTAD DE INGENIERÍA}
+            
+            \textbf{CARRERA: INGENIERÍA DE SISTEMAS}
+        
+        \vspace{1cm}
+            \textbf{MODALIDAD DE GRADUACIÓN}
+            
+            \textbf{PROYECTO DE GRADO}
+        
+        \vspace{1.3cm}
+            \textbf{APLICACIÓN NATIVA DE LA NUBE CON ALPR PARA EL CONTROL VEHICULAR PARA LA EMPRESA QSS BOLIVIA}
+        
+        \vspace{3cm}
+            \normalsize
+            \textbf{Juan Francisco Ribera Laszkowski}
+            
+            \textbf{Reg.: 2012110606}
+        
+        \vfill
+            \normalsize   
+            \textbf{Santa Cruz Bolivia}
+            
+            \textbf{2016}
+    \end{center}
+\end{titlepage}
+\restoregeometry

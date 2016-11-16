@@ -1,0 +1,53 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\select@language {american}
+\defcounter {refsection}{0}\relax 
+\select@language {spanish}
+\defcounter {refsection}{0}\relax 
+\addvspace {10\p@ }
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Distribuci\IeC {\'o}n del software en nodos y su integraci\IeC {\'o}n con c\IeC {\'a}maras de seguridad}}{10}{figure.1.1}
+\defcounter {refsection}{0}\relax 
+\addvspace {10\p@ }
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Monolitos y Microservicios (Fowler \& Lewis, 2016)}}{20}{figure.2.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Monolitos y Microservicios \parencite {Lewis2016-az}}}{22}{figure.2.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Ejemplo de Servicio Orquestado}}{26}{figure.2.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Integraci\IeC {\'o}n de Cloudify \parencite {Cloudify2016-je}}}{28}{figure.2.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Resumen de la Arquitectura de Manager de Cloudify \parencite {Cloudify2016-ze}}}{29}{figure.2.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Monolitos y Kubernetes \parencite {Kubernetes2016-li}}}{30}{figure.2.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Cluster de Kubernetes \parencite {Kubernetes2016-jo}}}{32}{figure.2.7}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Arquitectura de una aplicaci\IeC {\'o}n Docker \parencite {Docker2016-pk}}}{34}{figure.2.8}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Panorama de Juju \parencite {Metsch2013-et}}}{35}{figure.2.9}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Arquitectura de OpenStack Heat \parencite {Metsch2013-et}}}{36}{figure.2.10}
+\defcounter {refsection}{0}\relax 
+\addvspace {10\p@ }
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Arquitectura de una red basada en ONVIF \parencite {Senst2011-bb}}}{43}{figure.3.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Figure 10.1 Izquierda superior: imagen original. Derecha Superior: resultado despu\IeC {\'e}s de realizar una selecci\IeC {\'o}n manual del umbral de intensidad. Izquierda Inferior: resultado de selecci\IeC {\'o}n autom\IeC {\'a}tica del umbral por regresi\IeC {\'o}n polinomial al histograma de la imagen. Derecho inferior: resultado de selecci\IeC {\'o}n autom\IeC {\'a}tica del umbral por el m\IeC {\'e}todo de Otsu. La imagen en la derecha muestra el histograma y el resultado de hacer una regresi\IeC {\'o}n polinomial de 6to orden \parencite {Solomon2011-xz}}}{47}{figure.3.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Diagrama de flujo de los pasos principales en el dise\IeC {\~n}o de un clasificador \parencite {Solomon2011-xz}}}{50}{figure.3.3}
+\defcounter {refsection}{0}\relax 
+\addvspace {10\p@ }
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Matr\IeC {\'\i }culas de diferentes pa\IeC {\'\i }ses \parencite {Kustermann2016-yd}}}{53}{figure.4.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Representaci\IeC {\'o}n gr\IeC {\'a}fica de una cadena de procesos (en ingles, Pipeline) \parencite {Saini2015-yp}}}{55}{figure.4.2}
+\defcounter {refsection}{0}\relax 
+\addvspace {10\p@ }
+\defcounter {refsection}{0}\relax 
+\addvspace {10\p@ }
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Panorama de los Nodos de la Aplicaci\IeC {\'o}n}}{73}{figure.6.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Arquitectura de la Aplicaci\IeC {\'o}n}}{75}{figure.6.2}
