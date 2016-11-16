@@ -1,141 +1,127 @@
-\chapter{Reconocimiento Automático de Matrículas}
-Figura X. Ejemplo de Sistema Inteligente de Transporte con Cámaras de Seguridad \parencite{TechFAQ2016-oi}
+\chapter{Procesamiento de Imágenes Digitales}
 
-El reconocimiento automático de matrículas (en inglés, Automatic License Plate Recognition o ALPR) es uno de los módulos (importantes de los Sistemas Inteligentes de Transporte (ITS). Investigaciones de \parencite{Anagnostopoulos2008-uh} y \parencite{TechTarget2016-gw} mencionan múltiples aplicaciones de ALPR, tales como la determinación de qué vehículos pertenecen o no en un parqueo, disposición de pases parqueo eliminando la necesidad de confirmación humana, recuperación de autos robados, control de tráfico, etc..
+\section{Que es la Visión Artificial?}
+El objetivo de la visión artificial es utilizar cámaras para analizar o entender escenas del mundo real. Es una disciplina que estudia problemas metodológicos y algorítmicos, además de la implementación de soluciones diseñadas \parencite{Klette2014-oo}.
+La visión artificial nos permite saber si un auto se encuentra en su carril, cuantas personas se encuentran en un lugar, cual es la distancia desde una cámara a un edificio y, reconocer una persona específica; basado en imágenes o video.
+Recientemente ha habido un avance sólido en la visión artificial, con lo que las áreas de aplicación han aumentado. En productos modernos, se utiliza en aplicaciones para teléfonos inteligentes, asistencia para conductores de vehiculos, vehiculos auto-manejados (self-driving cars), o en la interacción usuario-videojuego.  Por otro lado, en la automatización industrial, se utiliza para el control de calidad o de proceso y, en la industria del cine, para la creación de avatares y mundos basados en imágenes o video, entre otros.  Estos son unos cuantos ejemplos de áreas en las que se satisface una necesidad de procesar información almacenada en imágenes o video. 
 
-Usualmente, un módulo de ALPR se divide en tres etapas principales: detección de la matrícula de una imagen o video, segmentación de caracteres y, reconocimiento de caracteres. Entre estos, la detección de la matrícula es la parte más importante y la más difícil; los módulos ALPR deben enfrentar factores no problemáticos como: imágenes fuera de foco, condiciones de iluminación no deseadas, matriculas pequeñas, sombras y diferentes condiciones climáticas \parencite{Mahini2006-us}.
-A pesar de que se han realizado muchas investigaciones en el área del ALPR, los sistemas actuales tienen un buen desempeño bajo condiciones específicas \parencite{Anagnostopoulos2006-is}, tales como: distancia de la cámara \parencite{Martin2002-zu,Guo2008-qk}, velocidad del vehículo \parencite{Garibotto2001-lu}, condiciones de iluminación \parencite{Xiong2004-qv,Mahini2006-us}, posiciones de la cámara \parencite{Chang2004-kg}, etc. No olvidemos que los módulos ALPR pueden fallar en el borde de dos países debido a las variaciones en los patrones patrones de los caracteres en matrículas \parencite{Anagnostopoulos2006-is,Shapiro2006-rv,Mecocci2006-nt}.
 
-  \begin{figure}[H]
+\section{Características de un Sistema de Visión}
+Un sistema de visión evalúa los datos que se encuentran en una imagen (originados de una cámara), extrae y procesa los datos y luego ejecuta una acción con los resultados.
+
+Por ejemplo, un dispositivo de control de parqueo. Este sistema observa un espacio de parqueo y detecta violaciones de parqueo en las que vehículos no autorizados intentan parquear en el espacio. Si fuese, en cambio, un vehículo autorizado o si el espacio estuviese desocupado, no hubiese ninguna violación. A pesar de ser conceptualmente simple, el problema presenta complejidades:
+
+\begin{itemize}
+    \item Las condiciones de luz afectan la detección de color y la distinción del vehículo del fondo.
+    \item La ligera variación del lugar de parqueo del vehículo puede dificultar la detección del vehículo contra un espacio desocupado. 
+    \item El vehículo puede estar sucio, dificultando la detección de un vehículo autorizado o de un vehículo no autorizado. 
+    \item El lugar de parqueo puede estar cubierto de nieve, dificultando saber si el espacio se encuentra desocupado.
+\end{itemize}
+Para encarar las complejidades mencionadas, un sistema de visión usualmente realiza dos tareas: filtrar la entrada para reducir el rango de información a procesar y, extraer las características relevantes de la(s) imágen(es) \parencite{Demaagd2012-qb}.
+
+\section{Imagen Digital}
+Una imagen digital puede considerarse como una representación discreta de información, que posee tanto datos espaciales y de intensidad (color) \parencite{Solomon2011-xz}.
+Mientras que una imagen es una representación bidimensional de una escena tridimensional, una imagen digital es básicamente una representación numérica de una imagen. Los diferentes sistemas de procesamiento de imágenes incluyen la adquisición de imágenes, su almacenamiento, procesamiento y exposición \parencite{Jayaraman2011-jb}.
+\section{Adquisición de la Imagen}
+La adquisición de la imagen digital es el primer proceso que cumple un sistema de reconocimiento de matrículas. Existen múltiples maneras de adquirir imágenes, y uno de ellos es a traves de Cámaras IP (IPC); para estas cámaras, existen múltiples fabricantes y cada uno puede adoptar un protocolo propietario. En este sentido, se propone un diseño de un software de control vehicular compatible con la especificación ONVIF. La especificación ONVIF define un protocolo común para el intercambio de información a través de dispositivos basados en IP. 
+
+\subsection{Especificación ONVIF}
+El Open Network Video Interface Forum \parencite{Onvif2016-bt}. fue fundado por Axis Communications, Bosch Security Systems y Sony Corporation Actualmente cuenta con 455 socios: 41 socios completos, 20 socios contribuyentes, 369 socios usuarios y 25 socios observadores. La especificación incluye descubrimiento automatizado de  dispositivos,  además de  transmisión de vídeo y metadatos. ONVIF hace uso de servicios web y provee una conformidad formal para los procesos. En este sentido, asegura la interoperabilidad entre dispositivos, sin importar la marca. 
+
+
+\subsubsection{Comunicación}
+El especificación ONVIF define una capa de red de dispositivos de seguridad IP, descrita por servicios web basados en los definidos por la Organización para el Avance de Estándares de Información Estructurada (OASIS). La definición de un cliente está provista en WSDL (Web Service Description Language) para asegurar la integración de productos sin importar la marca de los mismos. Las estructuras de datos y su intercambio entre servicios web proveedores y solicitantes se basa en el protocolo Simple Object Access Protocol (SOAP). SOAP es un protocolo de intercambio de mensajes que puede ser implementado a través de HTTP, HTTPS, RTSP, etc. \parencite{Onvif2016-dc}.
+
+    \begin{figure}[H]
         \centering
-        \includegraphics[width=0.80\textwidth]{SA_BOLI_GI}
-        \caption{ Matrículas de diferentes países \parencite{Kustermann2016-yd}}
-        \label{fig:worldcarplates}
-\end{figure}  
-
-La figura X muestra claramente cómo las matrículas de un país a otro varían bastante. Por esta razón no es efectivo utilizar un módulo ALPR desarrollado para un país, en otro, sin antes haberlo adaptado.
-\section{Detección vs. Reconocimiento}
-La\textit{ detección} de objetos consiste en determinar si en una imagen o video arbitrarios hay un objeto determinado (un rostro, un auto) y, en caso haberlo, en qué posición se encuentra. Por otro lado, el \textit{reconocimiento }de objetos (el rostro de Juan, el auto de Pedro) consiste en comparar el objeto detectado contra una base de datos para saber si existe alguna asociación con alguno registrado. Vale mencionar que es usualmente más difícil la detección de objetos en la escena compleja de una imagen que el reconocimiento de los mismos. Dado lo anterior, la mayoría de los algoritmos de reconocimiento pueden ser usados para la detección de objetos. Sin embargo, dependiendo del objeto a detectar, unos métodos pueden ser más adecuados que otros \parencite{Ekvall2005-ut}.
-\section{OpenALPR}
-OpenALPR es una librería open-source de visión artificial que se encarga de la tarea del reconocimiento automático de matrículas utilizando los módulos de OpenCV para realizar el procesamiento de imágenes..
-  
-  \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.90\textwidth]{openalpr-pipeline}
-        \caption{Representación gráfica de una cadena de procesos (en ingles, Pipeline) \parencite{Saini2015-yp}}
-        \label{fig:openalpr-pipeline}
-\end{figure}
+        \includegraphics[width=0.80\textwidth]{onvif-arch}
+        \caption{Arquitectura de una red basada en ONVIF \parencite{Senst2011-bb}}
+        \label{fig:onvif-arch}
+    \end{figure}
     
-A continuación se describe cada uno de los subprocesos que realiza la librería OpenALPR para el reconocimiento de una matrícula a partir de una entrada, sea una imagen o un video. 
-
-\subsection{OpenCV}
-OpenCV es una librería open-source bajo la licencia BSD que contiene cientos de algoritmos de visión artificial, utilizada por Google, Microsoft, IBM, Intel, etc. \parencite{OpenCV2016-bv}. OpenCV tiene una estructura modular distribuida de la siguiente manera:
-\begin{itemize}
-\item \textbf{core} - define las estructuras de datos y las funciones básicas utilizadas por todos los otros módulos.
-\item \textbf{imgproc} - módulo de procesamiento de imágenes que incluye filtros lineales y no lineales, transformaciones geométricas (resize, affine y perspective warping, generic table-based remapping), inversión del espacio de colores, histogramas, etc.
-\item \textbf{video} - módulo de análisis de video que incluye estimación de movimiento, sustracción de fondo y algoritmos de seguimiento de objetos.
-\item \textbf{calib3d} - módulo de algoritmos básicos de multiple-view geometry, calibración singular y estéreo de cámaras, estimación de pose de objeto, algoritmos de correspondencia estéreo y, reconstrucción de elementos 3D.
-\item \textbf{features2d} - módulo de detectores de características sobresalientes, descriptores y, igualadores de descriptores.
-\item \textbf{objdetect} - módulo de detección de objetos e instancias de clases predefinidas (por ejemplo, rostros, ojos, tazas, personas, autos, etc.)
-\item \textbf{highgui} - módulo con una interfaz intuitiva para la captura de video, codecs de imágenes y video y capacidades de UI sencillas
-\item \textbf{gpu} - módulo con algoritmos acelerados para el GPU de diferentes módulos de OpenCV
-\item ... y otros módulos de ayuda como FLANN y envoltorios de pruebas de Google, bindings para Python, etc.    
-\end{itemize}
-
-
-\section{Pre-Procesamiento}
-El pre-procesamiento puede ser útil para acelerar el proceso de cómputo a la hora de detectar un objeto. Por ejemplo, si se quiere realizar un reconocimiento de rostros en tiempo real a través de una transmisión de video en alta calidad, la computadora debe manejar grandes cantidades de pixeles por segundo y, presentarlos a un algoritmo de reconocimiento de patrones puede ser computacionalmente factible. 
-
-El objetivo del pre-procesamiento es encontrar características que se obtengan rápidamente y que mantengan información útil para la discriminación de clases. Por ejemplo, el valor medio de la intensidad en una subregión rectangular en una imagen puede ser calculado de una manera muy eficiente \parencite{Viola2004-bx}, y un conjunto de estos descriptores puede ser muy efectiva para la rapida deteccion de rostros.
-
-No obstante, se debe tener cuidado con los métodos de preprocesamiento porque frecuentemente se descarta información; y, cuando esta información es importante para las solución del problema entonces la precisión total del sistema puede fallar \parencite{Bishop2007-am}.
-
-\section{Detección de Matrículas}
-La fase de detección sucede una vez por cada imagen recibida (entrada). OpenALPR utiliza el algoritmo LBP (usualmente utilizado para la detección de rostros) para encontrar regiones posibles que contengan matrículas (x, y, ancho, alto). Luego, cada una de estas regiones se envía a los siguientes subprocesos de la cadena.
-
-La fase de detección es usualmente la de mayor intensidad computacional; para solventar esto se la puede acelerar por GPU para mejorar el desempeño. 
-
-\subsection{Medida de Error de un Detector}
-
-\subsection{Algoritmo del Patrón Binario Local}
-El reconocimiento de objetos mediante visión artificial involucra dos aspectos importantes \parencite{Huang2011-ud}: representación del objeto \parencite{Ahonen2006-gg} y diseño del clasificador \parencite{Cover1967-vb,Wright2009-en,Cortes1995-qx}. La representación del objeto consiste en obtener un conjunto de características relevantes que describan el objeto, a partir de las imágenes originales. Las características “buenas” deben \parencite{Hadid2004-dk}:
+Cada dispositivo integrado en una red conforme al protocolo ONVIF debe implementa un servicio que es categorizado en cuatro clases:
 
 \begin{itemize}
-\item Tolerar cierta variación pero igualmente discriminar estrictamente otras clases
-\item Ser de fácil extracción a partir de una imagen en formato original para permitir el rápido procesamiento
-\item Existir en un espacio de baja dimensionalidad para evitar el uso de clasificadores costosos
+\item \textbf{Transmisor de Vídeo en Red (NVT):} provee uno o más flujos de vídeo, como una cámara o una caja que combina los flujos de vídeo de múltiples cámaras.
+\item \textbf{Análisis de Vídeo en Red (NVA):} son dispositivos utilizados para analizar vídeo, audio o metadatos y proveen información adicional que no es entregada con el flujo de vídeo. 
+\item \textbf{Exposición de Vídeo en Red (NVD): }provee la representación del flujo de vídeo y la interfaz entre el sistema y los operadores humanos.
+\item \textbf{Almacenamiento de Vídeo en Red (NVS):} provee los medios para grabar multimedia transmitida y metadatos, además de la capacidad de acceder a estos datos de una manera estructurada.
 \end{itemize}
 
-En el momento de su creación, el algoritmo LBP tuvo el propósito de ser utilizado para la describir texturas y en representación de rostros \parencite{Ahonen2006-gg}; vale mencionar que a lo largo de los años se ha observado un mayor interés en su uso para la representación facial.
+De acuerdo con la especificación ONVIF, las funcionalidades de análisis que proporcionan los sistemas de seguridad de vídeo pueden considerarse NVAs \parencite{Senst2011-bb}.
 
-El operador LBP, introducido por \parencite{Ojala1996-el}, codifica los pixeles de una imagen comparándolo con sus ocho pixeles vecinos en un área de 3x3 partiendo de la esquina superior izquierda. Los valores menores son codificados con 0 y los otros con 1. Los números se concatenan en sentido del reloj partiendo de la esquina superior izquierda para generar un número binario, del cual se obtiene el equivalente en decimal. Este número decimal es conocido como el código LBP. 
+\section{Extracción de Características de una Imagen}
 
-A partir de una imagen, o región de una imagen, se puede obtener un histograma de los códigos LBP observados en los pixeles de la región. Este histograma es también llamado un descriptor LBP o patrón LBP.
-Posteriormente, \parencite{Ojala2002-pl} propusieron dos extensiones al operador original. Primero, el operador fue extendido para poder cambiar el radio de la vecindad y la cantidad de vecinos y así poder capturar características dominantes en diferentes escalas. Segundo, propusieron utilizar un subconjunto de los $2^P$ patrones generados por LBP en una región para describir la textura de las imágenes. Estos patrones, llamados patrones uniformes, contenían como máximo dos transiciones de 0 a 1 en su cadena de bits, donde 00111000 tiene dos transiciones y 00010011 no. La idea de utilizar únicamente estos patrones uniformes es debido a que en ellos se encuentra la mayor parte de la información de las texturas en una imagen. 
+Los valores numéricos que representan a una imagen son llamados Descriptores o Características, ya que expresan información acerca de la imagen. Los descriptores son utilizados para extraer de las imágenes información útil para un usuario. Según la información de la que se está hablando, se los puede dividir en distintos grupos como: descriptores de colores, texturas o formas. \parencite{Deselaers2008-zg}.
 
-\subsection{Descriptores LBP}
-La imagen de un objeto puede considerarse como una composición de los micro-patrones LPB. Al generar un histograma LBP a partir de la imagen, se obtiene las ocurrencias de los micro-patrones pero no su ubicación en la imagen. 
+Los descriptores comúnmente utilizados en el análisis de matrículas incluyen descriptores de forma, simetría \parencite{Kim2001-yv}, proporción de altura y ancho \parencite{Naito2000-im}, color \parencite{Kim1996-js}, variación de valores de intensidad \parencite{Draghici1997-gz}, etc.. Por otro lado, los descriptores de caracteres incluyen: línea \parencite{Yu2000-tm}, masas amorfas (blobs) \parencite{Hontani2001-lk}, relación de aspecto de los caracteres \parencite{Hermida1997-ds}, distribución de intervalos entre caracteres \parencite{Poon1995-pw} y el alineamiento de los mismos \parencite{Soh1994-mc}. En la práctica, un pequeño conjunto de descriptores de un objeto que sean robustos, confiables y fáciles de detectar son suficientes para describir al mismo \parencite{Chang2004-kg}. 
 
-Ante esto, \parencite{Ahonen2006-gg} propuso, de la siguiente manera:
+En el análisis de imágenes se extrae descriptores (información relevante de las imágenes) a través de técnicas de procesamiento de imágenes digitales para realizar posteriormente el reconocimiento y clasificación de los mismos. Las tareas de análisis de imágenes pueden ser tan simples como leer un código de barras como identificar una persona por su rostro. \parencite{Solomon2011-xz}
+
+
+\section{Segmentación de Imágenes Digitales}
+
+La segmentación de imágenes es esencial para el procesamiento de imágenes al ser el primer paso antes de realizar la extracción, clasificación, descripción de características; consiste en subdividir la imagen en base a sus regiones u objetos que la constituyen. Es uno de los procesos más difíciles en el diseño de sistemas de visión artificial y se mantiene como un campo activo de la investigación de técnicas de procesamiento de imágenes y visión artificial \parencite{Solomon2011-xz}.
+
+Luego de haber realizado una segmentación, se distingue un primer plano y un plano de fondo. Una segmentación correcta depende estrictamente de los tipos de objetos o regiones de interés para la identificación y, se puede realizar a través de dos maneras:
+\begin{itemize}
+\item \textbf{Métodos basados en bordes:} se buscan bordes entre regiones entonces la clave es identificar marcadas diferencias entre un grupo de píxeles
+\item \textbf{Métodos basados en regiones:} Se asignan píxeles a una región según su grado de similitud.
+\end{itemize}
+
+\subsection{Uso de Descriptores para la Segmentación}
+Con el método más básico de segmentación (umbral de intensidad) la segmentación se realiza utilizando únicamente la intensidad de los píxeles; sin embargo, otros métodos utilizan características y propiedades más sofisticadas de las imágenes para realizar segmentaciones exitosas. En este sentido, existen tres propiedades básicas en las imágenes a la hora de realizar una segmentación:
+\begin{itemize}
+\item El color permite distinguir entre objetos y fondos. Por ejemplo, segmentar una naranja de un fondo azul.
+\item La textura es un concepto no muy bien definido en el procesamiento de imágenes. Se refiere a la variación espacial en la intensidad de una imagen.
+\item El movimiento de los objetos en una secuencia de imágenes puede ser útil para la segmentación. 
+\end{itemize}
+La mayoría de los procesos de segmentación utilizan una o más de las características de color, textura y movimiento de objetos. Existen sin embargo casos en los que es más difícil segmentar objetos: por ejemplo, un avión en movimiento en el cielo no puede distinguirse por su textura usualmente, entonces un análisis de forma podría realizarse. Es importante tener cuidado a la hora de elegir la técnica de segmentación para exitosamente separar al objeto que se busca de su fondo. \parencite{Solomon2011-xz}.
+
+\subsection{Método del Umbral de Intensidad}
+El umbral de intensidad es el método más sencillo para la tarea de segmentación. Si se quiere separar objetos en una imagen dada la variación de la intensidad en la imagen, seleccionamos un valor límite de manera que los píxeles cuyo valor sea mayor que el valor límite sean asignados a una región mientras que los que caigan por debajo del valor sean asignados a otra región (adjunta). El umbral de intensidad genera una imagen binaria, como se puede observar en la Figura 10.1.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.80\textwidth]{umbral-intensidad}
+        \caption{Figure 10.1 Izquierda superior: imagen original. Derecha Superior: resultado después de realizar una selección manual del umbral de intensidad. Izquierda Inferior: resultado de selección automática del umbral por regresión polinomial al histograma de la imagen. Derecho inferior: resultado de selección automática del umbral por el método de Otsu. La imagen en la derecha muestra el histograma y el resultado de hacer una regresión polinomial de 6to orden \parencite{Solomon2011-xz}}
+        \label{fig:umbral-intensidad}
+    \end{figure}
+    
+
+
+\section{Clasificación de Características (Detección)}
+\subsection{El propósito de la clasificación automática}
+La clasificación de células sanas o anormales, separación de frutas de calidad en una planta de empaquetamiento, etc, son ejemplos de clasificación. 
+
+La clasificación sucede en todos los aspectos de la vida y es uno de los primeros pasos necesarios para tomar decisiones. En procesamiento de imágenes, el objetivo de la clasificación es identificar características, patrones o estructuras en una imagen y asignarlos a una clase específica (detección). A pesar de que el ser humano es completamente capaz de realizar tareas de clasificación con bastante precisión, es la única aproximación realista y costo-efectiva la de automatizar la clasificación de grandes volúmenes de datos. Sin embargo, en el momento de hacer esto, la intervención humana es necesaria en dos áreas clave \parencite{Solomon2011-xz}: 
+
+\begin{itemize}
+\item \textbf{Especificación de la tarea: }Que se quiere explícitamente que el clasificador logre? Se deben determinar las clases que serán consideradas y que parámetros o variables se consideran importantes para realizar la clasificación. Por ejemplo, a la hora de clasificar células estas se pueden clasificar en normales o anormales, pero un clasificador más complejo que tenga más clases y observe más información y podría también catalogar a los pacientes en categorías como anemia, infección viral, etc.
+\item \textbf{Nombramiento de clases: }El proceso de entrenar a un clasificador automático usualmente requiere “nombramiento manual” en las primeras etapas; consiste en asignar ejemplos a clases específicas en base a propiedades seleccionadas y sobresalientes. Esto forma parte del proceso de los llamados “clasificadores supervisados”.
+\end{itemize}
+
+\subsection{Clasificación Supervisada y No Supervisada}
+Las técnicas de clasificación se pueden agrupar en dos grupos principales: supervisados y no supervisados \parencite{Solomon2011-xz}. 
+La clasificación supervisada se apoya en tener datos de entrenamiento en base a los cuales se espera clasificar exitosamente nuevos patrones.
+La clasificación no supervisada utiliza técnicas de agrupamiento para clasificar sin información previa el conjunto de características que se observan en una imagen. 
+
+\subsection{Diseño de Módulos de Clasificación }
+
+Los sistemas de clasificación siguen el siguiente diseño, que también puede observarse en la figura \ref{fig:classifier-design}, son: 
 \begin{enumerate}
-    \item dividir las imágenes de rostros en M subregiones “relevantes” para la extracción de múltiples histogramas LBP locales y luego, 
-    \item concatenar estos descriptores en un histograma global resultante con la información espacial de cada uno.
-
+    \item Definición de clases de interés para el problema
+\item Exploración de datos, identificando posibles atributos que permitan distinguir óptimamente entre clases
+\item Selección y extracción de características que definen el espacio de características discriminatorias entre clases. Por ejemplo, para distinguir entre un leopardo y un león, no es muy preciso distinguir en base a características de forma; en cambio, es más óptimo hacerlo en base a características de color.
+\item Construir el clasificador con datos de entrenamiento
+\item Probar el clasificador para ver si es necesario ajustar las clases definidas
 \end{enumerate}
 
-El histograma resultante propuesto describe tanto información sobre la textura local como la forma global del objeto.
-No obstante, al ser la selección de subregiones relevantes arbitraria, se adoptó AdaBoost, con lo que se obtuvo una cascada de clasificadores impulsados (cascade of boosted classifiers). Adaboost \parencite{Viola2001-rh} ayuda seleccionando las subregiones más discriminativas, a partir de un conjunto de subregiones generadas al rotar y escalar una sub-ventana sobre la imagen del objeto. 
-
-\subsection{Entrenamiento de un detector}
-Primeramente, un clasificador (específicamente, una cascada de clasificadores impulsados, utilizando con características LBP) es entrenado con unos cientos de imágenes ejemplo de un objeto particular (por ejemplo, un rostro o un auto); estos son llamados ejemplos positivos y deben ser del mismo tamaño (por ejemplo, 20x20). De igual manera, se deben proporcionar ejemplos negativos - imágenes arbitrarias del mismo tamaño que no contengan al objeto.
-
-Después de que el clasificador es entrenado, puede ser aplicado a una región de interés en una imagen de entrada. El clasificador genera una salida de 1 si en la región es probable que exista el objeto (rostro, auto) y 0 en caso contrario. Para buscar el objeto en la imagen se puede mover y ajustar el tamaño de la ventana a lo largo de la imagen y verificar si existe el objeto utilizando el clasificador. Entonces, para encontrar un objeto de un tamaño desconocido en una imagen el proceso de escaneo debe ser realizado múltiples veces y en diferentes escalas \parencite{OpenCV2016-vq}
-
-
-\subsection{Cascada de Clasificadores Impulsados}
-Para determinar si en una imagen se encuentra una objeto o no, el algoritmo divide la imagen integral en subregiones de tamaños diferentes. Cada subregión es procesada por una serie de clasificadores donde cada uno evalúa si la subregión es el objeto buscado o no.
-
-La palabra “cascada” en el clasificador significa que el clasificador resultante está compuesto por múltiples clasificadores más simples que trabajan en cadena (cascada) sobre una región de interés hasta que una región candidata es rechazada o todos los clasificadores generan resultados positivos. La palabra “impulsado” (boosted) significa que los clasificadores en cada etapa de la cascada son por sí mismos complejos y están compuestos por clasificadores básicos, utilizando un métodos de boosting. El más conocido históricamente es Adaboost. Los clasificadores básicos son clasificadores por árbol de decisión compuestos de por lo menos dos hojas.
-
-La utilización de este algoritmo supone un ahorro de tiempo considerable ya que no serán procesadas subregiones de la imagen que no se sepa con certeza que contienen al objeto y sólo se invertirá tiempo en aquellas subregiones que posiblemente si lo contengan. \parencite{Viola2001-rh}
-
-\section{Binarización}
-Como fue descrito en el Cap. Procesamiento de Imagenes Digitales bajo la seccion de Segmentacion de Imagenes Digitales, para la binarización de la imagen se elige un umbral de intensidad y se asigna los valores de los pixeles para distinguir regiones en la imagen.
-
-Esta fase y todas las subsiguientes, ocurren múltiples veces (una por cada región que posiblemente contenga una matrícula)
-
-En este caso, se generan múltiples imágenes binarias para no perder información sobre los caracteres en la imagen. La binarización utiliza el método Wolf-Jolion y el método Sauovola con varios parámetros \parencite{Wolf2004-so,Oliveira2009-io}. Cada una de las imágenes binarias son procesadas en las fases subsiguientes.
-\section{Análisis de Caracteres}
-El análisis de caracteres intenta encontrar regiones de tamanhos de caracteres en la región de la matrícula. Primero encuentra todas las masas amorfas (blobs) en la región de la matrícula. Luego, busca las masas amorfas que son aproximadamente del tamaño y ancho de un carácter de una matrícula y tienen “bases y alturas” que están en una línea recta con las otras masas amorfas que tengan un ancho/alto similar.
-
-Este análisis se hace múltiples veces en la región; comienza primero con caracteres pequeños y luego busca caracteres más grandes.
-
-Si no se encuentra nada en la región, esta es descartada. No obstante, si se encuentra potenciales caracteres, la región se guarda y se procesa más a fondo.
-\section{Detección de Bordes}
-La siguiente fase es encontrar los bordes de la matrícula. Vale mencionar que la fase detección sólo es responsable por identificar regiones posibles donde exista una matrícula. Frecuentemente provee una región que es un poco más grande o más pequeña que la matrícula real. La detección de bordes trata de encontrar con precisión los bordes superior/inferior/izquierdo/derecho de la matrícula.
-
-Para encontrar todas las líneas verticales y horizontales, se utiliza la transformada de Hough \parencite{OpenCV2016-kr}.
-
-Se utiliza esta lista de líneas y la altura de los caracteres (computada en Análisis de Caracteres) para encontrar los bordes de la matrícula más probables. Utiliza pesos configurables para determinar qué borde tiene más sentido de ser un borde de la matrícula. Intenta utilizar un borde por defecto (en base al ancho/alto ideal de la matrícula) para ver si es una buena pareja.
-
-\section{Enderezamiento}
-Dados los bordes de la matrícula, la fase de Enderezamiento reorganiza la región de la placa a un tamaño y orientación estándar. Idealmente, esto devuelve una matrícula orientada correctamente (sin rotación o propio enderezamiento).
-
-\section{Enderezamiento}
-La segmentación de caracteres intenta aislar todos los caracteres contenidos en la imagen de la matrícula. Utiliza un histograma vertical para encontrar los espacios entre los caracteres de la matrícula. Esta fase también limpia el caracteres removiendo las masas amorfas pequeñas y desconectadas y descalificando regiones de caracteres que no son lo suficientemente altos. De igual manera, intenta remover regiones “borde” para que el borde de la matrícula no sea clasificado equivocadamente como un número “1” o una letra “l”. 
-
-\section{Reconocimiento Óptico de Caracteres (OCR)}
-El reconocimiento óptico de caracteres permite reconocer caracteres en texto escrito \parencite{Mithe2013-yn}. La fase de OCR analiza cada carácter independientemente: para cada imagen segmentada, computa todos los caracteres posibles  y sus grados de confianza a través de Tesseract \parencite{Tesseract-OCR2016-fe}.
-\section{Post-Procesamiento}
-Dada una lista de todos los posibles caracteres OCR y sus confianzas, el post-procesamiento determina las mejores combinaciones de letras para la matrícula, organizadas en una lista de top N. El post-procesamiento descarta todos los caracteres por debajo de un umbral específico. 
-
-De igual manera, el post-procesamiento maneja la validación de región si esta opción está habilitada. Por ejemplo, se puede especificar la región “Missouri” y el post-procesamiento intenta emparejar los resultados con una plantilla del formato de las matrículas de Missouri. Dada una plantilla de tipo  [char][char][number]-[char][num][char] y la lista de matrículas más probables:
-\begin{itemize}
-    \item CFOCIG
-    \item CF0CIG
-    \item CF0C1G
-
-\end{itemize}
-
-La tercera entrada concuerda con la plantilla, y las dos primeras no; entonces, post-procesamiento indicará que la tercera entrada es la mejor opción.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.80\textwidth]{classifier-design}
+        \caption{Diagrama de flujo de los pasos principales en el diseño de un clasificador \parencite{Solomon2011-xz}}
+        \label{fig:classifier-design}
+    \end{figure}
+    
 

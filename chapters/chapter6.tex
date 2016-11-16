@@ -1,59 +1,48 @@
-\chapter{Análisis del Problema}
-    \section{QSS Bolivia}
-        QSS Bolivia es una empresa boliviana dedicada a la asesoría, implementación y equipamiento de sistemas electrónicos de seguridad y automatización, que utiliza lo último de la tecnología para proteger y resguardar los bienes y asegurar la tranquilidad de sus clientes \parencite{QSSBolvia2016-el}
-        \subsection{Situación Actual}
-            QSS Bolivia se encuentra netamente conformada por profesionales bolivianos, formados principalmente en el área de informática y sistemas. La empresa cuenta con más de 10 años de trabajo, inicialmente enfocados principalmente al área de Consultoría Informática. Posteriormente, QSS Bolivia ingresó al área de seguridad de domicilios y empresas mediante la comercialización de dispositivos electrónicos orientados a la seguridad.
-            Actualmente, las soluciones que proporciona QSS Bolivia en el área de vigilancia son implementadas mediante CCTV.
-            
-            El objetivo principal de la empresa es de otorgar soluciones alcanzando una sinergia cliente-proveedor, haciendo énfasis en las necesidades y requerimientos del proceso de seguridad que prevé el cliente.  
-            Es esencial para QSS Bolivia invertir en capacitación del personal a fin de mantenerlo actualizado con los cambios tecnológicos que se presentan día a día y aprovechando al máximo las herramientas tecnológicas disponibles. 
-            
-            Finalmente, para QSS es importante el apoyo a la creación de Start-Ups asociados a nuevos emprendimientos de jóvenes estudiantes, tanto en el área de la informática y de la electrónica.
-    \section{Análisis Preliminar de Requerimientos}
-    \section{Escenario del Problema}
-        \begin{figure}[H]
-            \centering
-            \includegraphics[width=0.90\textwidth]{nodos-overview}
-            \caption{Panorama de los Nodos de la Aplicación}
-            \label{fig:nodos-overview}
-        \end{figure}
-    
-    Como se observa en la Figura \ref{fig:nodos-overview}, la aplicación distribuirá el nodo de aplicación, donde se ejecutaran los servicios Recolector y Reconocimiento; la base de datos; y, el servidor web, a través del cual el usuario accede a la información relacionada a los registros y al sistema.
-        
-        El proceso de reconocimiento de un vehículo sigue una cadena de procesos:
+\chapter{Aplicaciones Web con Arquitectura SaaS}
 
-        \begin{enumerate}
-            \item existe una cámara instalada y la información de la misma se encuentra almacenada en la base de datos
-            \item el Servicio de Recolección de vídeo, una vez iniciado, reenvía el flujo de vídeo (cuadros) a un LB
-            \item el LB distribuye los cuadros de vídeo recibidos entre los servicios de Reconocimiento disponibles
-            \item el Servicio de Reconocimiento, por cada cuadro, ejecuta el algoritmo de reconocimiento y guarda en la BD si se reconoció una matricula
-        \end{enumerate}    
-        
-        Toda la información de las matriculas reconocidas puede verse desde el cliente web.
-        
-        Bajo ese esquema, los servicios que componen a la aplicación pueden ser categorizados según su atomicidad:
-        \begin{itemize}
-            \item Servicios Atómicos: IaaS, Base de Datos, LB
-            \item Servicios Compuestos: Servicio Recolector, Servicio de Reconocimiento, Servicio Web
-        \end{itemize}
-        De igual manera, pueden ser categorizados según su rol en la aplicación:
-        \begin{itemize}
-            \item Servicios Clave: Servicio Recolector, Servicio de Reconocimiento, LB, Servicio Web
-            \item Servicios de Soporte: Base de Datos,
-        \end{itemize}
-    
-        \begin{figure}[H]
-            \centering
-            \includegraphics[width=1\textwidth]{nodos-arch}
-            \caption{Arquitectura de la Aplicación}
-            \label{fig:nodos-arch}
-        \end{figure} 
-        
-        Dado el nivel de las tecnologías descrito en los capítulos 2-5, el proyecto utilizara:
-        \begin{itemize}
-            \item Kubernetes para la gestión y configuración de contendedores, dados los casos de uso exitosos en producción en compañías como Google, SAP, Ebay, Box \parencite{Kubernetes2016-ub}; y el poder de ser ejecutado en cualquier nube.
-            \item OpenALPR sera utilizado para realizar el reconocimiento de matriculas, ya que utiliza OpenCV que es la tecnología principal en computación visual, además de ser open source, multiplataforma y ser utilizada por compañías como Microsoft, IBM, Intel, etc. \parencite{Itseez2000-he}.
-            \item Se utilizara el Framework de desarrollo web Laravel, elegido en base a la experiencia del equipo de programadores con esta herramienta, la documentación que provee Laravel y las capacidades que posee, descritas en el Capitulo 5.
-            \item Las cámaras que utiliza QSS Bolivia son de la marca Dahua. Las especificaciones se describen en el \todonum{Apendice} Apéndice X
-        \end{itemize}
+\section{Arquitectura Cliente-Servidor}
+pendiente
+\section{Comunicación - HTTP 'I\&' URIs}
+pendiente
+\section{Representación -  HTML I\& CSS}
+pendiente
+\section{Arquitectura de 3 Niveles y Escalabilidad Horizontal}
+pendiente
+\section{Arquitectura Modelo-Vista-Controlador}
+pendiente
+\section{Transacciones mediante REST}
+Transferencia de Estado Representacional (REST) es una de las maneras en que los navegadores web pueden realizar transacciones a través de HTTP. Varias interfaces de programación de aplicaciones (API) están surgiendo orientadas a la nube y están utilizando REST para exponer los servicios web y construir las APIs que permiten a los usuarios conectarse e interactuar con estos servicios.
+Las APIs RESTful son utilizadas por muchos sitios, incluyendo Google \parencite{Google-Inc2016-lm}, Amazon \parencite{Aws2016-iu}, Twitter \parencite{Twitter2016-df} y LinkedIn \parencite{LinkedIn2016-am}.
+Una API RESTful es una interfaz de aplicación web (API) que utiliza HTTP para hacer las solicitudes de datos GET, POST, PUT y DELETE.
+Una API RESTful descompone una transacción en módulos, cada uno de los cuales se encarga de una parte de la operación. Se utiliza la solicitud PUT para cambiar el estado o actualizar un recurso, GET para obtener un recurso, POST para crear un recurso y DELETE para removerlo. Actualmente los modelos REST de Amazon Simple Storage Service (S3) \parencite{Aws2016-tc}, Openstack Swift \parencite{OpenStack2016-ht} y Cloud Data Management Interface (CDMI) \parencite{Snia2016-vq} son los más populares \parencite{Richardson2008-ng}.
 
+\section{Frameworks SaaS}
+En un principio, cada página web era programada a mano: actualizar un sitio web significaba editar HTML y un rediseño implicaba rehacer cada página, una por una. Con el tiempo, los sitios web crecieron y se volvieron más “ambiciosos” por lo que este proceso se volvió tedioso, consumía tiempo y era inmantenible.
+Un grupo de programadores en la NCSA (Centro Nacional de Aplicaciones de Supercomputación, donde Mosaic, el primer navegador web gráfico fue desarrollado), resolvieron este problema permitiendo que el servidor web se conecte con programas externos que dinámicamente generaban HTML. Este protocolo se llamó Interfaz de Entrada Común (CGI o Common Gateway Interface, con lo cual las páginas web eran generadas “a solicitud” dinámicamente. 
+Sin embargo, CGI presentó problemas debido a que los scripts en CGI tienen que incluir varias plantillas repetitivas que no permiten reutilizar mucho código y tienen una curva de aprendizaje empinada.
+En este sentido, se desarrollaron los frameworks de desarrollo web que proveen una infraestructura para la programación de aplicaciones, de manera que el programador pueda escribir código mantenible sin tener que re-inventar la rueda. \parencite{Holovaty2016-nm}
+
+
+\subsection{Laravel}
+Laravel es un framework de desarrollo web open-source escrito en PHP que sigue una arquitectura Modelo-Vista-Controlador, que refuerza la separación de la logica del negocio de la lógica de presentación asociada a la interfaz de usuario. Laravel soporta transacciones RESTful, plantillas, JSON APIs and gestión de paquetes con Composer \parencite{Bean2015-zt}.
+Laravel fue reportado ser ser el Framework de desarrollo web para PHP más popular en 2015 \parencite{SitePoint2015-yl}.
+Laravel utiliza una máquina virtual basada en Vagrant, llamada Homestead, que maneja y configura el ambiente de desarrollo. La virtualización consiste en utilizar una máquina virtual para correr un servidor web, una base de datos y scripts; es decir, desarrollar aplicaciones y sitios web dinámicos. Se pueden crear múltiples máquinas virtuales para varios proyectos, las cuales también pueden ser borradas cuando no se necesiten sin afectar al resto.  De igual manera, pueden ser re-creadas en poco tiempo \parencite{Wu2016-ws}. Un sitio que vale la pena mencionar que \parencite{Tumblr2016-mn} experimentó drásticos cambios de desempeño al migrar a PHP 7. 
+
+\subsection{Django}
+Django es un framework de desarrollo web open-source escrito en Python, que sigue la arquitectura Modelo-Vista-Plantilla. El principal objetivo de Django es facilitar la creación de sitios web complejos. Enfatiza la reusabilidad y la capacidad de “enchufar” componentes, desarrollo rápido y el principio de DRY (en  inglés, Don’t Repeat Yourself) \parencite{Holovaty2009-jr}. Algunos sitios web desarrollados con Django son:
+\begin{itemize}
+    \item Disqus \parencite{Robenolt2013-cb}
+    \item \cite{Instagram2016-cp}
+    \item Bitbucket \parencite{Django2012-bt}
+    \item \cite{OpenStack2016-vh}
+\end{itemize}
+
+\subsection{Ruby on Rails}
+Ruby on Rails es un framework de desarrollo web escrito en Ruby, cuya filosofía incluye dos principios principales: DRY (Don’t Repeat Yourself) y Convention Over Configuration (convención sobre configuración) que implica minimizar el número de decisiones que un desarrollador necesita tomar (configuración), ganando así en simplicidad pero no perdiendo flexibilidad por ello.
+Algunos sitios web desarrollados con Ruby on Rails son:
+\begin{itemize}
+    \item 500px \parencite{Liu2015-dx}
+    \item Airbnb \parencite{Weksler2015-ip}
+    \item \cite{GitHub2009-gt}
+    \item \cite{Bloomberg2012-ue}
+\end{itemize}
