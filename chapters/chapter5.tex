@@ -8,12 +8,12 @@ A pesar de que se han realizado muchas investigaciones en el área del ALPR, los
 
   \begin{figure}[H]
         \centering
-        \includegraphics[width=0.80\textwidth]{SA_BOLI_GI}
+        \includegraphics[width=0.80\textwidth]{worldcarplates}
         \caption{ Matrículas de diferentes países \parencite{Kustermann2016-yd}}
         \label{fig:worldcarplates}
 \end{figure}  
 
-La figura X muestra claramente cómo las matrículas de un país a otro varían bastante. Por esta razón no es efectivo utilizar un módulo ALPR desarrollado para un país, en otro, sin antes haberlo adaptado.
+La figura \ref{fig:worldcarplates} muestra claramente cómo las matrículas de un país a otro varían bastante. Por esta razón no es efectivo utilizar un módulo ALPR desarrollado para un país, en otro, sin antes haberlo adaptado.
 \section{Detección vs. Reconocimiento}
 La\textit{ detección} de objetos consiste en determinar si en una imagen o video arbitrarios hay un objeto determinado (un rostro, un auto) y, en caso haberlo, en qué posición se encuentra. Por otro lado, el \textit{reconocimiento }de objetos (el rostro de Juan, el auto de Pedro) consiste en comparar el objeto detectado contra una base de datos para saber si existe alguna asociación con alguno registrado. Vale mencionar que es usualmente más difícil la detección de objetos en la escena compleja de una imagen que el reconocimiento de los mismos. Dado lo anterior, la mayoría de los algoritmos de reconocimiento pueden ser usados para la detección de objetos. Sin embargo, dependiendo del objeto a detectar, unos métodos pueden ser más adecuados que otros \parencite{Ekvall2005-ut}.
 \section{OpenALPR}

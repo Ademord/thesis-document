@@ -42,8 +42,10 @@
         \end{itemize}
 
         \subsubsection{Principios de una Arquitectura Orientada a Servicios (SOA)}
+        \todonum insert diagram from engineering software as a service figure 1.7; loc 838
+        Una Arquitectura Orientada a Servicios significa que los componentes de una aplicación actúan como servicios interoperables, a través de interfaces bien definidas \todonum{ref esaas book}.
         
-        Un conjunto importante de principios inherentes a la Computación en la Nube es el que indica los lineamientos acerca de las Arquitecturas Orientadas a Servicios (SOA) y, en general, sistemas distribuidos. Estos definen que los servicios sean:
+        Un conjunto importante de principios, inherentes a la Computación en la Nube, es el que establece los lineamientos para construir aplicaciones en base a componentes. Los principios de SOA definen que los servicios sean:
         \begin{itemize}
             \item \textbf{Autónomos: }La lógica de un servicio se encuentra de un límite explícito. El servicio tiene control dentro de sus límites y tiene bajo acoplamiento para la ejecución. 
             \item \textbf{Compartir un contrato formal: }Para que los servicios puedan interactuar, deben compartir únicamente una colección de metadatos públicos que describen a cada servicio y sus términos de intercambio de información.
@@ -66,7 +68,7 @@
         \end{itemize}
      
         \subsubsection{Microservicios}
-        El estilo arquitectónico de “microservicios” \parencite{Lewis2016-az}, inspirado y basado fuertemente en SOA, ha recibido recientemente considerable atención como una solución viable para la construcción de aplicaciones escalables  al utilizar la composición de servicios pequeños, simples, aislados y de funcionalidad única (es decir, microservicios) para construir aplicaciones coherentes. La arquitectura de microservicios va en oposición de la llamada arquitectura “monolítica” donde toda la funcionalidad es ofrecida por una única unidad lógica ejecutable
+        El estilo arquitectónico de “microservicios” \parencite{Lewis2016-az}, inspirado y basado fuertemente en SOA, ha recibido recientemente considerable atención como una solución viable para la construcción de aplicaciones escalables  al utilizar la composición de servicios pequeños, simples, aislados y de funcionalidad única (es decir, microservicios) para construir aplicaciones coherentes. La arquitectura de microservicios va en oposición de la llamada arquitectura “monolítica” donde toda la funcionalidad es ofrecida por una única unidad lógica ejecutable.
         \begin{figure}[ht]
             \centering
             \includegraphics[width=\textwidth]{fowler1}
