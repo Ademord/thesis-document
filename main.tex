@@ -132,23 +132,45 @@
 \renewcommand{\thefigure}{\arabic{chapter}.\arabic{figure}}
 
 \pagestyle{fancy}
+% APPENDIX
+% \usepackage{indentfirst}
+% \usepackage{setspace}
+
+% \usepackage{titlesec}
+%   \titleformat{\chapter}
+%       {\normalfont \center}{\thechapter}{1em}{}
+%   \titlespacing*{\chapter}{0pt}{-.5 in}{0.35in}
+%   \renewcommand{\thechapter}{\Roman{chapter}}
+% \renewcommand*\contentsname{TABLE OF CONTENTS}
+
+% \usepackage[margin=1in]{geometry}
+% 
+\usepackage{tocloft}
+%   \renewcommand\cfttoctitlefont{\normalsize\normalfont}
+%   \renewcommand\cftbeforetoctitleskip{0pt}
+%   \renewcommand\cftaftertoctitleskip{2\baselineskip}
+%   \setlength\cftchapnumwidth{3em}
+%   \renewcommand\cftchapleader{\cftdotfill{\cftdotsep}}
+%   \renewcommand\cftchapfont{\normalfont}
+%   \renewcommand\cftchappagefont{\normalfont}
+
+% It's good practice to load the hyperref package 
+% late in the preamble
+% \usepackage[hidelinks]{hyperref}
+
 
 % DOCUMENT
 \title{Aplicacion Nativa de la Nube con ALPR para el Control Vehicular para la Empresa QSS Bolivia}
 \author{Juan Francisco Ribera Laszkowski}
 \begin{document}
-
-\renewcommand{\BRetrieved}[1]{Recuperado el {#1} de\ }%
-\renewcommand{\BRetrievedFrom}{Recuperado de\ }%
-
-
-\renewcommand{\BOthers}[1]{et al.\hbox{}}%       ``y colaboradores''
-\renewcommand{\BOthersPeriod}[1]{et al.\hbox{}}% ``y colaboradores''
-
-% Here is an example citation \parencite{Johnson1995-yr}.
-    
+    \renewcommand{\BRetrieved}[1]{Recuperado el {#1} de\ }%
+    \renewcommand{\BRetrievedFrom}{Recuperado de\ }%
+    \renewcommand{\BOthers}[1]{et al.\hbox{}}%       ``y colaboradores''
+    \renewcommand{\BOthersPeriod}[1]{et al.\hbox{}}% ``y colaboradores''
+    % Here is an example citation \parencite{Johnson1995-yr}.
     % Here is an example citation \cite{Onvif2016-dc}.
 
+    % FIRST PAGES
     \selectlanguage{spanish}
     \input{first-pages/titlepage}
     \input{first-pages/titlepage-inner}
@@ -160,15 +182,28 @@
 
     \input{first-pages/executive-summary}
     
-
+    % TOC
     \tableofcontents
+    \addtocontents{toc}{~\hfill\textbf{Pág.}\par}
+    % \addcontentsline{toc}{chapter}{Contents}
     \listoffigures
-    %\listoftables
-    \listoftodos
+    % \addcontentsline{toc}{chapter}{List of Figures}
+    \listoftables
+    % \addcontentsline{toc}{chapter}{List of Tables}
 
-    \foreach \c in {1,...,8}{\import{chapters/}{chapter\c.tex} }
+    % CHAPTERS
+    \addtocontents{toc}{\protect\setlength{\cftchapnumwidth}{10mm}}
+    \addtocontents{toc}{\protect\setlength{\cftsecnumwidth}{10mm}}
+    \addtocontents{toc}{\protect\setlength{\cftsecindent}{10mm}}
     
-\bibliographystyle{apacite}
-\bibliography{bibliography}
+    \foreach \c in {1,...,9}{\import{chapters/}{chapter0\c.tex} }
+    \foreach \c in {0,...,1}{\import{chapters/}{chapter1\c.tex} }
+    % APPENDIXES
+    \foreach \c in {1,...,1}{\import{appendixes/}{appendix0\c.tex} }
+
+
+    % BIBLIOGRAPHY
+    \bibliographystyle{apacite}
+    \bibliography{bibliography}
     % \printbibliography[heading=bibintoc]
 \end{document}
