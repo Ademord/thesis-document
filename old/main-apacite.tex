@@ -1,0 +1,26 @@
+\documentclass{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8x]{inputenc}
+
+\usepackage{apacite}
+
+% \title{Package Example: apacite}
+% \author{writeLaTeX}
+
+\begin{document}
+\maketitle
+
+\renewcommand{\BRetrieved}[1]{Recuperado el {#1} de\ }%
+
+
+Here is an online  \cite{WinNT}.
+Here is an online  \cite{WinNT2}.
+
+Here is a misc \cite{Onvif2016-dc}.
+
+Here is an article \cite{Taylor2000-yr}.
+
+\bibliographystyle{apacite}
+\bibliography{bibliography}
+
+\end{document}

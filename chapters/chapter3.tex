@@ -24,7 +24,7 @@
     De manera que las acciones de escalabilidad suceden cuando la aplicación se está ejecutando, surge la oportunidad de realizar optimizaciones tales como reducir el costo al reducir el número de recursos utilizados o el cambio de ubicación de recursos para proporcionar una menor latencia. Una aplicación nativa de la nube debe respetar los principios de computación en la nube que se describen a continuación.
 	
         \subsubsection{Principios de la Computación en la Nube}
-        El objetivo clave es aprovechar los beneficios que trae una arquitectura nativa de la nube basada en los principios de Computación en la Nube definidos por NIST \parencite{Mell2011-wz}:
+        El objetivo clave es aprovechar los beneficios que trae una arquitectura nativa de la nube basada en los principios de Computación en la Nube definidos por NIST \cite{Mell2011-wz}:
         \begin{itemize}
             \item \textbf{Bajo demanda, Autoabastecimiento:} esto significa que los usuarios finales de la nube (de en adelante llamados usuarios finales) pueden ir hacia un proveedor de la nube y, sin ninguna intervención del proveedor de la nube, crear una instancia de un servicio en la nube,  cuando el usuario lo necesite; considerando que los detalles de facturación del usuario final han sido provistos y validados por el proveedor.
             \item \textbf{Pooling de Recursos:} esto significa que los recursos de computación que utiliza un proveedor de servicios en la nube están compartidos a lo largo de las instancias de servicios de los clientes, siguiendo un modelo de Tenencia Múltiple. Utilizando tecnologías de virtualización, el proveedor de servicios en la nube puede utilizar óptima y fácilmente esos recursos. 
@@ -36,14 +36,21 @@
         \subsubsection{Tipos de Servicios}
         En la computación en la nube, los servicios se dividen tradicionalmente en tres tipos:
         \begin{itemize}
-            \item \textbf{Infraestructura como Servicio (IaaS):} generalmente servicios de cómputo, almacenamiento y red. Estos ayudan al administrador de sistema/red tradicional entregando infraestructura sobre la cual los desarrolladores de aplicaciones pueden montar sus stacks (pilas) de aplicaciones. SIn embargo, dada la facilidad y practicidad de utilizar estos servicios, los desarrolladores están migrando a roles anteriormente reservados para los administradores. Un movimiento conocido como DevOps envuelve este concepto. Ejemplos de ofertas de infraestructura como servicio son Openstack \footcite{Openstack2016-od}, Amazon EC2 \footcite{Aws2016-fc} and Joyent Triton \footcite{Joyent2016-wr}.
-            \item \textbf{Plataforma como Servicio (PaaS): }típicamente conocida como ambientes de ejecución para lenguajes de programación, bases de datos y servidores web. PaaS puede ser visto como un conjunto de servicios que respaldan al programador que quiere entregar su software a usuarios finales. Ejemplos de PaaS son Google AppEngine \footcite{Google2016-zb}, CloudFoundry \footcite{Cloudfoundry2016-vz}, y OpenShift \footcite{RedHat2016-sb}.
-            \item \textbf{Software como Servicio (SaaS):} es la categoría más amplia de servicios de computación en la nube, ya que refleja la diversidad que surge de la creatividad de los programadores de aplicaciones y ofrece sus creaciones a los clientes. Ejemplos de estos incluyen Google Apps for Work\footcite{Google2016-ts} and Salesforce \footcite{Salesforce2016-mo}.
+            \item \textbf{Infraestructura como Servicio (IaaS):} generalmente servicios de cómputo, almacenamiento y red. Estos ayudan al administrador de sistema/red tradicional entregando infraestructura sobre la cual los desarrolladores de aplicaciones pueden montar sus stacks (pilas) de aplicaciones. SIn embargo, dada la facilidad y practicidad de utilizar estos servicios, los desarrolladores están0 migrando a roles anteriormente reservados para los administradores. Un movimiento conocido como DevOps envuelve este concepto. Ejemplos de ofertas de infraestructura como servicio son Openstack \citeyear{Openstack2016-od}, Amazon EC2 \citeyear{Aws2016-fc} and Joyent Triton \citeyear{Joyent2016-wr}.
+            \item \textbf{Plataforma como Servicio (PaaS): }típicamente conocida como ambientes de ejecución para lenguajes de programación, bases de datos y servidores web. PaaS puede ser visto como un conjunto de servicios que respaldan al programador que quiere entregar su software a usuarios finales. Ejemplos de PaaS son Google AppEngine \citeyear{Google2016-zb}, CloudFoundry \citeyear{Cloudfoundry2016-vz}, y OpenShift \citeyear{RedHat2016-sb}.
+            \item \textbf{Software como Servicio (SaaS):} es la categoría más amplia de servicios de computación en la nube, ya que refleja la diversidad que surge de la creatividad de los programadores de aplicaciones y ofrece sus creaciones a los clientes. Ejemplos de estos incluyen Google Apps for Work\citeyear{Google2016-ts} and Salesforce \citeyear{Salesforce2016-mo}.
         \end{itemize}
 
         \subsubsection{Principios de una Arquitectura Orientada a Servicios (SOA)}
-        \todonum insert diagram from engineering software as a service figure 1.7; loc 838
-        Una Arquitectura Orientada a Servicios significa que los componentes de una aplicación actúan como servicios interoperables, a través de interfaces bien definidas \todonum{ref esaas book}.
+        
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{services-arch}
+        \caption{a nice plot \protect\cite{Fox2013-ct}}
+        \label{fig:services-arch}
+    \end{figure}
+        
+        Una Arquitectura Orientada a Servicios significa que los componentes de una aplicación actúan como servicios interoperables, a través de interfaces bien definidas \cite{Fox2013-ct}.
         
         Un conjunto importante de principios, inherentes a la Computación en la Nube, es el que establece los lineamientos para construir aplicaciones en base a componentes. Los principios de SOA definen que los servicios sean:
         \begin{itemize}
@@ -68,11 +75,11 @@
         \end{itemize}
      
         \subsubsection{Microservicios}
-        El estilo arquitectónico de “microservicios” \parencite{Lewis2016-az}, inspirado y basado fuertemente en SOA, ha recibido recientemente considerable atención como una solución viable para la construcción de aplicaciones escalables  al utilizar la composición de servicios pequeños, simples, aislados y de funcionalidad única (es decir, microservicios) para construir aplicaciones coherentes. La arquitectura de microservicios va en oposición de la llamada arquitectura “monolítica” donde toda la funcionalidad es ofrecida por una única unidad lógica ejecutable.
+        El estilo arquitectónico de “microservicios” \cite{Lewis2016-az}, inspirado y basado fuertemente en SOA, ha recibido recientemente considerable atención como una solución viable para la construcción de aplicaciones escalables  al utilizar la composición de servicios pequeños, simples, aislados y de funcionalidad única (es decir, microservicios) para construir aplicaciones coherentes. La arquitectura de microservicios va en oposición de la llamada arquitectura “monolítica” donde toda la funcionalidad es ofrecida por una única unidad lógica ejecutable.
         \begin{figure}[ht]
             \centering
             \includegraphics[width=\textwidth]{fowler1}
-            \caption{Monolitos y Microservicios (Fowler \& Lewis, 2016)}
+            \caption{Monolitos y Microservicios \protect\cite{Lewis2016-az}}
             \label{fig:fowler1}
         \end{figure}
     
@@ -93,26 +100,26 @@
             \item {Diseñado para el fracaso}
         \end{itemize} 
         Mientras que la mayoría de los principios surgen de la necesidad de un desarrollo continuo y un proceso de despliegue escalable en términos de los equipos involucrados, reducir dependencias y la necesidad de comunicación entre-equipos, las ventajas técnicas de este estilo arquitectónico son el aislamiento de fracasos y desempeño de manera que las aplicaciones pueden (parcialmente) continuar ejecutándose aún cuando otras funcionalidades no estén disponibles. Las aplicaciones creadas usando el estilo arquitectónico de microservicios adquieren complejidad con múltiples partes movibles que necesitan ser monitoreadas y manejadas, de manera que automatizacion extensiva debe ocurrir.
-        \begin{figure}[h]
+        \begin{figure}[H]
             \centering
             \includegraphics[width=\textwidth]{fowler2}
-            \caption{Monolitos y Microservicios \parencite{Lewis2016-az}}
+            \caption{Monolitos y Microservicios \protect\cite{Lewis2016-az}}
             \label{fig:fowler2}
         \end{figure}
 
         Los microservicios pueden utilizar diferentes lenguajes de programación y tecnologías de bases de datos en la construcción de una composición coherentes de servicios (modulares). Los microservicios son típicamente provistos y manejados por un proveedor de aplicaciones unico, pero es observable como los mismos principios de gestión necesitados para tratar con composiciones de servicios (que pueden ser de terceros) son necesitadas internamente para las composiciones de microservicios para alcanzar los mismos objetivos generales de confiabilidad.
         
-        En las arquitecturas de microservicios, varios patrones pueden ser utilizados para garantizar un comportamiento resistente y de rápida reacción al fracaso. Por ejemplo, el patrón de diseño Circuit-breaker \parencite{Nygard2007-ed} o balanceo de carga (load balancing) en el lado del cliente como en la Netflix Ribbon library \parencite{Netflix2016-ri}. El típico escenario de despliegue tiene múltiples instancias del mismo microservicio ejecutándose simultáneamente, posiblemente con mecanismos de sincronización para servicios con estados. La lógica subyacente es la capacidad de poder instanciar microservicios a lo largo de datacenters y proveedores de infraestructura; permitiendo que cada microservicio se ajuste a los fracasos rápidamente tener puntos de conexión (endpoints) alternativos (para cada tipo de servicio).
+        En las arquitecturas de microservicios, varios patrones pueden ser utilizados para garantizar un comportamiento resistente y de rápida reacción al fracaso. Por ejemplo, el patrón de diseño Circuit-breaker \cite{Nygard2007-ed} o balanceo de carga (load balancing) en el lado del cliente como en la Netflix Ribbon library \cite{Netflix2016-ri}. El típico escenario de despliegue tiene múltiples instancias del mismo microservicio ejecutándose simultáneamente, posiblemente con mecanismos de sincronización para servicios con estados. La lógica subyacente es la capacidad de poder instanciar microservicios a lo largo de datacenters y proveedores de infraestructura; permitiendo que cada microservicio se ajuste a los fracasos rápidamente tener puntos de conexión (endpoints) alternativos (para cada tipo de servicio).
         
         De igual manera, los microservicios pueden ser mejorados al seguir buenas prácticas o metodologías a la hora de construir aplicaciones modernas. Una de ellas son los atributos del manifiesto de Los 12 Factores de una Aplicación, que entre otras cosas, enfatiza la importancia de tener un sistema de control de cambios, dependencias explícitas y aisladas, mantener la configuración en el ambiente de desarrollo y no en el código, tratar los servicios de soporte como recursos adjuntos, separar etapas de construcción y de ejecución, ejecutar aplicaciones sin estado y exponer servicios a través la el binding de puertos.
 
         
     \subsection{Orquestación de Servicios}
-        Las arquitecturas orientadas a servicios (SOA) y el estilo arquitectónico de microservicios, como mencionamos, proveen de una manera de construir Sistemas de Tecnologías de la Información (TI) con bajo acoplamiento, alta reusabilidad y utilizando estándares. No obstante, gestionar, configurar y coordinar múltiples servicios complejos manualmente es una tarea que llega a ser tedioso y consume tiempo, y, por lo tanto, dinero. He ahí la necesidad de automatizar estas tareas con la Orquestación de Servicios \parencite{Kapuruge2014-qq}.
+        Las arquitecturas orientadas a servicios (SOA) y el estilo arquitectónico de microservicios, como mencionamos, proveen de una manera de construir Sistemas de Tecnologías de la Información (TI) con bajo acoplamiento, alta reusabilidad y utilizando estándares. No obstante, gestionar, configurar y coordinar múltiples servicios complejos manualmente es una tarea que llega a ser tedioso y consume tiempo, y, por lo tanto, dinero. He ahí la necesidad de automatizar estas tareas con la Orquestación de Servicios \cite{Kapuruge2014-qq}.
         
-        La Orquestación de Servicios permite automatizar la configuración y administración de software y las interacciones de software en la nube, las cuales pueden ser eventualmente complicadas cuando sistemas heterogéneos están involucrados y la comunicación se realiza través de diferentes interfaces \footcite{Katsaros2016-bj}. 
+        La Orquestación de Servicios permite automatizar la configuración y administración de software y las interacciones de software en la nube, las cuales pueden ser eventualmente complicadas cuando sistemas heterogéneos están involucrados y la comunicación se realiza través de diferentes interfaces \citeyear{Katsaros2016-bj}. 
         
-        En este area han habido iniciativas y trabajos de investigación \parencite{Antonescu2012-ml,Juve2011-ob,Liu2011-vw,Binz2012-ru}, y proyectos en la industria \parencite{Ibm2016-xb,Ibm2013-az} que han utilizado diversas herramientas para la orquestación de aplicaciones en la nube y para describir la topología de servicios.
+        En este area han habido iniciativas y trabajos de investigación \cite{Antonescu2012-ml,Juve2011-ob,Liu2011-vw,Binz2012-ru}, y proyectos en la industria \cite{Ibm2016-xb,Ibm2013-az} que han utilizado diversas herramientas para la orquestación de aplicaciones en la nube y para describir la topología de servicios.
         
         Una aplicación nativa de la nube generalmente está compuesta por múltiples servicios, cada uno posiblemente compuesto por otros “sub-servicios”, hasta que el "nivel atómico” es alcanzado. Los servicios pueden encontrarse en un datacenter único o dispersos a lo largo de múltiples datacenters (o proveedores) por muchas razones (desde confiabilidad hasta optimización de costos y reducción de latencia para el usuario, segun la zona geográfica del mismo). El objetivo final de la orquestación es costurar (desplegar, provisionar) múltiples componentes para entregar un sistema funcional (por ejemplo, un sistema de bases de datos con replicación) o un servicio (por ejemplo, una aplicación web de 3 capas con API).
 	    
@@ -153,14 +160,14 @@
         En la siguiente sección se describen tecnologías y soluciones clave existentes que pueden realizar la función de orquestación utilizada en contextos de Nubes TI.
 	    
 	    \subsubsection{Cloudify}
-        Cloudify \parencite{Cloudify2016-qi} es una plataforma open-source que provee orquestación de servicios, definiendo la configuración, servicios y dependencias de una aplicación. Utiliza una plantilla YAML, basada en TOSCA, para automatizar el despliegue de una aplicación y describir cómo la aplicación interactúa con el centro de datos a través de APIs.
+        Cloudify \cite{Cloudify2016-qi} es una plataforma open-source que provee orquestación de servicios, definiendo la configuración, servicios y dependencias de una aplicación. Utiliza una plantilla YAML, basada en TOSCA, para automatizar el despliegue de una aplicación y describir cómo la aplicación interactúa con el centro de datos a través de APIs.
         
         Cloudify soporta desde la instalación, abastecimiento, configuración y despliegue hasta la gestión y monitoreo de una aplicación o servici
     	    
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{cloudify-int}
-    \caption{Integración de Cloudify \parencite{Cloudify2016-je}}
+    \caption{Integración de Cloudify \protect\cite{Cloudify2016-je}}
     \label{fig:cloudify-int}
 \end{figure}
     
@@ -174,12 +181,12 @@ Características:
 \item Embebible (OEM)
 \end{itemize}
 Cloudify aporta a la comunidad open-source publicando una de las capacidades principales a través del Proyecto ARIA, que un motor de orquestación basado en las especificaciones TOSCA 
-\parencite{Oasis2016-sk}.
+\cite{Oasis2016-sk}.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.80\textwidth]{cloudify-mgr}
-    \caption{Resumen de la Arquitectura de  Manager de Cloudify \parencite{Cloudify2016-ze}}
+    \caption{Resumen de la Arquitectura de  Manager de Cloudify \protect\cite{Cloudify2016-ze}}
     \label{fig:cloudify-mgr}
 \end{figure}
 
@@ -195,7 +202,7 @@ Esto provee la simplicidad de una Plataforma como Servicio (PaaS) con la flexibi
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.80\textwidth]{kub-comp}
-    \caption{ Monolitos y Kubernetes \parencite{Kubernetes2016-li}}
+    \caption{ Monolitos y Kubernetes \protect\cite{Kubernetes2016-li}}
     \label{fig:kub-comp}
 \end{figure}
 
@@ -215,32 +222,32 @@ Características:
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.80\textwidth]{kub-cluster}
-    \caption{ Cluster de Kubernetes \parencite{Kubernetes2016-jo}}
+    \caption{ Cluster de Kubernetes \protect\cite{Kubernetes2016-jo}}
     \label{fig:kub-cluster}
 \end{figure}
 
-Un cluster de Kubernetes está compuesto por un nodo maestro que gestiona el cluster y múltiples nodos que hospedan a las aplicaciones que se ejecutan y se comunican con el maestro a través de la API de Kubernetes \parencite{Kubernetes2016-jo}.
+Un cluster de Kubernetes está compuesto por un nodo maestro que gestiona el cluster y múltiples nodos que hospedan a las aplicaciones que se ejecutan y se comunican con el maestro a través de la API de Kubernetes \cite{Kubernetes2016-jo}.
 consists of a master, which manages the cluster and multiple nodes which host the running applications and communicate with the master through the Kubernetes API.
 
 
 \subsubsection{Swarm}
-Docker Swarm \parencite{Docker2016-yo} es una herramienta de clustering y planificación de contenedores Docker. Provee capacidades nativas de clustering para convertir un conjunto de motores Docker en una sola computadora.
+Docker Swarm \cite{Docker2016-yo} es una herramienta de clustering y planificación de contenedores Docker. Provee capacidades nativas de clustering para convertir un conjunto de motores Docker en una sola computadora.
 
 Sus características son:
 \begin{itemize}
-\item \textbf{Compatible con Herramientas Docker: } soporta la API estándar de Docker, que permite la comunicación con un demonio Docker. También soporta pulling de repositorios privados en DTR  \parencite{Docker2016-is} o Hub \parencite{Docker2016-ev}.
+\item \textbf{Compatible con Herramientas Docker: } soporta la API estándar de Docker, que permite la comunicación con un demonio Docker. También soporta pulling de repositorios privados en DTR  \cite{Docker2016-is} o Hub \cite{Docker2016-ev}.
 \item \textbf{Alta Escalabilidad y Desempeño: }escala hacia fuera con baja degradación de desempeño. 
-\item \textbf{Redes y Volúmenes Integrados: }soporta Redes Docker \parencite{Docker2016-dm}, Volúmenes Docker \parencite{Docker2016-mi} y plugins.
+\item \textbf{Redes y Volúmenes Integrados: }soporta Redes Docker \cite{Docker2016-dm}, Volúmenes Docker \cite{Docker2016-mi} y plugins.
 \item \textbf{Alta Disponibilidad y Tolerancia a Fallos: }permite la creación de múltiples maestros Swarm y soporta pólizas para la elección del líder en caso de fallos. También soporta alertas de errores cuando un nodo falla.
 \item \textbf{Planificación de Contenedores Flexible: }soporta múltiples filtros tales como etiquetas, afinidad y estrategias para maximizar el desempeño y la utilización de recursos en el momento de asignar contenedores a nodos adyacentes.
-\item \textbf{Planificadores y Descubridores de Nodos Conectables: }soporta Mesos o Kubernetes como backend a la par de el cliente Docker. Para el descubrimiento de nodos soporta utilizar un archivo estático, etcd \parencite{Coreos2016-ep}, Consul \parencite{HashiCorp2016-ei} o Zookeper \parencite{Apache2016-oo}.
+\item \textbf{Planificadores y Descubridores de Nodos Conectables: }soporta Mesos o Kubernetes como backend a la par de el cliente Docker. Para el descubrimiento de nodos soporta utilizar un archivo estático, etcd \cite{Coreos2016-ep}, Consul \cite{HashiCorp2016-ei} o Zookeper \cite{Apache2016-oo}.
 
 \end{itemize}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.80\textwidth]{docker-arch}
-    \caption{ Arquitectura de una aplicación Docker \parencite{Docker2016-pk}}
+    \caption{ Arquitectura de una aplicación Docker \protect\cite{Docker2016-pk}}
     \label{fig:docker-arch}
 \end{figure}
 En un cluster Swarm, cada microservicio que compone una aplicación corre dentro de un contenedor Docker y cada uno de los microservicios “Dockerizados” son desplegados en una red de contenedores. Las redes de contenedores son una característica del motor Docker que permite la comunicación de múltiples contenedores a lo largo de múltiples servidores Docker. 
@@ -249,7 +256,7 @@ Los cuatro nodos en la Figura X están ejecutando el demonio Docker, al igual qu
 
 
 \subsubsection{Juju}
-Juju es un orquestador de servicios open-source desarrollado por Canonical Ltd. Se encuentra alojado en Launchpad y bajo la Licencia Pública General Affero (AGPL). Juju separa a los servicios de su contenedor, ya sea el servidor o la máquina virtual en la que son desplegados \parencite{Canonical2016-qx}. 
+Juju es un orquestador de servicios open-source desarrollado por Canonical Ltd. Se encuentra alojado en Launchpad y bajo la Licencia Pública General Affero (AGPL). Juju separa a los servicios de su contenedor, ya sea el servidor o la máquina virtual en la que son desplegados \cite{Canonical2016-qx}. 
 
 Juju soporta las siguientes plataformas: Openstack, HP Cloud, Amazon Web Services (AWS), Metal-as-a-Service (MaaS). Ejecutar el procedimiento Juju instancia una máquina virtual  para el Juju State Server, como se muestra en la figura X con la juju-machine-0.
 
@@ -257,7 +264,7 @@ Juju soporta las siguientes plataformas: Openstack, HP Cloud, Amazon Web Service
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.80\textwidth]{juju-overview}
-    \caption{ Panorama de Juju \parencite{Metsch2013-et}}
+    \caption{ Panorama de Juju \protect\cite{Metsch2013-et}}
     \label{fig:juju-overview}
 \end{figure}
 
@@ -270,19 +277,19 @@ Juju ofrece también un repositorio de charms donde los desarrolladores pueden d
 
 \subsubsection{Heat}
 
-OpenStack Heat es un servicio utilizado para orquestar múltiples aplicaciones nativas de la nube compuestas; utilizando plantillas y a través de una API REST nativa de Openstack y una Interfaz de Programación de Aplicaciones (API) de consultas compatible con CloudFormation \parencite{Rackspace2016-jh}. La figura X muestra un resumen de la arquitectura de OpenStack Heat.
+OpenStack Heat es un servicio utilizado para orquestar múltiples aplicaciones nativas de la nube compuestas; utilizando plantillas y a través de una API REST nativa de Openstack y una Interfaz de Programación de Aplicaciones (API) de consultas compatible con CloudFormation \cite{Rackspace2016-jh}. La figura X muestra un resumen de la arquitectura de OpenStack Heat.
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.80\textwidth]{heat-arch}
-    \caption{ Arquitectura de OpenStack Heat \parencite{Metsch2013-et}}
+    \caption{ Arquitectura de OpenStack Heat \protect\cite{Metsch2013-et}}
     \label{fig:heat-arch}
 \end{figure}
 Los componentes principales de OpenStack Heat son:
 
 \begin{itemize}
 \item \textbf{Heat:} Heat es una utilidad CLI para OpenStack Heat. Es decir, es una interfaz para agregar, modificar y obtener información acerca de las pilas que pertenecen a un usuario. Es una aplicación de conveniencia que se comunica con el servicio heat-api. heat-cfn utiliza Openstack Keystone para realizar la autenticación antes de comunicarse con el servicio heat-api.
-\item \textbf{heat-api:} heat-api es un servicio que expone una API externa basada en REST \parencite{Richardson2008-ng} para conectarse con el servicio heat-engine. La comunicación entre el servicio heat-api y el servicio heat-engine utiliza una cola de mensajes basada en RPC \parencite{Arpaci-Dusseau2015-px}. El servicio heat-api incluye las implementaciones de la API nativa de OpenStack y la API de AWS CloudFormation.
-\item \textbf{heat-engine:} la responsabilidad del servicio heat-engine es orquestar el despliegue de plantillas y proveer de eventos a la API del consumidor. Las plantillas se integran bien con herramientas de automatización tales como Puppet \parencite{Puppet2016-ao} o Chef \parencite{Chef2016-cc}.
+\item \textbf{heat-api:} heat-api es un servicio que expone una API externa basada en REST \cite{Richardson2008-ng} para conectarse con el servicio heat-engine. La comunicación entre el servicio heat-api y el servicio heat-engine utiliza una cola de mensajes basada en RPC \cite{Arpaci-Dusseau2015-px}. El servicio heat-api incluye las implementaciones de la API nativa de OpenStack y la API de AWS CloudFormation.
+\item \textbf{heat-engine:} la responsabilidad del servicio heat-engine es orquestar el despliegue de plantillas y proveer de eventos a la API del consumidor. Las plantillas se integran bien con herramientas de automatización tales como Puppet \cite{Puppet2016-ao} o Chef \cite{Chef2016-cc}.
 \item \textbf{heat-metadata:} el servicio heat-metadate recibe metadatos de las pilas de recursos y los guarda en la base de datos.
 \item \textbf{AMQP:} broker de mensajes para la comunicación entre servicios.
 \item \textbf{Database:} DB subyacente.
@@ -293,6 +300,6 @@ La funcionalidad básica de Heat funciona cumple con el objetivo de orquestació
 \subsection{Repositorios y Registros de Servicios}
 Dados los cambios dinámicos que ocurren en una aproximación basada en servicios (por ejemplo, microservicios), en el momento de enlazar las interfaces de programación de los servicios que se quieren orquestar, debe haber un registro de servicios o un repositorio de servicios que puedan supervisar el descubrimiento y seguimiento de tales servicios.
 
-Un registro de servicios es utilizado en la fase de ejecución para el descubrimiento de servicio, algunas veces y, tradicionalmente a través del estándar UDDI  \parencite{Oasis2016-dc}, interviniendo cuando los servicios desplegados necesitan ser registrados y luego ubicados para ser accedidos por otros servicios. Así pues, se lleva control de las definiciones de servicios, interfaces, parámetros, operaciones, ayudando con la resolución de puntos de conexión y eliminando el “vendor lock-in”.
+Un registro de servicios es utilizado en la fase de ejecución para el descubrimiento de servicio, algunas veces y, tradicionalmente a través del estándar UDDI  \cite{Oasis2016-dc}, interviniendo cuando los servicios desplegados necesitan ser registrados y luego ubicados para ser accedidos por otros servicios. Así pues, se lleva control de las definiciones de servicios, interfaces, parámetros, operaciones, ayudando con la resolución de puntos de conexión y eliminando el “vendor lock-in”.
 
 Por otro lado, un repositorio de servicios, durante todo el ciclo de vida, almacena información acerca del uso de los servicios y aplicaciones que son presentadas en el “catálogo de servicios” y han de ser orquestados. Un repositorio de servicios comúnmente guarda metadatos como la versión, estado, dependencias y responsabilidades, etc. de un servicio.

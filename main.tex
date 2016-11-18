@@ -2,7 +2,7 @@
 \usepackage{blindtext} % to quickly get a full document
 \usepackage{import}
 % SPANISH TITLES, TOC, TOF, TOT
-\usepackage[american, spanish]{babel}
+\usepackage[spanish]{babel}
 
 % IMPORT CHAPTERS
 \usepackage{tikz}
@@ -59,15 +59,18 @@
 \graphicspath{ {images/} }
 \usepackage{float}
 % BIBLIOGRAPHY
+\usepackage{apacite}
+
 \usepackage{csquotes}
-\usepackage[
-    backend=biber,
-    style=alphabetic,
-    sorting=ynt,
-    style=apa,
-]{biblatex}
-\DeclareLanguageMapping{english}{american-apa}
-\addbibresource{bibliography.bib}
+% \usepackage[
+%     backend=biber,
+%     sorting=ynt,
+%     style=apa, maxbibnames=9,maxcitenames=2,uniquelist=false
+% ]{biblatex}
+% \DefineBibliographyStrings{spanish}{andothers={et~al\adddot}}
+
+% \DeclareLanguageMapping{english}{american-apa}
+% \addbibresource{bibliography.bib}
 
 % EXTRA FORMATTING
 \usepackage{parskip} % page indentation and page breaks
@@ -92,7 +95,7 @@
     bottom=2.5cm,
     left=4cm,
     right=2.5cm,
-    headheight=30pt, % as per the warning by fancyhdr
+    headheight=33pt, % as per the warning by fancyhdr
     includehead,includefoot,
     heightrounded, % to avoid spurious underfull messages
 ]{geometry} 
@@ -134,6 +137,18 @@
 \title{Aplicacion Nativa de la Nube con ALPR para el Control Vehicular para la Empresa QSS Bolivia}
 \author{Juan Francisco Ribera Laszkowski}
 \begin{document}
+
+\renewcommand{\BRetrieved}[1]{Recuperado el {#1} de\ }%
+\renewcommand{\BRetrievedFrom}{Recuperado de\ }%
+
+
+\renewcommand{\BOthers}[1]{et al.\hbox{}}%       ``y colaboradores''
+\renewcommand{\BOthersPeriod}[1]{et al.\hbox{}}% ``y colaboradores''
+
+% Here is an example citation \parencite{Johnson1995-yr}.
+    
+    % Here is an example citation \cite{Onvif2016-dc}.
+
     \selectlanguage{spanish}
     \input{first-pages/titlepage}
     \input{first-pages/titlepage-inner}
@@ -151,6 +166,9 @@
     %\listoftables
     \listoftodos
 
-    \foreach \c in {1,...,7}{\import{chapters/}{chapter\c.tex} }
-\printbibliography[heading=bibintoc]
+    \foreach \c in {1,...,8}{\import{chapters/}{chapter\c.tex} }
+    
+\bibliographystyle{apacite}
+\bibliography{bibliography}
+    % \printbibliography[heading=bibintoc]
 \end{document}

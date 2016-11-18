@@ -5,7 +5,7 @@
     
     Por otro lado, el estado del arte de la electrónica ha facilitado una variedad de herramientas capaces de mejorar los procesos industriales, los sistemas en general y, además, proporcionar una mayor calidad de vida a la sociedad. Al hacer uso de las herramientas que proporciona la electrónica y de la creatividad de las soluciones de software, las aplicaciones alcanzan armonía con los objetivos de optimización y reducción de costos de las empresas y ciudades. 
     
-    En 2015, más de 72.37 millones de vehículos fueron vendidos en el mundo \parencite{Statista2016-qw} y según la \cite{Interpol2015-lz}, hubieron más de 7.4 millones de reportes de vehículos robados mundialmente. Cuando se habla de hacer un seguimiento de los vehículos, esfuerzo humano innecesario es requerido y las compañías incurren en costos que preferirían evitar.
+    En 2015, más de 72.37 millones de vehículos fueron vendidos en el mundo \cite{Statista2016-qw} y según la \citeA{Interpol2015-lz}, hubieron más de 7.4 millones de reportes de vehículos robados mundialmente. Cuando se habla de hacer un seguimiento de los vehículos, esfuerzo humano innecesario es requerido y las compañías incurren en costos que preferirían evitar.
     
     En este sentido, dado el nivel de la tecnología en el área de la visión artificial, unido con útiles herramientas que proporciona la electrónica, los sistemas de seguridad no sólo sirven para proteger bienes e inmuebles, sino también personas y ahorrar tiempo y dinero. Por ejemplo, países como Estados Unidos cuentan con sistemas de reconocimiento de matrículas en semáforos para el registro infracciones. 
     
@@ -26,7 +26,7 @@ Previa recopilación de datos se pudo recolectar información acerca de las fale
     \subsection{Situación Deseada}
     Automatizar el proceso de reconocer matrículas y el de proveer información sobre las matriculas identificadas y sus respectivos propietarios, facilitar los reportes sobre el monitoreo de las matrículas y notificar si se observa una matrícula sospechosa.
     \subsection{Objeto de Estudio}
-        \begin{figure}[h]
+        \begin{figure}[H]
             \centering
             \includegraphics[width=\textwidth]{nodos-overview}
             \caption{Distribución del software en nodos y su integración con cámaras de seguridad}
@@ -58,25 +58,66 @@ Previa recopilación de datos se pudo recolectar información acerca de las fale
     \end{itemize}
 \section{Metodologia}
 \subsection{Contexto de Ágil}
-En el momento de definir la metodología más adecuada para el proyecto final de grado (PFG) es esencial tomar en cuenta la naturaleza del mismo.
+En el momento de definir la metodología más adecuada para el Proyecto Final de Grado (PFG) es esencial tomar en cuenta la naturaleza del mismo.
 
-El PFG aprovecha las ventajas de la computación en la nube de acuerdo con los lineamientos establecidos en el Capitulo II y se encuentra en el borde de sistemas en tiempo real ya que hace uso tecnologías de computación visual para el procesamiento de imágenes digitales (Capitulo III-IV). 
+El PFG aprovecha las ventajas de la computación en la nube de acuerdo con los lineamientos establecidos en el Capítulo II y se encuentra en el borde de sistemas en tiempo real ya que hace uso tecnologías de computación visual para el procesamiento de imágenes digitales (Capítulo III-IV). 
 
-Figura de encuestas [] 
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\textwidth]{pp-sw-projects}
+        \caption{Figura de encuestas \protect\cite{Fox2013-ct}}
+        \label{fig:pp-sw-projects}
+    \end{figure}
 
-\todonum{loc669} [johnson] [taylor] [jones] [johnson] reflejan la crisis del software que no llega a poder ser entregado dentro del tiempo ni presupuesto establecidos como se observa en la figura X. Dado esto, surge la necesidad de una metodología de software que pueda lidiar con los cambios que ocurren en los proyectos de software de manera continua y con una mayor interacción con el cliente. [johnson  2013b] demuestra que los proyectos pequeños, que típicamente utilizan metodologías ágiles, tienen mayor probabilidad de ser exitosos que proyectos grandes (76\% de los proyectos se terminan a tiempo y sobre el presupuesto). 
+Como se observa en la Figura \ref{fig:pp-sw-projects}, \citeA{Johnson1995-yr}, \citeA{Taylor2000-yr}, \citeA{Jones2004-vq} y \citeA{Johnson2013-yr} reflejan la crisis del software que no llega a poder ser entregado dentro del tiempo ni presupuesto establecidos. 
 
-En este sentido, se alcanza una armonía entre la naturaleza SaaS del PFG y las características de las metodologías ágiles, al estar el PFG  bajo una perspectiva de descomposición en componentes con interfaces bien definidas (Capitulo II), la necesidad de interacción con el cliente constante y la entrega de prototipos hasta que el cliente este satisfecho. Mas aún, agrega valor a la consideración el respaldo que tienen las metodologías ágiles al ser usadas por 60\% a 80\% de los proyectos en 2013 [et bureau 2012] y [proyect management institute 2012], y su uso en equipos distribuidos geográficamente [estler, 2012]. 
+Dado esto, surge la necesidad de una metodología de software que pueda lidiar con los cambios que ocurren en los proyectos de software de manera continua y con una mayor interacción con el cliente. cite{Johnson2013-yr} demuestra que los proyectos pequeños, que típicamente utilizan metodologías ágiles, tienen mayor probabilidad de ser exitosos que proyectos grandes (76\% de los proyectos se terminan a tiempo y sobre el presupuesto). 
+    
+    \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.90\textwidth]{pp-sw-small}
+            \caption{Figura de encuestas \protect\cite{Fox2013-ct}}
+            \label{fig:pp-sw-small}
+        \end{figure}
 
+En este sentido, se alcanza una armonía entre la naturaleza SaaS del PFG y las características de las metodologías ágiles, al estar el PFG  bajo una perspectiva de descomposición en componentes con interfaces bien definidas (Capítulos II y VI), la constante interaccion con el cliente constante y entrega de prototipos.
 
 \subsection{ICONIX}
-Dado el contexto de agil, descrito en la seccion anterior y la experiencia en proyectos pasados utilizando la metodología de rational (RUP), se definió que la metodología ágil más adecuada para el PFG es ICONIX. Esto debido a que ICONIX mantiene las características esenciales de RUP sin discriminar la importancia de la documentación del software; la cual ICONIX considera es esencial para cualquier proyecto []. 
+Dado el contexto de ágil, descrito en la sección anterior y la experiencia en proyectos pasados utilizando el Proceso Unificado de Rational (RUP), se definió que la metodología ágil más adecuada para el PFG es ICONIX, basado en lo que establecen \citeA{Rosen05-ct}, en \textit{Agile Development with ICONIX Process: People, Process, and Pragmatism}. 
+
+ICONIX mantiene las características esenciales de RUP sin discriminar la importancia de la documentación del software; la cual ICONIX considera es esencial independiente de la complejidad del proyecto. 
+Mas aún, ICONIX establece un enlace crucial entre el análisis y el diseño, solventando la grieta que existe entre ambos. Esto lo hace con sus estereotipos de análisis (objetos de frontera, control y entidad), los cuales se traducen con relativa sencillez a Arquitecturas MVC \cite{Rosen05-ct}; este otro de los beneficios que ICONIX trae para el PFG. Las arquitecturas MVC se describen brevemente en la sección de patrones de Arquitecturas SaaS en el Capitulo VI. 
 En ICONIX, los artefactos requeridos son:
 \begin{itemize}
-  \item Use case text
-  \item Domain Model
-  \item Robustness Diagram
-  \item Sequence Diagram
- 
+  \item Texto de Casos de Uso: definir los requerimientos de comportamiento.
+  \item Modelo de Dominio: describir los objetos del mundo real y sus relaciones.
+  \item Diagrama de Robustez: Disminución de los requerimientos de comportamiento.
+  \item Diagrama de Secuencia: Asignar comportamiento a las clases.
+  
 \end{itemize}
-\todonum[inline]{ICONIX: Pendiente}
+
+\begin{figure}[H]
+            \centering
+            \includegraphics[width=\textwidth]{iconix-process}
+            \caption{Proceso ICONIX \protect\cite{Rosen05-ct}}
+            \label{fig:iconix-process}
+        \end{figure}
+
+En pocas palabras, para cada escenario y complementando con la Figura \ref{fig:iconix-process}, el proceso ICONIX puede descomponerse en:
+\begin{enumerate}
+    \item Identificar los objetos de dominio del mundo real (modelado del dominio)
+    \item Definir los requerimientos de comportamiento (casos de uso)
+    \item Realizar el análisis de robustez
+    \item Asignar comportamiento a los objetos (diagrama de secuencia)
+    \item Finalizar el modelo estático (diagrama de clases)
+    \item Implementar el escenario
+    \item Realizar pruebas
+\end{enumerate}
+
+Donde los hitos que se deben alcanzar en cada entregable son:
+\begin{enumerate}
+    \item Revisión de Requerimientos
+    \item Revisión Preliminar del Diseño
+    \item Revisión Detallada/Critica del Diseño
+    \item Entrega
+\end{enumerate}
