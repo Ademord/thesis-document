@@ -134,6 +134,9 @@
 \renewcommand{\thetable}{\arabic{chapter}.\arabic{table}}
 
 \pagestyle{fancy}
+\usepackage{array, booktabs}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash}m{#1}}
+\usepackage{longtable}
 % APPENDIX
 % \usepackage{indentfirst}
 % \usepackage{setspace}
