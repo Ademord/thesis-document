@@ -1,2 +1,68 @@
 \chapter{Pruebas}
-Este capitulo detalla las pruebas de caja negra necesarias para asegurar que cada componente del PFG interactua con los otros componentes como se espera. Las pruebas son importantes en el contexto del PFG debido a su naturaleza SOA.
+Este capitulo detalla las pruebas de caja negra necesarias para asegurar que cada componente del PFG interactúa con los otros componentes como se espera. Las pruebas son importantes en el contexto del PFG debido a su naturaleza SOA.
+\pagebreak
+\section{Pruebas de Integración}
+
+\subsection{Comunicación de Mensaje Exitoso}
+Se utilizo la herramienta Postman \footnote{\url{https://www.getpostman.com/}} para realizar consultas HTTP a la interfaz de cada servicio.
+De cada consulta se obtuvo las respuestas HTTP exitosas correspondientes en base a la consulta.
+\
+\begin{longtable}{@{} p{3cm} p{10cm} @{}} \toprule
+\textbf{Propósito}                  & Gestionar Conexión a Cámara (Recolectar Vídeo, Reconocer Matrícula) \\ \midrule
+\textbf{Dependencias externas}      & Gerente \\ \cmidrule{1-2}
+\textbf{Descripción}                & El gerente inicia un Servicio Recolector para una cámara registrada. \\ \cmidrule{1-2}
+\textbf{Descripción de la Prueba}   & 1. El gerente inicia su navegador web. \\ 
+                                    & 2. Existe la cámara. \\
+                                    & 3. Existe un Servicio Recolector para la cámara (la conexión a la cámara esta establecida). \\
+                                    & 4. El gerente visita la página de Cámaras.  \\ \cmidrule{1-2} 
+\textbf{Resultados Esperados}       & 2.2. El sistema recolecta el flujo de vídeo y reenvía los cuadros del vídeo a un Servicio de Reconocimiento. \\ \bottomrule
+\caption{Prueba de Integración - Laravel - Interfaz de Servicio} \label{tab:tabcu-rec}  \\
+\end{longtable}
+   
+\pagebreak
+\subsection{Capa de Presentación - Interfaz de Servicio}
+\begin{longtable}{@{} p{3cm} p{10cm} @{}} \toprule
+\textbf{Propósito}                  & Gestionar Conexión a Cámara (Recolectar Vídeo, Reconocer Matrícula) \\ \midrule
+\textbf{Dependencias externas}      & Gerente \\ \cmidrule{1-2}
+\textbf{Descripción}                & El gerente inicia un Servicio Recolector para una cámara registrada. \\ \cmidrule{1-2}
+\textbf{Descripción de la Prueba}   & 1. El gerente inicia su navegador web. \\ 
+                                    & 2. Existe la cámara. \\
+                                    & 3. Existe un Servicio Recolector para la cámara (la conexión a la cámara esta establecida). \\
+                                    & 4. El gerente visita la página de Cámaras.  \\ \cmidrule{1-2} 
+\textbf{Resultados Esperados}       & 2.2. El sistema recolecta el flujo de vídeo y reenvía los cuadros del vídeo a un Servicio de Reconocimiento. \\ \bottomrule
+\caption{Prueba de Integración - Laravel - Interfaz de Servicio} \label{tab:tabcu-rec}  \\
+\end{longtable}
+
+\pagebreak       
+\subsection{Consultas Interfaz de Servicio - Base de Datos}
+\subsubsection{Resultado de Datos de una Consulta Invalida}
+\begin{longtable}{@{} p{3cm} p{10cm} @{}} \toprule
+\textbf{Propósito}                  & Gestionar Conexión a Cámara (Recolectar Vídeo, Reconocer Matrícula) \\ \midrule
+\textbf{Dependencias externas}      & Gerente \\ \cmidrule{1-2}
+\textbf{Descripción}                & El gerente inicia un Servicio Recolector para una cámara registrada. \\ \cmidrule{1-2}
+\textbf{Descripción de la Prueba}   & 1. El gerente inicia su navegador web. \\ 
+                                    & 2. Existe la cámara. \\
+                                    & 3. Existe un Servicio Recolector para la cámara (la conexión a la cámara esta establecida). \\
+                                    & 4. El gerente visita la página de Cámaras.  \\ \cmidrule{1-2} 
+\textbf{Resultados Esperados}       & 2.2. El sistema recolecta el flujo de vídeo y reenvía los cuadros del vídeo a un Servicio de Reconocimiento. \\ \bottomrule
+\caption{Prueba de Integración - Laravel - Interfaz de Servicio} \label{tab:tabcu-rec}  \\
+\end{longtable}
+  
+ 
+\pagebreak  
+\subsubsection{Consulta de Cero Resultados}
+\pagebreak
+\subsubsection{Consulta de Resultado Singular}
+\pagebreak
+\subsubsection{Consulta de Múltiples Resultados}
+\pagebreak
+\subsection{Interfaz de Servicios - Base de Datos}
+\subsubsection{Envío de Datos con Formato Incorrecto}
+\pagebreak
+\subsubsection{Adición de Datos}
+\pagebreak
+\subsubsection{Adición de Datos Duplicados}
+\pagebreak
+\subsubsection{Modificación de Datos}
+\pagebreak
+\subsubsection{Eliminación de Datos}

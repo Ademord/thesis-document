@@ -3,12 +3,12 @@ Dado el nivel actual de las tecnologías descrito en los capítulos III-VI, para
 
 \section{Tecnologías del Negocio}
 \begin{itemize}
-    \item La capa de presentación se programó en PHP (con HTML y CSS para las páginas web) dada la tecnologia de soporte Laravel.
+    \item La capa de presentación se programó con HTML, CSS y PHP en armonía con el Framework de desarrollo web Laravel. Se utilizo plantillas de Bootstrap\footnote{\url{http://getbootstrap.com/}} para el diseño de botones, tablas, etc.
     \item Los servicios Lugar, Cámara, Matricula, Propietario, Coincidencia, Recolector y Reconocedor se programaron en Python 3.5. 
-    \item La interfaz que expone cada servicio se programo con la libreria Flask
-     \footnote{http://flask.pocoo.org/}.
+    \item La interfaz que expone cada servicio y se mapea a un método del mismo se programó con la librería Flask
+     \footnote{\url{http://flask.pocoo.org/}}.
     \item El Servicio Recolector recupera la entrada de vídeo a través de las funcionalidades de la librería OpenCV.
-    \item El Servicio Reconocedor utiliza OpenALPR para el reconocimiento de matriculas. Esta libreria utiliza OpenCV de manera subyacente. OpenCV es la tecnología principal en computación visual, además de ser open-source, multiplataforma y ser utilizada por compañías como Microsoft, IBM, Intel, etc. \cite{Itseez2000-he}.       
+    \item El Servicio Reconocedor utiliza OpenALPR para el reconocimiento de matriculas. Esta librería utiliza OpenCV de manera subyacente. OpenCV es la tecnología principal en computación visual, además de ser open-source, multiplataforma y ser utilizada por compañías como Microsoft, IBM, Intel, etc. \cite{Itseez2000-he}.       
 \end{itemize}
 
 \section{Tecnologías de Soporte}
@@ -21,8 +21,8 @@ Dado el nivel actual de las tecnologías descrito en los capítulos III-VI, para
 
     \item PostgreSQL es la base de datos de preferencia, dada la experiencia del grupo de programadores con esta herramienta, y por ser open-source.
 \end{itemize}
-
-\section{Programación de Servicios}
+\section{Servicio}
+\subsection{Descripción}
 En breve, para programar un servicio se debe:
 \begin{itemize}
     \item Programar la interfaz del servicio y la lógica del mismo.
@@ -32,24 +32,25 @@ En breve, para programar un servicio se debe:
     \item Definir el archivo de Servicio Kubernetes.
 \end{itemize}
 Dado lo anterior, la estructura de archivos de un servicio consiste en la siguiente:
-\vspace{0.5cm}
 
+\vspace{0.5cm}
 \dirtree{%
-.1 /.
-.2 app.
-.3 app.py.
-.3 database.py.
-.3 Dockerfile.
-.3 requirements.txt. 
-.3 server.py.
-.2 deployment.json.
-.2 service.json.
+.1 servicio/.
+    .2 app/.
+        .3 app.py.
+        .3 database.py.
+        .3 Dockerfile.
+        .3 requirements.txt. 
+        .3 server.py.
+    .2 deployment.json.
+    .2 service.json.
 }
+\pagebreak
 Donde:
 \begin{itemize}
-\item \textit{app.py} contiene la logica del servicio.
-\item \textit{database.py} contiene la configuracion de la base de datos.
-\item \textit{Dockerfile} describe la implementacion del servicio en un contenedor Docker.
+\item \textit{app.py} contiene la lógica del servicio.
+\item \textit{database.py} contiene la configuración de la base de datos.
+\item \textit{Dockerfile} describe la implementación del servicio en un contenedor Docker. Este archivo extiende una imagen base de DockerHub  \footnote{\url{https://hub.docker.com/}} que incluye una versión mínima de Linux y las dependencias base para la implementación del servicio. Esta imagen es extendida de acuerdo a la aplicación que se desarrolla. Por ejemplo, los servicios atómicos se basan en una imagen que únicamente incluye python3.5, mientras que el servicio recolector se basa en una imagen de OpenCV y el servicio reconocedor en una imagen de OpenALPR.
 \item \textit{requirements.txt} es un archivo que contiene todas las dependencias.
 \item \textit{server.py} es el encargado de ejecutar el micro servidor web para mapear las rutas 
 \item \textit{deployment.json} describe los metadatos necesarios para el despliegue del servicio en Kubernetes (cantidad de replicas, variables de entorno, puertos, etc.).
@@ -58,17 +59,131 @@ Donde:
 
 \end{itemize}
 
-Los servicios, al ser aislados e independientes, exponen una interfaz con la cual otros componentes pueden comunicarse con ellos. Esta interfaz se programo con Flask, que monta un micro servidor web que mapea las rutas permitidas a una funcion del servicio. Un ejemplo de un servicio es:
+\subsection{Implementación}
+Los servicios, al ser aislados e independientes, exponen una interfaz con la cual otros componentes pueden comunicarse con ellos. Esta interfaz se programó con Flask, que monta un micro servidor web que mapea las rutas permitidas a un método del servicio. Un ejemplo de un servicio es:
 
-\begin{minted}[mathescape,
-               linenos,
-               numbersep=5pt,
-               gobble=2,
-               frame=lines,
-               framesep=2mm]{csharp}
+{ \sffamily \textbf{app.py}}
 
-# app.py
-# !flask/bin/python
+\begin{mdframed}[linecolor=black, topline=true, bottomline=true,
+  leftline=false, rightline=false, backgroundcolor=LightGray,userdefinedwidth=\textwidth]
+  \begin{minted}[fontsize=\normalsize, linenos, baselinestretch=1.2]{python}
+
+from orator import Model
+from database import db
+
+class Lugar(Model):
+
+    def connect():
+        Model.set_connection_resolver(db)
+    __table__ = 'lugar'
+    
+    def getall(): 
+        return Lugar.all().serialize()
+
+    def get(id):
+        lugar = Lugar.find(id)
+        try:
+            return lugar.serialize()
+        except:
+            return lugar
+
+    def add(temp):
+        lugar = Lugar()
+        try:
+            lugar.nombre = temp['nombre']
+            lugar.save()
+            return True
+        except:
+            return "No se pudo agregar elemento."
+
+    def remove(id):
+        lugar = Lugar.find(id)
+        try:
+            lugar.delete()
+            return True
+        except:
+            return "No se pudo eliminar elemento."
+
+    def update(id, temp):
+        lugar = Lugar.find(id)
+        try:
+            lugar.nombre = temp['nombre']
+            lugar.save()
+            return True
+        except:
+            return "No se pudo actualizar elemento."
+
+    def valid(temp):
+        if 'nombre' in temp and not isinstance(temp['nombre'], str):
+            return False
+        return True
+\end{minted}
+\end{mdframed}
+
+\pagebreak
+{ \sffamily \textbf{database.py}} 
+
+\begin{mdframed}[linecolor=black, topline=true, bottomline=true,
+  leftline=false, rightline=false, backgroundcolor=LightGray,userdefinedwidth=\textwidth]
+  \begin{minted}[fontsize=\normalsize, linenos, baselinestretch=1.2]{python}
+
+from orator import DatabaseManager
+import os
+config = {
+    'pgsql': {
+        'driver': 'pgsql',
+        'host': os.environ.get('DATABASE_HOST', 'homestead'),
+        'database': os.environ.get('DATABASE_NAME', 'homestead'),
+        'user': os.environ.get('DATABASE_USER', 'homestead'),
+        'password': os.environ.get('DATABASE_PASSWORD', 'secret'),
+        'prefix': '',
+        'port': os.environ.get('DATABASE_PORT', '5432')
+    }
+}
+db = DatabaseManager(config)
+
+\end{minted}
+\end{mdframed}
+\vspace{0.2cm}
+{ \sffamily 
+\textbf{Dockerfile}
+}\vspace{0.1cm}
+
+
+\begin{mdframed}[linecolor=black, topline=true, bottomline=true,
+  leftline=false, rightline=false, backgroundcolor=LightGray,userdefinedwidth=\textwidth]
+  \begin{minted}[fontsize=\normalsize, linenos, baselinestretch=1.2]{vim}
+FROM python:3-onbuild
+ENV DATABASE_HOST=homestead
+ENV DATABASE_NAME=homestead
+ENV DATABASE_USER=homestead
+ENV DATABASE_PASSWORD=secret
+ENV DATABASE_PORT=5432
+EXPOSE 55550
+ENTRYPOINT ["python","/usr/src/app/server.py"]
+\end{minted}
+\end{mdframed}
+
+{ \sffamily 
+\textbf{requirements.txt}
+}
+\begin{mdframed}[linecolor=black, topline=true, bottomline=true,
+  leftline=false, rightline=false, backgroundcolor=LightGray,userdefinedwidth=\textwidth]
+  \begin{minted}[fontsize=\normalsize, linenos, baselinestretch=1.2]{python}
+ flask
+ orator
+ psycopg2
+\end{minted}
+\end{mdframed}
+
+\pagebreak
+{ \sffamily \textbf{server.py} }
+
+
+\begin{mdframed}[linecolor=black, topline=true, bottomline=true,
+  leftline=false, rightline=false, backgroundcolor=LightGray,userdefinedwidth=\textwidth]
+  \begin{minted}[fontsize=\normalsize, linenos, baselinestretch=1.2]{python}
+
 from flask import Flask, jsonify, abort, make_response, request
 from app import Lugar
 app = Flask(__name__)
@@ -122,10 +237,114 @@ def _run_on_start():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=55550, debug=True)
-    # app.run(port=55555, debug=True)
 
 \end{minted}
+\end{mdframed}
+\pagebreak
+{ \sffamily \textbf{deployment.json} }
+\begin{mdframed}[linecolor=black, topline=true, bottomline=true,
+  leftline=false, rightline=false, backgroundcolor=LightGray,userdefinedwidth=\textwidth]
+  \begin{minted}[fontsize=\normalsize, linenos, baselinestretch=1]{json}
+{  
+   "kind":"Deployment",
+   "apiVersion":"extensions/v1beta1",
+   "metadata":{  
+      "name":"lugares",
+      "namespace":"panchito",
+      "creationTimestamp":null
+   },
+   "spec":{  
+      "replicas":3,
+      "template":{  
+         "metadata":{  
+            "creationTimestamp":null,
+            "labels":{  
+               "service":"lugares"
+            }
+         },
+         "spec":{  
+            "containers":[  
+               {  
+                  "name":"lugares",
+                  "image":"ademord/lugar:v6",
+                  "ports":[  
+                     {  
+                        "containerPort":55550,
+                        "protocol":"TCP"
+                     }
+                  ],
+                  "env":[  
+                     {  
+                        "name":"DATABASE_HOST",
+                        "value":"homestead"
+                     },
+                     {  
+                        "name":"DATABASE_PORT",
+                        "value":"5432"
+                     }
+                  ],
+                  "resources":{ }
+               }
+            ],
+            "restartPolicy":"Always"
+         }
+      },
+      "strategy":{ }
+   },
+   "status":{ }
+}
+\end{minted}
+\end{mdframed}
 
+\pagebreak
+{ \sffamily \textbf{service.json} }
+\begin{mdframed}[linecolor=black, topline=true, bottomline=true,
+  leftline=false, rightline=false, backgroundcolor=LightGray,userdefinedwidth=\textwidth]
+  \begin{minted}[fontsize=\normalsize, linenos, baselinestretch=1]{json}
+ {  
+   "kind":"Service",
+   "apiVersion":"v1",
+   "metadata":{  
+      "name":"lugares",
+      "namespace":"panchito",
+      "creationTimestamp":null,
+      "labels":{  
+         "service":"lugares"
+      }
+   },
+   "spec":{  
+      "ports":[  
+         {  
+            "name":"55550",
+            "protocol":"TCP",
+            "port":80,
+            "targetPort":55550
+         }
+      ],
+      "selector":{  
+         "service":"lugares"
+      },
+      "type":"LoadBalancer"
+   },
+   "status":{  
+      "loadBalancer":{ }
+   }
+}
+\end{minted}
+\end{mdframed}
 
+Con estos archivos se puede montar un servicio en un cluster de Kubernetes \footnote{\url{http://kubernetes.io/docs/hellonode/}}. Cabe recordar que existen diversas alternativas de Infraestructura como Servicio (IaaS) en el momento de utilizar Kubernetes \footnote{\url{http://kubernetes.io/docs/getting-started-guides/}}:
+\begin{itemize}
+\item \textbf{Nubes Públicas:} contratar un proveedor de IaaS y montar el cluster de Kubernetes sobre sus recursos de cómputo, almacenamiento, redes, etc. como AWS, Google Cloud, etc.
+\item \textbf{Nubes Privadas:} alojar la aplicación en servidores físicos en las instalaciones de la empres.
+\item \textbf{Nubes Híbridas:} mantener cierta parte de la infraestructura in-situ (en las instalaciones), donde la estrategia general es desplegar los nodos de aplicación en la nube y mantener las bases de datos en los datacenter de la empresa.
+ \end{itemize}
+Posterior a pruebas a través de despliegues en nubes públicas, se registró una latencia de 4 a 12 segundos en el envío de cuadros de vídeo. Esta latencia se encuentra presente debido a la infraestructura del internet de Bolivia y, se traduce en un requerimiento de desplegar la aplicación en una nube privada, donde no existe esta condicionante.
 
-\section{Programación de Capa de Presentación}
+\section{Servicio Reconocedor}
+\subsection{Descripción}
+
+El Servicio Recolector, manipula los cuadros de vídeo en una estructura particular llamada arreglos de numpy. Estos arreglos son transformados a listas y enviados, con la IP de la cámara correspondiente, en formato JSON a través de HTTP a la interfaz correspondiente del Servicio Reconocedor.
+El servicio Reconocedor procesa cada cuadro y si encuentra una matricula la envía, con la IP de la cámara correspondiente, al Servicio de Coincidencias. Este servicio se encarga de almacenar la matricula de acuerdo a la descripción del diagrama de secuencia \ref{fig:seq-alma}.
+
+\subsection{Implementación}

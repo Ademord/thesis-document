@@ -8,13 +8,11 @@
 % ]{times.ttf}
 % % Arial
 \setmainfont[
-% SizeFeatures={Size=12},
-Scale=1.0909,
+SizeFeatures={Size=12},
 BoldFont=arialbd.ttf,
 ItalicFont=ariali.ttf,
 BoldItalicFont=arialbi.ttf
 ]{arial.ttf}
-% \renewcommand{\familydefault}{\sfdefault}
 % % Courier New
 % \setmonofont[Scale=0.90,
 % BoldFont=courbd.ttf,
@@ -60,11 +58,10 @@ BoldItalicFont=arialbi.ttf
     % pdfhighlight=/N,
     colorlinks,
     allcolors = blue,
-    filecolor=blue,
+    % filecolor=blue,
     % linkcolor=blue,
     % urlcolor=blue
 }
-\usepackage{url}
 \usepackage[all]{hypcap}
 % \numberwithin{equation}{section}
 % \numberwithin{figure}{section}
@@ -79,6 +76,7 @@ BoldItalicFont=arialbi.ttf
 %     }
 % \usepackage{helvet}
 % \renewcommand{\familydefault}{\sfdefault}
+\renewcommand{\baselinestretch}{1.5} 
 % IMAGES AND FIGURES
 \usepackage{graphicx}
 \graphicspath{ {images/} }
@@ -132,7 +130,7 @@ BoldItalicFont=arialbi.ttf
 \fancyfoot[R]{\thepage}
 \fancyfoot[C]{}
 \fancyfoot[L]{\textit{
-    Aplicacion Nativa de la Nube con ALPR para el Control Vehicular \\ para la Empresa QSS Bolivia
+    Aplicacion Nativa de la Nube con ALPR para el Control Vehicular para la Empresa QSS Bolivia
 }}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
@@ -144,7 +142,7 @@ BoldItalicFont=arialbi.ttf
     \fancyfoot[R]{\thepage}
     \fancyfoot[C]{}
     \fancyfoot[L]{\textit{
-        Aplicacion Nativa de la Nube con ALPR para el Control Vehicular \\ para la Empresa QSS Bolivia
+        Aplicacion Nativa de la Nube con ALPR para el Control Vehicular para la Empresa QSS Bolivia
     }}
     \renewcommand{\headrulewidth}{0pt}
 }
@@ -177,16 +175,10 @@ BoldItalicFont=arialbi.ttf
 % 
 \usepackage{tocloft}
 \usepackage{lscape}
-% \usepackage{rotating}
 % \setlength{\cftfigurenumwidth}{20mm}
 % \setlength{\cfttablenumwidth}{20mm}
 \addtolength\cftfignumwidth{1em}
 \addtolength\cfttabnumwidth{1em}
-\addtolength\cftchapnumwidth{1em}
-\addtolength\cftsecnumwidth{1em}
-\addtolength\cftsubsecnumwidth{1em}
-\addtolength\cftsubsubsecnumwidth{1em}
-\addtolength\cftsecindent{1em}
 
 %   \renewcommand\cfttoctitlefont{\normalsize\normalfont}
 %   \renewcommand\cftbeforetoctitleskip{0pt}
@@ -205,10 +197,6 @@ BoldItalicFont=arialbi.ttf
 \usepackage{dirtree}
 \usepackage{minted}
 \usepackage{setspace}
-\usepackage[bottom]{footmisc}
-\usepackage{xcolor}
-\definecolor{LightGray}{rgb}{0.95,0.95,0.95}
-\usepackage{mdframed}
 % \setmainfont[
 % BoldFont=arialbd.ttf,
 % ItalicFont=ariali.ttf,
@@ -218,14 +206,11 @@ BoldItalicFont=arialbi.ttf
 % \setmonofont[Color={0019D4}]{Courier New}
 % \setsansfont{Calibri}
 % \setmonofont{Consolas}
-    \renewcommand{\baselinestretch}{1.6} 
 
 % DOCUMENT
 \title{Aplicacion Nativa de la Nube con ALPR para el Control Vehicular para la Empresa QSS Bolivia}
 \author{Juan Francisco Ribera Laszkowski}
 \begin{document}
-
-    \urlstyle{same}
     \renewcommand{\theFancyVerbLine}{
     \sffamily\textcolor[rgb]{0.5,0.5,0.5}{\scriptsize\arabic{FancyVerbLine}}}
     \renewcommand{\BRetrieved}[1]{Recuperado el {#1} de\ }%
@@ -241,7 +226,6 @@ BoldItalicFont=arialbi.ttf
     \afterpage{\blankpage}
     \afterpage{\blankpage}
     \input{first-pages/titlepage-inner}
-    \input{first-pages/pre-acknoledgements}
 
     \input{first-pages/acknoledgements}
 
@@ -262,9 +246,9 @@ BoldItalicFont=arialbi.ttf
     % \addcontentsline{toc}{chapter}{List of Tables}
 
     % CHAPTERS
-    % \addtocontents{toc}{\protect\setlength{\cftchapnumwidth}{8mm}}
-    % \addtocontents{toc}{\protect\setlength{\cftsecnumwidth}{10mm}}
-    % \addtocontents{toc}{\protect\setlength{\cftsecindent}{10mm}}
+    \addtocontents{toc}{\protect\setlength{\cftchapnumwidth}{8mm}}
+    \addtocontents{toc}{\protect\setlength{\cftsecnumwidth}{10mm}}
+    \addtocontents{toc}{\protect\setlength{\cftsecindent}{10mm}}
 
     \foreach \c in {1,...,9}{\import{chapters/}{chapter0\c.tex} }
     \foreach \c in {0,...,4}{\import{chapters/}{chapter1\c.tex} }
@@ -289,3 +273,4 @@ BoldItalicFont=arialbi.ttf
     \bibliography{bibliography}
     % \printbibliography[heading=bibintoc]
 \end{document}
+
