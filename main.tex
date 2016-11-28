@@ -1,4 +1,25 @@
-\documentclass[12pt, spanish]{report} % to have chapters
+\documentclass[12pt, letterpaper, spanish]{report} % to have chapters
+\usepackage{fontspec}
+% \setmainfont{Arial}
+% \setmainfont[
+% BoldFont=timesbd.ttf,
+% ItalicFont=timesi.ttf,
+% BoldItalicFont=timesbi.ttf,
+% ]{times.ttf}
+% % Arial
+\setmainfont[
+SizeFeatures={Size=12},
+BoldFont=arialbd.ttf,
+ItalicFont=ariali.ttf,
+BoldItalicFont=arialbi.ttf
+]{arial.ttf}
+% % Courier New
+% \setmonofont[Scale=0.90,
+% BoldFont=courbd.ttf,
+% ItalicFont=couri.ttf,
+% BoldItalicFont=courbi.ttf,
+% Color={red}
+% ]{cour.ttf}
 \usepackage{blindtext} % to quickly get a full document
 \usepackage{import}
 % SPANISH TITLES, TOC, TOF, TOT
@@ -36,23 +57,25 @@
     linktocpage,
     % pdfhighlight=/N,
     colorlinks,
-    citecolor=blue,
-    filecolor=blue,
-    linkcolor=blue,
-    urlcolor=blue
+    allcolors = blue,
+    % filecolor=blue,
+    % linkcolor=blue,
+    % urlcolor=blue
 }
-\hypersetup{}
-
+\usepackage[all]{hypcap}
+% \numberwithin{equation}{section}
+% \numberwithin{figure}{section}
+% \numberwithin{table}{section}
 % FONTS AND LANGUAGE
-\usepackage[T1]{fontenc}
-\usepackage{selinput}
-\SelectInputMappings{%
-    aacute={á},
-    ntilde={ñ},
-    Euro={€}
-    }
-\usepackage{helvet}
-\renewcommand{\familydefault}{\sfdefault}
+% \usepackage[T1]{fontenc}
+% \usepackage{selinput}
+% \SelectInputMappings{%
+%     aacute={á},
+%     ntilde={ñ},
+%     Euro={€}
+%     }
+% \usepackage{helvet}
+% \renewcommand{\familydefault}{\sfdefault}
 \renewcommand{\baselinestretch}{1.5} 
 % IMAGES AND FIGURES
 \usepackage{graphicx}
@@ -152,6 +175,11 @@
 % 
 \usepackage{tocloft}
 \usepackage{lscape}
+% \setlength{\cftfigurenumwidth}{20mm}
+% \setlength{\cfttablenumwidth}{20mm}
+\addtolength\cftfignumwidth{1em}
+\addtolength\cfttabnumwidth{1em}
+
 %   \renewcommand\cfttoctitlefont{\normalsize\normalfont}
 %   \renewcommand\cftbeforetoctitleskip{0pt}
 %   \renewcommand\cftaftertoctitleskip{2\baselineskip}
@@ -163,12 +191,28 @@
 % It's good practice to load the hyperref package 
 % late in the preamble
 % \usepackage[hidelinks]{hyperref}
+% CAPITULO DE IMPLEMENTACION
 
-\usepackage{multirow}
+\usepackage{listings}
+\usepackage{dirtree}
+\usepackage{minted}
+\usepackage{setspace}
+% \setmainfont[
+% BoldFont=arialbd.ttf,
+% ItalicFont=ariali.ttf,
+% BoldItalicFont=arialbi.ttf
+% ]{arial.ttf}
+% \setmainfont{Times New Roman}
+% \setmonofont[Color={0019D4}]{Courier New}
+% \setsansfont{Calibri}
+% \setmonofont{Consolas}
+
 % DOCUMENT
 \title{Aplicacion Nativa de la Nube con ALPR para el Control Vehicular para la Empresa QSS Bolivia}
 \author{Juan Francisco Ribera Laszkowski}
 \begin{document}
+    \renewcommand{\theFancyVerbLine}{
+    \sffamily\textcolor[rgb]{0.5,0.5,0.5}{\scriptsize\arabic{FancyVerbLine}}}
     \renewcommand{\BRetrieved}[1]{Recuperado el {#1} de\ }%
     \renewcommand{\BRetrievedFrom}{Recuperado de\ }%
     \renewcommand{\BOthers}[1]{et al.\hbox{}}%       ``y colaboradores''
@@ -176,13 +220,15 @@
     % Here is an example citation \parencite{Johnson1995-yr}.
     % Here is an example citation \cite{Onvif2016-dc}.
 
-    % FIRST PAGES
+    % ADD FIRST PAGES
     \selectlanguage{spanish}
     \input{first-pages/titlepage}
+    \afterpage{\blankpage}
+    \afterpage{\blankpage}
     \input{first-pages/titlepage-inner}
-    \afterpage{\blankpage}
-    \afterpage{\blankpage}
+
     \input{first-pages/acknoledgements}
+
     \input{first-pages/abstract}
     \afterpage{\blankpage}
 
@@ -203,12 +249,24 @@
     \addtocontents{toc}{\protect\setlength{\cftchapnumwidth}{8mm}}
     \addtocontents{toc}{\protect\setlength{\cftsecnumwidth}{10mm}}
     \addtocontents{toc}{\protect\setlength{\cftsecindent}{10mm}}
-    
-    \foreach \c in {1,...,9}{\import{chapters/}{chapter0\c.tex} }
-    \foreach \c in {0,...,1}{\import{chapters/}{chapter1\c.tex} }
+
+    % \foreach \c in {1,...,9}{\import{chapters/}{chapter0\c.tex} }
+    \foreach \c in {0,...,4}{\import{chapters/}{chapter1\c.tex} }
     % APPENDIXES
     \foreach \c in {1,...,1}{\import{appendixes/}{appendix0\c.tex} }
 
+% This an \textit{example} of document compiled with \textbf{xelatex} compiler. If you have to write some code
+% \blindtext[0]
+% \begin{minted}[mathescape,
+%               linenos,
+%               numbersep=5pt,
+%               gobble=2,
+%               frame=lines,
+%               framesep=2mm]{csharp}
+%   string title = "This is a Unicode in the sky"
+
+%   const double pi = 3.1415926535
+% \end{minted}
 
     % BIBLIOGRAPHY
     \bibliographystyle{apacite}

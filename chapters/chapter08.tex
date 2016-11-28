@@ -1,4 +1,4 @@
-\chapter{Análisis de Requisitos}
+\chapter{Análisis Preliminar}
 En este capítulo se detallan los requerimientos funcionales y no funcionales, de los cuales se identifican actores y casos de uso. Posteriormente, se realiza un mapeo de requerimientos a casos de uso para confirmar que se cubren todos los requerimientos con los casos de uso. Finalmente, se obtiene el modelo del dominio correspondiente.
 \section{Requerimientos Funcionales}
 \begin{itemize}
@@ -35,55 +35,37 @@ Estos requerimientos caen fuera del alcance del prototipo, y serán postergados 
     \item Gerente de Vigilancia: Se encarga del manejo del sistema. 
 \end{enumerate}
 \section{Identificación de Casos de Uso}
-\addcontentsline{lot}{table}{Casos de Uso}
-\begin{tabular}{@{} *5l @{}}    \toprule
-\emph{\#CU} & \emph{Detalle CU} \\ \midrule
- 1 & Gestionar Lugar \\ 
- 2 & Gestionar Cámara \\ 
- 3 & Gestionar Matricula \\ 
- 4 & Gestionar Propietario \\ 
- 5 & Gestionar Coincidencia \\ 
- 6 & Gestionar Recolección \\ 
- 7 & Gestionar Reconocimiento \\ 
- 8 & Gestionar Reporte \\ \bottomrule
- \hline
-\end{tabular}
-\begin{landscape}
-    \section{Mapeo de Requerimientos a Casos de Uso}
-    % \addcontentsline{lot}{table}{Mapeo Requerimientos - Casos de Uso}
-    
-    \begin{table}[H]
-        \centering
-        \begin{tabular}{@{} *5l @{}} \toprule
-        \emph{\#REQ} & \emph{Detalle REQ} & \emph{\#CU} & \emph{Detalle CU} \\ \midrule
-         1 & Gestionar lugar & 1 & Gestionar Lugar \\ 
-         2 & Gestionar cámaras & 2 & Gestionar Cámara \\ 
-         3 & Gestionar matriculas & 3 & Gestionar Matricula \\ 
-         4 & Gestionar códigos administrativos & 4 & Gestionar Propietario \\ 
-         5 & Establecer conexión con cámara & 5 & Gestionar Coincidencia \\ 
-         6 & Traducir una matricula & 8 & Gestionar Reporte \\ 
-         7 & Buscar asociación entre matricula y propietario & 8 & Gestionar Reporte \\ 
-         8 & Registrar coincidencia en BD & 8 & Gestionar Reporte \\ 
-         9 & Filtrar Registros & 8 & Gestionar Reporte \\ 
-         10 & Generar reporte de matriculas por lugares & 8 & Gestionar Reporte \\ 
-         11 & Generar reporte de matriculas con propietario vs. no registradas & 8 & Gestionar Reporte \\  \bottomrule
-         \hline
-        \end{tabular}
-            \caption{Mapeo Requerimientos - Casos de Uso}
-            \label{tab:tab-mapeo}
-    \end{table}
-    
-    % \begin{tabular}{@{} *5l @{}}    \toprule
-    %     \end{tabular}
-\end{landscape}
+\begin{longtable}{@{} >{\centering\arraybackslash}p{1cm} p{6cm} @{}}    \toprule
+    \emph{\#CU} & \emph{Detalle CU} \\ \midrule
+     1          & Gestionar Lugar \\ 
+     2          & Gestionar Cámara \\ 
+     3          & Gestionar Matricula \\ 
+     4          & Gestionar Propietario \\ 
+     5          & Gestionar Coincidencia \\ 
+     6          & Gestionar Conexión a Cámara \\ 
+     7          & Buscar \\ 
+     8          & Gestionar Reporte \\ \bottomrule
+\caption{Casos de Uso}
+\label{tab:tabcu}
+   \end{longtable}
 
-\begin{landscape}
-\section{Modelo del Dominio}
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1.3\textwidth]{DOM}
-        \caption{Modelo del Dominio}
-        \label{fig:DOM}
-    \end{figure}
-    
-\end{landscape}
+    \section{Mapeo de Requerimientos a Casos de Uso}
+
+\begin{longtable}{@{} >{\centering\arraybackslash} p{1cm} p{5cm} >{\centering\arraybackslash}p{1cm} p{5cm} @{}} \toprule
+          \emph{\#REQ} & \emph{Detalle REQ} & \emph{\#CU} & \emph{Detalle CU} \\ \cmidrule{1-4}
+         1 & Gestionar lugar                                    & 1 & Gestionar Lugar \\ \cmidrule{1-4}
+         2 & Gestionar cámaras                                  & 2 & Gestionar Cámara \\ \cmidrule{1-4}
+         3 & Gestionar matriculas                               & 3 & Gestionar Matricula \\ \cmidrule{1-4}
+         4 & Gestionar códigos administrativos                  & 4 & Gestionar Propietario \\ \cmidrule{1-4}
+         5 & Establecer conexión con cámara                     & 5.1 & Gestionar Conexión a Cámara \\ 
+         6 & Traducir una matricula                             & 5.2 &  \\ \cmidrule{1-4}
+         7 & Buscar asociación entre matricula y propietario    & 6 &  Gestionar Coincidencia\\ 
+         8 & Registrar coincidencia en BD                       & 6 &  Gestionar Coincidencia\\ \cmidrule{1-4} 
+         9 & Filtrar Registros                                  & 7 & Buscar \\ \cmidrule{1-4}
+         10 & Generar reporte de matriculas por lugares         & 8 & Gestionar Reporte \\ 
+         11 & Generar reporte de matriculas con propietario vs. no registradas & 8 & Gestionar Reporte  \\  \bottomrule
+   \caption{Mapeo Requerimientos - Casos de Uso} \label{tab:tabmapeo} \\
+   \end{longtable}
+
+
+

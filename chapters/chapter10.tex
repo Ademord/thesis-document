@@ -1,271 +1,218 @@
 \addtocontents{toc}{\protect\setlength{\cftsecnumwidth}{13mm}}
 
-
-\chapter{Diseño}
-A continuación, se describe cada caso de uso del PFG siguiendo el orden establecido en el Mapeo de Requerimientos – Casos de Uso. Posteriormente, para agregar valor a la documentación del software, se incluye un diagrama de despliegue, un diagrama de paquetes y un diagrama de estados.  
+\section{Casos de Uso}
+A continuación, se describe cada caso de uso del PFG siguiendo el orden establecido en el cuadro \ref{tab:tabmapeo}.
 \section{Gestionar Lugar}
 
-\begin{table}[H]
-    \begin{tabular}{@{} *5l @{}} \toprule
-    \textbf{Caso de Uso} & Gestionar Lugar \\ \midrule
-    Actor & Gerente \\ 
-    Descripción & El gerente gestiona un lugar. \\ 
-    Propósito & El gerente quiere gestionar un lugar. \\ \midrule
-    Precondiciones & El gerente inicia su navegador web. \\ \midrule
-    Postcondiciones & Existe un lugar. \\ \midrule
-    \multirow{4}{*}{Curso Básico}
-        & \parbox{0.75\linewidth}{ 
-                1. El gerente visita la página de Lugares. \\
-                2. El gerente hace click en el botón Nuevo. \\
-                3. El sistema muestra la página del formulario de lugar. \\
-                4. El gerente ingresa la información correspondiente y envía los datos haciendo click en el botón Guardar. \\
-                5. El sistema registra el lugar.  \\
-                6. El sistema muestra la página de Lugares.   
-        } \\ \midrule
-        \multirow{2}{*}{Excepciones}
-        & \parbox{0.75\linewidth}{ 
-            1. El sistema no puede registrar el lugar dada una falla en la base de datos. \\
-            2. El gerente puede salir de la página del formulario de lugar en cualquier momento antes de eliminar haciendo click en Cancelar.
-        }  \\  \bottomrule
-     \hline
-    \end{tabular}
-        \caption{Gestionar Lugar - Caso de Uso (1)}
-        \label{tab:tabcu-lugar}
-\end{table}
+
+\begin{longtable}{@{} p{3cm} p{10cm} @{}} \toprule
+    \textbf{Caso de Uso}    & Gestionar Lugar \\ \midrule
+    Actor                   & Gerente \\ \cmidrule{1-2}
+    Descripción             & El gerente gestiona un Lugar. \\ \cmidrule{1-2}
+    Propósito               & El gerente quiere registrar los datos de un nuevo Lugar. \\ \cmidrule{1-2}
+    Precondiciones          & El gerente inicia su navegador web. \\ \cmidrule{1-2} 
+    Postcondiciones         & Existe un nuevo Lugar. \\ \cmidrule{1-2} 
+                            & 1. El gerente visita la página de Lugares. \\ 
+                            & 2. El gerente hace click en el botón Nuevo. \\
+   Curso Básico             & 3. El gerente ingresa la información correspondiente y envía los datos haciendo click en el botón Guardar. \\
+                            & 4. El sistema registra el Lugar. \\ 
+                            & 5. El sistema muestra la página de Lugares. \\ \cmidrule{1-2}
+    Excepciones             & 1. El sistema no puede registrar el Lugar dada una falla en la base de datos. \\
+                            & 2. El gerente puede salir de la página del formulario de Lugar en cualquier momento antes de Guardar haciendo click en Cancelar. \\ \bottomrule
+   \caption{Caso de Uso - Gestionar Lugar (1)} \label{tab:tabcu-lug1} \\
+   \end{longtable}
 
 
-\begin{table}[H]
-    \begin{tabular}{@{} *5l @{}} \toprule
-    \textbf{Caso de Uso} & Gestionar Lugar \\ \midrule
-    Actor & Gerente \\ 
-    Descripción & El gerente gestiona un lugar. \\ 
-    Propósito & El gerente quiere gestionar un lugar. \\ \midrule
-    Precondiciones & El gerente inicia su navegador web. Existe el lugar. \\ \midrule
-    Postcondiciones & Existe un lugar con nuevos datos. \\ \midrule
-    \multirow{4}{*}{Curso Básico}
-        & \parbox{0.75\linewidth}{ 
-                1. El gerente visita la página de Lugares. \\
-                2. El gerente hace click en el botón Modificar de un lugar. \\
-                3. El sistema muestra la página del formulario de lugar. \\
-                    3.1 El sistema recuperara datos del lugar para intentar poblar el formulario. \\
-                4. El gerente ingresa la información correspondiente y envía los datos haciendo click en el botón Guardar. \\
-                5. El sistema actualiza el lugar.  \\
-                6. El sistema muestra la página de Lugares.   
-        } \\ \midrule
-        \multirow{2}{*}{Excepciones}
-        & \parbox{0.75\linewidth}{ 
-            1. El sistema no puede actualizar el lugar dada una falla en la base de datos. \\
-            2. El gerente puede salir de la página del formulario de lugar en cualquier momento antes de eliminar haciendo click en Cancelar.
-        }  \\  \bottomrule
-     \hline
-    \end{tabular}
-        \caption{Gestionar Lugar - Caso de Uso (2)}
-        \label{tab:tabcu-lugar2}
-\end{table}
+\begin{longtable}{@{} p{3cm} p{10cm} @{}} \toprule
+    \textbf{Caso de Uso}    & Gestionar Lugar \\ \midrule
+    Actor                   & Gerente \\ \cmidrule{1-2}
+    Descripción             & El gerente gestiona un Lugar. \\ \cmidrule{1-2}
+    Propósito               & El gerente quiere modificar los datos de un Lugar. \\ \cmidrule{1-2}
+    Precondiciones          & El gerente inicia su navegador web. \\
+                            & Existe el Lugar. \\ \cmidrule{1-2} 
+    Postcondiciones         & Existe un Lugar con nuevos datos. \\ \cmidrule{1-2} 
+                            & 1. El gerente visita la página de Lugar. \\ 
+                            & 2. El gerente hace click en el botón Modificar de un Lugar. \\
+   Curso Básico             & 2.1 El sistema recuperara datos de la Lugar para intentar poblar el formulario de Lugar. \\
+                            & 3. El gerente ingresa la información correspondiente y envía los datos haciendo click en el botón Guardar. \\
+                            & 4. El sistema actualiza el Lugar. \\ 
+                            & 5. El sistema muestra la página de Lugares. \\ \cmidrule{1-2}
+    Excepciones             & 1. El sistema no puede actualizar el Lugar dada una falla en la base de datos. \\
+                            & 2. El gerente puede salir de la página del formulario de Lugar en cualquier momento antes de Guardar haciendo click en Cancelar. \\ \bottomrule
+   \caption{Caso de Uso - Gestionar Lugar (2)} \label{tab:tabcu-lug2} \\
+   \end{longtable}
 
 
-\begin{table}[H]
-    \begin{tabular}{@{} *5l @{}} \toprule
-    \textbf{Caso de Uso} & Gestionar Lugar \\ \midrule
-    Actor & Gerente \\ 
-    Descripción & El gerente gestiona un lugar. \\ 
-    Propósito & El gerente quiere gestionar un lugar. \\ \midrule
-    Precondiciones & El gerente inicia su navegador web. Existe el lugar.\\ \midrule
-    Postcondiciones & Se eliminó un lugar. \\ \midrule
-    \multirow{4}{*}{Curso Básico}
-        & \parbox{0.75\linewidth}{ 
-                1. El gerente visita la página de Lugares. \\
-                2. El gerente hace click en el botón Detalles de un Lugar. \\
-                3. El sistema muestra la página de Detalles de un Lugar. \\
-                    3.1 El sistema recupera datos del Lugar para mostrar los detalles. \\
-                4. El gerente elimina el lugar haciendo click en el botón Eliminar. \\
-                5. El sistema elimina el lugar.  \\
-                6. El sistema muestra la página de Lugares.   
-        } \\ \midrule
-        \multirow{2}{*}{Excepciones}
-        & \parbox{0.75\linewidth}{ 
-            1. El sistema no puede eliminar el lugar dada una falla en la base de datos. \\
-            2. El gerente puede salir de la página de detalles en cualquier momento antes de eliminar haciendo click en Cancelar.
-        }  \\  \bottomrule
-     \hline
-    \end{tabular}
-        \caption{Gestionar Lugar - Caso de Uso (3)}
-        \label{tab:tabcu-lugar3}
-\end{table}
-    
-    
+
+\begin{longtable}{@{} p{3cm} p{10cm} @{}} \toprule
+    \textbf{Caso de Uso}    & Gestionar Lugar \\ \midrule
+    Actor                   & Gerente \\ \cmidrule{1-2}
+    Descripción             & El gerente gestiona un Lugar. \\ \cmidrule{1-2}
+    Propósito               & El gerente quiere eliminar un Lugar. \\ \cmidrule{1-2}
+    Precondiciones          & El gerente inicia su navegador web. \\
+                            & Existe el Lugar. \\ \cmidrule{1-2} 
+    Postcondiciones         & Se eliminó un Lugar. \\ \cmidrule{1-2} 
+                            & 1. El gerente visita la página de Lugares. \\ 
+                            & 2. El gerente hace click en el botón Detalles de un Lugar. \\
+                            & 2.1 El sistema recupera los datos del Lugar para mostrar la página de detalles. \\
+    Curso Básico            & 3. El gerente hace click en el botón Eliminar. \\
+                            & 4. El sistema elimina el Lugar. \\ 
+                            & 5. El sistema muestra la página de Lugares. \\ \cmidrule{1-2}
+    Excepciones             & 1. El sistema no puede eliminar el Lugar dada una falla en la base de datos. \\
+                            & 2. El gerente puede salir de la página del formulario de Lugar en cualquier momento antes de eliminar haciendo click en Cancelar. \\ \bottomrule
+   \caption{Caso de Uso - Gestionar Lugar (3)} \label{tab:tabcu-lug3} \\
+   \end{longtable}
+
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.85\textwidth]{chapter10/lugar-uc}
-        \caption{Gestionar Lugar - Diagrama de Caso de Uso}
+        \caption{Diagrama de Caso de Uso - Gestionar Lugar}
         \label{fig:lugar-uc}
     \end{figure}
     
     \begin{figure}[H]
         \centering
         \includegraphics[width=1\textwidth]{chapter10/lugar-int}
-        \caption{Gestionar Lugar - Interfaz Tentativa }
+        \caption{Interfaz Tentativa - Gestionar Lugar}
         \label{fig:lugar-int}
     \end{figure}
     
-    \begin{figure}[H]
+ \begin{landscape}
+        \begin{figure}[H]
         \centering
         \includegraphics[width=1\textwidth]{chapter10/lugar-rob}
-        \caption{Gestionar Lugar - Diagrama de Robustez}
+        \caption{Diagrama de Robustez - Gestionar Lugar}
         \label{fig:lugar-rob}
     \end{figure}
     
     \begin{figure}[H]
         \centering
-        \includegraphics[width=.8\textwidth]{chapter10/lugar-seq-create}
-        \caption{Gestionar Lugar - Diagrama de Secuencia (1) }
+        \includegraphics[width=1.2\textwidth]{chapter10/lugar-seq-create}
+        \caption{Diagrama de Secuencia - Gestionar Lugar (1)}
         \label{fig:lugar-seq-create}
     \end{figure}
     
     \begin{figure}[H]
         \centering
-        \includegraphics[width=.8\textwidth]{chapter10/lugar-seq-edit}
-        \caption{Gestionar Lugar - Diagrama de Secuencia (2) }
+        \includegraphics[width=1.2\textwidth]{chapter10/lugar-seq-edit}
+        \caption{Diagrama de Secuencia - Gestionar Lugar (2)}
         \label{fig:lugar-seq-edit}
     \end{figure}
     
     \begin{figure}[H]
         \centering
-        \includegraphics[width=.8\textwidth]{chapter10/lugar-seq-del}
-        \caption{Gestionar Lugar - Diagrama de Secuencia (3) }
+        \includegraphics[width=1.2\textwidth]{chapter10/lugar-seq-del}
+        \caption{Diagrama de Secuencia - Gestionar Lugar (3)}
         \label{fig:lugar-seq-del}
     \end{figure}
+ \end{landscape}
 
 \section{Gestionar Cámara}
 
-\begin{table}[H]
-    \begin{tabular}{@{} *5l @{}} \toprule
-    \textbf{Caso de Uso} & Gestionar Cámara \\ \midrule
-    Actor & Gerente \\ 
-    Descripción & El gerente gestiona una cámara. \\ 
-    Propósito & El gerente quiere gestionar una cámara. \\ \midrule
-    Precondiciones & El gerente inicia su navegador web. \\ \midrule
-    Postcondiciones & Existe una cámara. \\ \midrule
-    \multirow{4}{*}{Curso Básico}
-        & \parbox{0.75\linewidth}{ 
-                1. El gerente visita la página de Cámaras. \\
-                2. El gerente hace click en el botón Nuevo. \\
-                3. El sistema muestra la página del Formulario de Cámara. \\
-                4. El gerente ingresa la información correspondiente y envía los datos haciendo click en el botón Guardar. \\
-                5. El sistema registra la Cámara.  \\
-                6. El sistema muestra la página de Cámaras.   
-        } \\ \midrule
-        \multirow{2}{*}{Excepciones}
-        & \parbox{0.75\linewidth}{ 
-            1. El sistema no puede registrar la cámara dada una falla en la base de datos. \\
-            2. El gerente puede salir de la página del Formulario de Cámara en cualquier momento antes de eliminar haciendo click en Cancelar.
-        }  \\  \bottomrule
-     \hline
-    \end{tabular}
-        \caption{Gestionar Lugar - Caso de Uso (1)}
-        \label{tab:tabcu-cam}
-\end{table}
+\begin{longtable}{@{} p{3cm} p{10cm} @{}} \toprule
+    \textbf{Caso de Uso}    & Gestionar Cámara \\ \midrule
+    Actor                   & Gerente \\ \cmidrule{1-2}
+    Descripción             & El gerente gestiona una Cámara. \\ \cmidrule{1-2}
+    Propósito               & El gerente quiere registrar los datos de una nueva Cámara. \\ \cmidrule{1-2}
+    Precondiciones          & El gerente inicia su navegador web. \\
+                            & Existe el lugar. \\ \cmidrule{1-2} 
+    Postcondiciones         & Existe una nueva Cámara. \\ \cmidrule{1-2} 
+                            & 1. El gerente visita la página de Cámaras. \\ 
+                            & 2. El gerente hace click en el botón Nuevo. \\
+   Curso Básico             & 3. El gerente ingresa la información correspondiente y envía los datos haciendo click en el botón Guardar. \\
+                            & 4. El sistema registra la Cámara. \\ 
+                            & 5. El sistema muestra la página de Cámaras. \\ \cmidrule{1-2}
+    Excepciones             & 1. El sistema no puede registrar la Cámara dada una falla en la base de datos. \\
+                            & 2. El gerente puede salir de la página del formulario de Cámara en cualquier momento antes de Guardar haciendo click en Cancelar. \\ \bottomrule
+   \caption{Caso de Uso - Gestionar Cámara (1)} \label{tab:tabcu-cam1} \\
+   \end{longtable}
 
 
-\begin{table}[H]
-    \begin{tabular}{@{} *5l @{}} \toprule
-    \textbf{Caso de Uso} & Gestionar Cámara \\ \midrule
-    Actor & Gerente \\ 
-    Descripción & El gerente gestiona una Cámara. \\ 
-    Propósito & El gerente quiere gestionar una Cámara. \\ \midrule
-    Precondiciones & El gerente inicia su navegador web. \\ Existe un lugar. \\ Existe la Cámara. \\ \midrule
-    Postcondiciones & Existe una Cámara con nuevos datos. \\ \midrule
-    \multirow{4}{*}{Curso Básico}
-        & \parbox{0.75\linewidth}{ 
-                1. El gerente visita la página de Cámara. \\
-                2. El gerente hace click en el botón Modificar de una Cámara. \\
-                3. El sistema muestra la página del Formulario de Cámara. \\
-                    3.1 El sistema recuperara datos de la Cámara para intentar poblar el formulario. \\
-                4. El gerente ingresa la información correspondiente y envía los datos haciendo click en el botón Guardar. \\
-                5. El sistema actualiza la Cámara.  \\
-                6. El sistema muestra la página de Cámaras.   
-        } \\ \midrule
-        \multirow{2}{*}{Excepciones}
-        & \parbox{0.75\linewidth}{ 
-            1. El sistema no puede actualizar la Cámara dada una falla en la base de datos. \\
-            2. El gerente puede salir de la página del formulario de Cámara en cualquier momento antes de eliminar haciendo click en Cancelar.
-        }  \\  \bottomrule
-     \hline
-    \end{tabular}
-        \caption{Gestionar Lugar - Caso de Uso (2)}
-        \label{tab:tabcu-cam2}
-\end{table}
+\begin{longtable}{@{} p{3cm} p{10cm} @{}} \toprule
+    \textbf{Caso de Uso}    & Gestionar Cámara \\ \midrule
+    Actor                   & Gerente \\ \cmidrule{1-2}
+    Descripción             & El gerente gestiona una Cámara. \\ \cmidrule{1-2}
+    Propósito               & El gerente quiere modificar los datos de una Cámara. \\ \cmidrule{1-2}
+    Precondiciones          & El gerente inicia su navegador web. \\
+                            & Existe el lugar. \\
+                            & Existe la Cámara. \\ \cmidrule{1-2} 
+    Postcondiciones         & Existe una Cámara con nuevos datos. \\ \cmidrule{1-2} 
+                            & 1. El gerente visita la página de Cámaras. \\ 
+                            & 2. El gerente hace click en el botón Modificar de una Cámara. \\
+   Curso Básico             & 2.1 El sistema recuperara datos de la Cámara para intentar poblar el formulario de Cámara. \\
+                            & 3. El gerente ingresa la información correspondiente y envía los datos haciendo click en el botón Guardar. \\
+                            & 4. El sistema actualiza la Cámara. \\ 
+                            & 5. El sistema muestra la página de Cámaras. \\ \cmidrule{1-2}
+    Excepciones             & 1. El sistema no puede actualizar la Cámara dada una falla en la base de datos. \\
+                            & 2. El gerente puede salir de la página del formulario de Cámara en cualquier momento antes de Guardar haciendo click en Cancelar. \\ \bottomrule
+   \caption{Caso de Uso - Gestionar Cámara (2)} \label{tab:tabcu-cam2} \\
+   \end{longtable}
 
 
-\begin{table}[H]
-    \begin{tabular}{@{} *5l @{}} \toprule
-    \textbf{Caso de Uso} & Gestionar Cámara \\ \midrule
-    Actor & Gerente \\ 
-    Descripción & El gerente gestiona una Cámara. \\ 
-    Propósito & El gerente quiere gestionar una Cámara. \\ \midrule
-    Precondiciones & El gerente inicia su navegador web. Existe un lugar. Existe la Cámara.\\ \midrule
-    Postcondiciones & Se eliminó una Cámara. \\ \midrule
-    \multirow{4}{*}{Curso Básico}
-        & \parbox{0.75\linewidth}{ 
-                1. El gerente visita la página de Cámaras. \\
-                2. El gerente hace click en el botón Detalles de una Cámara. \\
-                3. El sistema muestra la página de Detalles de una Cámara. \\
-                    3.1 El sistema recupera datos de  la Cámara para mostrar los detalles. \\
-                4. El gerente elimina la Cámara haciendo click en el botón Eliminar. \\
-                5. El sistema elimina la Cámara.  \\
-                6. El sistema muestra la página de Cámaras.   
-        } \\ \midrule
-        \multirow{2}{*}{Excepciones}
-        & \parbox{0.75\linewidth}{ 
-            1. El sistema no puede eliminar la Cámara dada una falla en la base de datos. \\
-            2. El gerente puede salir de la página de detalles en cualquier momento antes de eliminar haciendo click en Cancelar.
-        }  \\  \bottomrule
-     \hline
-    \end{tabular}
-        \caption{Gestionar Lugar - Caso de Uso (3)}
-        \label{tab:tabcu-cam3}
-\end{table}
+
+\begin{longtable}{@{} p{3cm} p{10cm} @{}} \toprule
+    \textbf{Caso de Uso}    & Gestionar Cámara \\ \midrule
+    Actor                   & Gerente \\ \cmidrule{1-2}
+    Descripción             & El gerente gestiona una Cámara. \\ \cmidrule{1-2}
+    Propósito               & El gerente quiere eliminar una Cámara. \\ \cmidrule{1-2}
+    Precondiciones          & El gerente inicia su navegador web. \\
+                            & Existe el lugar. \\
+                            & Existe la Cámara. \\ \cmidrule{1-2} 
+    Postcondiciones         & Se eliminó una Cámara. \\ \cmidrule{1-2} 
+                            & 1. El gerente visita la página de Cámaras. \\ 
+                            & 2. El gerente hace click en el botón Detalles de un Cámara. \\
+                            & 2.1 El sistema recupera los datos de la Cámara para mostrar la página de detalles. \\
+    Curso Básico            & 3. El gerente hace click en el boton Eliminar. \\
+                            & 4. El sistema muestra la página del Formulario de Cámara. \\
+                            & 6. El sistema elimina la Cámara. \\ 
+                            & 7. El sistema muestra la página de Cámaras. \\ \cmidrule{1-2}
+    Excepciones             & 1. El sistema no puede eliminar la Cámara dada una falla en la base de datos. \\
+                            & 2. El gerente puede salir de la página del formulario de Cámara en cualquier momento antes de eliminar haciendo click en Cancelar. \\ \bottomrule
+   \caption{Caso de Uso - Gestionar Cámara (3)} \label{tab:tabcu-cam3} \\
+   \end{longtable}
+
     
     
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.85\textwidth]{chapter10/uc-cam}
-        \caption{Gestionar Lugar - Diagrama de Caso de Uso}
+        \caption{Diagrama de Caso de Uso - Gestionar Cámara}
         \label{fig:uc-cam}
     \end{figure}
     
-    % \begin{figure}[H]
-    %     \centering
-    %     \includegraphics[width=1\textwidth]{chapter10/camara-int}
-    %     \caption{Gestionar Lugar - Interfaz Tentativa }
-    %     \label{fig:lugar-int}
-    % \end{figure}
-      \begin{landscape}
+      \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{chapter10/int-cam}
+        \caption{Interfaz de Usuario Tentativa - Gestionar Cámara}
+        \label{fig:int-cam}
+    \end{figure}
+    
+\begin{landscape}
     \begin{figure}[H]
         \centering
         \includegraphics[width=1\textwidth]{chapter10/rob-cam}
-        \caption{Gestionar Cámara - Diagrama de Robustez}
+        \caption{Diagrama de Robustez - Gestionar Cámara }
         \label{fig:rob-cam}
     \end{figure}
   
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1.1\textwidth]{chapter10/seq-cam-nu}
-        \caption{Gestionar Cámara - Diagrama de Secuencia (1) }
+        \includegraphics[width=1.2\textwidth]{chapter10/seq-cam-nu}
+        \caption{Diagrama de Secuencia - Gestionar Cámara (1) }
         \label{fig:seq-cam-nu}
     \end{figure}
     
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1.1\textwidth]{chapter10/seq-cam-mo}
-        \caption{Gestionar Cámara - Diagrama de Secuencia (2) }
+        \includegraphics[width=1.21\textwidth]{chapter10/seq-cam-mo}
+        \caption{Diagrama de Secuencia - Gestionar Cámara (2) }
         \label{fig:seq-cam-mo}
     \end{figure}
     
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1.1\textwidth]{chapter10/seq-cam-el}
-        \caption{Gestionar Cámara - Diagrama de Secuencia (3) }
+        \includegraphics[width=1.2\textwidth]{chapter10/seq-cam-el}
+        \caption{Diagrama de Secuencia - Gestionar Cámara (3) }
         \label{fig:seq-cam-el}
     \end{figure}
     \end{landscape}
@@ -281,7 +228,7 @@ A continuación, se describe cada caso de uso del PFG siguiendo el orden estable
     Postcondiciones         & Existe una nueva Matrícula. \\ \cmidrule{1-2} 
                             & 1. El gerente visita la página de Propietarios. \\ 
                             & 2. El gerente hace click en el botón Detalles de un Propietario. \\
-                            & 2.1 El sistema recupera los datos del Propietario para mostrar la pagina de detalles. \\
+                            & 2.1 El sistema recupera los datos del Propietario para mostrar la página de detalles. \\
     Curso Básico            & 3. El gerente hace click en el boton Nuevo. \\
                             & 4. El sistema muestra la página del Formulario de Matrícula. \\
                             & 5. El gerente ingresa la información correspondiente y envía los datos haciendo click en el botón Guardar. \\ 
@@ -289,7 +236,7 @@ A continuación, se describe cada caso de uso del PFG siguiendo el orden estable
                             & 7. El sistema muestra la página de Detalles del Propietario con la nueva Matrícula. \\ \cmidrule{1-2}
     Excepciones             & 1. El sistema no puede registrar la Matrícula dada una falla en la base de datos. \\
                             & 2. El gerente puede salir de la página del formulario de Matrícula en cualquier momento antes de eliminar haciendo click en Cancelar. \\ \bottomrule
-   \caption{Gestionar Matrícula - Caso de Uso (3)} \label{tab:tabcu-matri1} \\
+   \caption{Caso de Uso - Gestionar Matrícula (1} \label{tab:tabcu-matri1} \\
    \end{longtable}
 
 \begin{longtable}{@{} p{3cm} p{10cm} @{}} \toprule
@@ -301,7 +248,7 @@ A continuación, se describe cada caso de uso del PFG siguiendo el orden estable
     Postcondiciones         & Existe una Matrícula con nuevos datos. \\ \cmidrule{1-2} 
                             & 1. El gerente visita la página de Propietarios. \\ 
                             & 2. El gerente hace click en el botón Detalles de un Propietario. \\
-                            & 2.1 El sistema recupera los datos del Propietario para mostrar la pagina de detalles. \\
+                            & 2.1 El sistema recupera los datos del Propietario para mostrar la página de detalles. \\
     Curso Básico            & 3. El gerente hace click en el boton Modificar de una Matrícula. \\
                             & 4. El sistema muestra la página del Formulario de Matrícula. \\
                             & 4.1. El sistema recupera datos de la Matrícula para intentar poblar el formulario. \\
@@ -310,7 +257,7 @@ A continuación, se describe cada caso de uso del PFG siguiendo el orden estable
                             & 8. El sistema muestra la página de Detalles del Propietario con la nueva Matrícula. \\ \cmidrule{1-2}
     Excepciones             & 1. El sistema no puede actualizar la Matrícula dada una falla en la base de datos. \\
                             & 2. El gerente puede salir de la página del formulario de Matrícula en cualquier momento antes de eliminar haciendo click en Cancelar. \\ \bottomrule
-   \caption{Gestionar Matrícula - Caso de Uso (3)} \label{tab:tabcu-matri2} \\
+   \caption{Caso de Uso - Gestionar Matrícula (2)} \label{tab:tabcu-matri2} \\
    \end{longtable}
 
  \begin{longtable}{@{} p{3cm} p{10cm} @{}} \toprule
@@ -322,55 +269,56 @@ A continuación, se describe cada caso de uso del PFG siguiendo el orden estable
     Postcondiciones         & Se eliminó una Matrícula. \\ \cmidrule{1-2} 
                             & 1. El gerente visita la página de Propietarios. \\ 
                             & 2. El gerente hace click en el botón Detalles de un Propietario. \\
-                            & 2.1 El sistema recupera los datos del Propietario para mostrar la pagina de detalles. \\
+                            & 2.1 El sistema recupera los datos del Propietario para mostrar la página de detalles. \\
     Curso Básico            & 3. El gerente selecciona una Matrícula haciendo click en ell boton Detalles. \\
                             & 4. El sistema muestra la página de Detalles de una Matrícula. \\
                             & 5. El gerente elimina la Matrícula haciendo click en el botón Eliminar. \\
                             & 6. El sistema elimina la Matrícula. \\ \cmidrule{1-2}
     Excepciones             & 1. El sistema no puede eliminar la Matrícula dada una falla en la base de datos. \\
                             & 2. El gerente puede salir de la página de detalles en cualquier momento antes de eliminar haciendo click en Cancelar. \\ \bottomrule
-   \caption{Gestionar Matrícula - Caso de Uso (3)} \label{tab:tabcu-matri3} \\
+   \caption{Caso de Uso - Gestionar Matrícula (3)} \label{tab:tabcu-matri3} \\
    \end{longtable}
   
  
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.8\textwidth]{chapter10/uc-matri}
-        \caption{Gestionar Matrícula - Diagrama de Caso de Uso}
+        \caption{Diagrama de Caso de Uso - Gestionar Matrícula}
         \label{fig:uc-matri}
     \end{figure}
     
-    % \begin{figure}[H]
-    %     \centering
-    %     \includegraphics[width=1\textwidth]{chapter10/camara-int}
-    %     \caption{Gestionar Lugar - Interfaz Tentativa }
-    %     \label{fig:lugar-int}
-    % \end{figure}
+     \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{chapter10/int-matri}
+        \caption{Interfaz de Usuario Tentativa - Gestionar Matrícula}
+        \label{fig:int-matri}
+    \end{figure}
+    
 \begin{landscape}
     \begin{figure}[H]
         \centering
         \includegraphics[width=1.1\textwidth]{chapter10/rob-matri}
-        \caption{Gestionar Matrícula - Diagrama de Robustez}
+        \caption{Diagrama de Robustez - Gestionar Matrícula}
         \label{fig:rob-matri}
     \end{figure}
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth]{chapter10/seq-matri-nu}
-        \caption{Gestionar Matrícula - Diagrama de Secuencia (1) }
+        \includegraphics[width=1.2\textwidth]{chapter10/seq-matri-nu}
+        \caption{Diagrama de Secuencia - Gestionar Matrícula (1) }
         \label{fig:seq-matri-nu}
     \end{figure}
     
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1.1\textwidth]{chapter10/seq-matri-mod}
-        \caption{Gestionar Matrícula - Diagrama de Secuencia (2) }
+        \includegraphics[width=1.2\textwidth]{chapter10/seq-matri-mod}
+        \caption{Diagrama de Secuencia - Gestionar Matrícula (2) }
         \label{fig:seq-matri-mo}
     \end{figure}
     
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1.1\textwidth]{chapter10/seq-matri-el}
-        \caption{Gestionar Matrícula - Diagrama de Secuencia (3) }
+        \includegraphics[width=1.2\textwidth]{chapter10/seq-matri-el}
+        \caption{Diagrama de Secuencia - Gestionar MatrículaD(3) }
         \label{fig:seq-matri-el}
     \end{figure}
 \end{landscape}
@@ -388,31 +336,24 @@ A continuación, se describe cada caso de uso del PFG siguiendo el orden estable
     Postcondiciones         & \\ \cmidrule{1-2} 
                             & 1. El gerente visita la página de Propietarios. \\ 
     Curso Básico            & 2. El gerente hace click en el botón Detalles de un Propietario. \\
-                            & 2.1 El sistema recupera los datos del Propietario para mostrar la pagina de detalles. \\ \cmidrule{1-2}
+                            & 2.1 El sistema recupera los datos del Propietario para mostrar la página de detalles. \\ \cmidrule{1-2}
     Excepciones             & \\ \bottomrule
    \end{tabular}
-        \caption{Gestionar Propietario - Caso de Uso (3)}
+        \caption{Caso de Uso - Gestionar Propietario}
         \label{tab:tabcu-prop}
 \end{table}
 
     \begin{figure}[H]
         \centering
         \includegraphics[width=.8\textwidth]{chapter10/uc-prop}
-        \caption{Gestionar Propietario - Diagrama de Caso de Uso}
+        \caption{Diagrama de Caso de Uso - Gestionar Propietario}
         \label{fig:uc-prop}
     \end{figure}
-    
-    % \begin{figure}[H]
-    %     \centering
-    %     \includegraphics[width=1\textwidth]{chapter10/camara-int}
-    %     \caption{Gestionar Lugar - Interfaz Tentativa }
-    %     \label{fig:lugar-int}
-    % \end{figure}
-    
+
     \begin{figure}[H]
         \centering
         \includegraphics[width=.9\textwidth]{chapter10/rob-prop}
-        \caption{Gestionar Propietario - Diagrama de Robustez}
+        \caption{Diagrama de Robustez - Gestionar Propietario}
         \label{fig:rob-prop}
     \end{figure}
     \begin{landscape}
@@ -420,7 +361,7 @@ A continuación, se describe cada caso de uso del PFG siguiendo el orden estable
     \begin{figure}[H]
         \centering
         \includegraphics[width=1.2\textwidth]{chapter10/seq-prop}
-        \caption{Gestionar Propietario - Diagrama de Secuencia (1) }
+        \caption{Diagrama de Secuencia - Gestionar Propietario (1) }
         \label{fig:seq-prop}
     \end{figure}
     \end{landscape}
@@ -429,28 +370,45 @@ A continuación, se describe cada caso de uso del PFG siguiendo el orden estable
 \section{Gestionar Conexión a Cámara (Reconocer Matrícula)}
 
     \begin{longtable}{@{} p{3cm} p{10cm} @{}} \toprule
-    \textbf{Caso de Uso}    & Reconocer Matrícula \\ \midrule
+    \textbf{Caso de Uso}    & Gestionar Conexión a Cámara (Recolectar Vídeo, Reconocer Matrícula) \\ \midrule
     Actor                   & Gerente \\ \cmidrule{1-2}
-    Descripción             & El gerente inicia el servicio de reconocimiento para una cámara registrada. \\ \cmidrule{1-2}
+    Descripción             & El gerente inicia un Servicio Recolector para una cámara registrada. \\ \cmidrule{1-2}
     Propósito               & El gerente quiere que se realicen registros de coincidencias de matriculas a partir del vídeo de las cámaras de seguridad. \\ \cmidrule{1-2}
     Precondiciones          & El gerente inicia su navegador web. \\ 
                             & Existe la cámara. \\ \cmidrule{1-2} 
-    Postcondiciones         & Existe un servicio de reconocimiento para la cámara (la conexión a la cámara esta establecida). \\ \cmidrule{1-2} 
+    Postcondiciones         & Existe un Servicio Recolector para la cámara (la conexión a la cámara esta establecida). \\ \cmidrule{1-2} 
                             & 1. El gerente visita la página de Cámaras. \\ 
                             & 2. El gerente hace click en el botón Conectar. \\
-                            & 2.1 El sistema recupera la información de la cámara y la envía a un servicio recolector para asignar un servicio de recolección a la cámara seleccionada. \\
-    Curso Básico            & 2.2. El sistema "recolecta" el flujo de vídeo y reenvía los cuadros del vídeo al servicio de reconocimiento. \\
-                            & 2.3. El servicio de reconocimiento procesa los cuadros recibidos y envía  las matriculas reconocidas al servicio de almacenamiento. \\
-                            & 2.4. El servicio de almacenamiento recupera la información correspondiente a la matricula reconocida y almacena la información asociada. \\ \cmidrule{1-2}
+                            & 2.1 El sistema recupera la información de la cámara y la envía a un Servicio Recolector. \\
+    Curso Básico            & 2.2. El sistema recolecta el flujo de vídeo y reenvía los cuadros del vídeo a un Servicio de Reconocimiento. \\
+                            & 2.3. El Servicio de Reconocimiento procesa los cuadros recibidos y envía  las matriculas reconocidas al Servicio de Coincidencias. \\
+                            & 2.4. El Servicio de Coincidencias recupera la información correspondiente a la matricula reconocida y almacena la información asociada. (Caso de Uso: Almacenar Coincidencia) \\ \cmidrule{1-2}
     Excepciones             & \\ \bottomrule
-   \caption{Gestionar Propietario - Caso de Uso (3)} \label{tab:tabcu-matri}  \\
+   \caption{Caso de Uso - Gestionar Conexión a Cámara (Reconocer Matrícula)} \label{tab:tabcu-rec}  \\
    \end{longtable}
        
+    
+    \begin{longtable}{@{} p{3cm} p{10cm} @{}} \toprule
+    \textbf{Caso de Uso}    & Gestionar Conexión a Cámara (Almacenar Coincidencia) \\ \midrule
+    Actor                   & Gerente \\ \cmidrule{1-2}
+    Descripción             & El Servicio de Reconocimiento envía las matriculas reconocidas al Servicio de Coincidencias para ser almacenadas. \\ \cmidrule{1-2}
+    Propósito               & Almacenar una coincidencia. \\ \cmidrule{1-2}
+    Precondiciones          & Existe el Servicio de Reconocimiento. \\
+                            & Existe el Servicio de Coincidencias. \\ \cmidrule{1-2} 
+    Postcondiciones         & Se almacenó una nueva coincidencia. \\ \cmidrule{1-2} 
+                            & 1. El Servicio de Reconocimiento envía una matricula reconocida al Servicio de Coincidencias. \\ 
+    Curso Básico            & 2. El Servicio de Coincidencias busca un propietario asociado a la matricula recibida. \\
+                            & 3. El Servicio de Coincidencias busca el lugar asociado a la IP de la cámara recibida. \\
+                            & 4. El Servicio de Coincidencias almacena la coincidencia con todos los datos obtenidos, sin referencias a los datos originales, de manera que actúa como un histórico; caso de que los datos de las entidades cambien en el futuro, el registro de la coincidencia no cambiara. \\ \cmidrule{1-2}
+    Alternativas            & Caso de que la matricula recibida este incompleta, dado que no concuerda al compararla con una plantilla predeterminada, se marca como irregular. \\ \cmidrule{1-2}
+    Excepciones             & Caso de que haya una falla en la base de datos, el sistema no puede registrar la Coincidencia. \\ \bottomrule
+   \caption{Caso de Uso - Gestionar Coincidencia} \label{tab:tabcu-rec2}  \\
+   \end{longtable}
     
     \begin{figure}[H]
         \centering
         \includegraphics[width=.8\textwidth]{chapter10/uc-rec2}
-        \caption{Gestionar Conexión a Cámara - Diagrama de Caso de Uso}
+        \caption{Diagrama de Caso de Uso - Gestionar Conexión a Cámara}
         \label{fig:uc-rec}
     \end{figure}
     \begin{landscape}
@@ -458,28 +416,28 @@ A continuación, se describe cada caso de uso del PFG siguiendo el orden estable
     \begin{figure}[H]
         \centering
         \includegraphics[width=1.4\textwidth]{chapter10/rob-rec}
-        \caption{Gestionar Conexión a Cámara  - Diagrama de Robustez}
+        \caption{ Diagrama de Robustez - Gestionar Conexión a Cámara}
         \label{fig:rob-rec}
     \end{figure}
     
  \begin{figure}[H]
         \centering
-        \includegraphics[width=1.2\textwidth]{chapter10/seq-recol}
-        \caption{Gestionar Conexión a Cámara - Diagrama de Secuencia (1: Recolección)}
+        \includegraphics[width=1.3\textwidth]{chapter10/seq-recol}
+        \caption{Diagrama de Secuencia - Gestionar Conexión a Cámara (1: Recolección)}
         \label{fig:seq-recol}
     \end{figure}
     
     \begin{figure}[H]
         \centering
         \includegraphics[width=1\textwidth]{chapter10/seq-rec}
-        \caption{Gestionar Conexión a Cámara - Diagrama de Secuencia (1: Reconocimiento)  }
+        \caption{Diagrama de Secuencia - Gestionar Conexión a Cámara (2: Reconocimiento)  }
         \label{fig:seq-rec}
     \end{figure}
     
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1.4\textwidth]{chapter10/seq-alma}
-        \caption{Gestionar Conexión a Cámara - Diagrama de Secuencia (3: Almacenamiento)  }
+        \includegraphics[width=1.3\textwidth]{chapter10/seq-alma}
+        \caption{Diagrama de Secuencia - Gestionar Conexión a Cámara (3: Almacenamiento)  }
         \label{fig:seq-alma}
     \end{figure}
     \end{landscape}    
@@ -496,69 +454,149 @@ A continuación, se describe cada caso de uso del PFG siguiendo el orden estable
     Postcondiciones         &  \\ \cmidrule{1-2} 
                             & 1. El gerente visita la página de Coincidencias. \\ 
     Curso Básico            & 2. El gerente hace click en el botón Detalles de una Coincidencia. \\
-                            & 2.1 El sistema recupera la información de la coincidencia y muestra la pagina de Detalles. \\ \cmidrule{1-2}
+                            & 2.1 El sistema recupera la información de la coincidencia y muestra la página de Detalles. \\ \cmidrule{1-2}
     Excepciones             & \\ \bottomrule
-   \caption{Gestionar Coincidencia - Caso de Uso} \label{tab:tabcu-coin}  \\
+   \caption{Caso de Uso - Gestionar Coincidencia} \label{tab:tabcu-coin}  \\
    \end{longtable}
     
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.85\textwidth]{chapter10/uc-coin}
-        \caption{Gestionar Coincidencia - Diagrama de Caso de Uso}
+        \includegraphics[width=0.7\textwidth]{chapter10/uc-coin}
+        \caption{Diagrama de Caso de Uso - Gestionar Coincidencia}
         \label{fig:uc-coin}
     \end{figure}
     
-    % \begin{figure}[H]
-    %     \centering
-    %     \includegraphics[width=1\textwidth]{chapter10/camara-int}
-    %     \caption{Gestionar Lugar - Interfaz Tentativa }
-    %     \label{fig:lugar-int}
-    % \end{figure}
-    \begin{landscape}
-    \begin{figure}[H]
+  \begin{figure}[H]
         \centering
-        \includegraphics[width=1.2\textwidth]{chapter10/rob-coin}
-        \caption{Gestionar Coincidencia - Diagrama de Robustez}
-        \label{fig:rob-coin}
+        \includegraphics[width=0.85\textwidth]{chapter10/int-coin}
+        \caption{Interfaz de Usuario Tentativa - Gestionar Coincidencia}
+        \label{fig:int-coin}
     \end{figure}
     
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1.1\textwidth]{chapter10/seq-coin}
-        \caption{Gestionar Coincidencia - Diagrama de Secuencia }
+        \includegraphics[width=.7\textwidth]{chapter10/rob-coin}
+        \caption{Diagrama de Robustez - Gestionar Coincidencia}
+        \label{fig:rob-coin}
+    \end{figure}
+    \begin{landscape}
+    
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1.2\textwidth]{chapter10/seq-coin}
+        \caption{Diagrama de Secuencia - Gestionar Coincidencia }
         \label{fig:seq-coin}
     \end{figure}
     \end{landscape}
     
     
 \section{Buscar}
-
+\begin{longtable}{@{} p{3cm} p{10cm} @{}} \toprule
+    \textbf{Caso de Uso}    & Buscar\\ \midrule
+    Actor                   & Gerente \\ \cmidrule{1-2}
+    Descripción             & El gerente consulta información de una entidad de acuerdo a un criterio. \\ \cmidrule{1-2}
+    Propósito               & El gerente quiere consultar la información de una coincidencia, propietario, fecha, lugar, o cámara en base a un criterio. \\ \cmidrule{1-2}
+    Precondiciones          & El gerente inicia su navegador web. \\ \cmidrule{1-2} 
+    Postcondiciones         & El gerente obtuvo una respuesta a su consulta. \\ \cmidrule{1-2} 
+                            & 1. El gerente visita la página de la entidad sobre la que quiere buscar (Lugar, Camara, Matricula, Propietario, Coincidencia). \\ 
+    Curso Básico            & 2. El gerente ingresa su criterio de búsqueda. \\
+                            & 3. El gerente hace click en el botón Buscar. \\
+                            & 4. El sistema valida el criterio de búsqueda. \\
+                            & 5. El sistema obtiene los resultados en base al criterio. \\
+                            & 6. El sistema devuelve los resultados obtenidos. \\ \cmidrule{1-2}
+    Alternativas            & El gerente refina su criterio de búsqueda luego de obtener resultados. \\ \bottomrule
+    Excepciones             & Dada una falla en la base de datos, el sistema no puede consultar información. \\ 
+                            & Dado un criterio invalido, se notifica al gerente los errores que existen\\  \bottomrule
+   \caption{Caso de Uso - Buscar} \label{tab:tabcu-coin}  \\
+   \end{longtable}
+   
 \begin{figure}[H]
         \centering
-        \includegraphics[width=0.7\textwidth]{chapter10/uc-buscar}
-        \caption{Buscar - Diagrama de Robustez}
+        \includegraphics[width=.8\textwidth]{chapter10/uc-buscar}
+        \caption{Diagrama de Caso de Uso - Buscar}
         \label{fig:uc-buscar}
+    \end{figure}
+    
+      \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{chapter10/int-buscar-registro}
+        \caption{Interfaz de Usuario Tentativa - Gestionar Buscar}
+        \label{fig:int-buscar-registro}
+    \end{figure}
+    
+     \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{chapter10/int-buscar-registro-resultados}
+        \caption{Interfaz de Usuario Tentativa - Gestionar Buscar}
+        \label{fig:int-buscar-registro-resultados}
     \end{figure}
     
  \begin{landscape}
     \begin{figure}[H]
         \centering
         \includegraphics[width=1.2\textwidth]{chapter10/rob-buscar}
-        \caption{Buscar - Diagrama de Robustez}
+        \caption{Diagrama de Robustez - Buscar}
         \label{fig:rob-buscar}
     \end{figure}
     
     \begin{figure}[H]
         \centering
         \includegraphics[width=1.3\textwidth]{chapter10/seq-buscar}
-        \caption{Buscar - Diagrama de Secuencia }
+        \caption{Diagrama de Secuencia - Buscar }
         \label{fig:seq-buscar}
     \end{figure}
     \end{landscape}
     
-\section{Gestionar Reporte}
+\section{Generar Reporte}
+\begin{longtable}{@{} p{3cm} p{10cm} @{}} \toprule
+    \textbf{Caso de Uso}    & Generar Reporte \\ \midrule
+    Actor                   & Gerente \\ \cmidrule{1-2}
+    Descripción             & El gerente genera un reporte.\\ \cmidrule{1-2}
+    Propósito               & El gerente quiere consultar informacion relevate a traves de un reporte. \\ \cmidrule{1-2}
+    Precondiciones          & El gerente inicia su navegador web. Existen resultados a una consulta. \\ \cmidrule{1-2} 
+    Postcondiciones         & Se generó un reporte. \\ \cmidrule{1-2} 
+                            & 1. El gerente visita la página de Principal \\ 
+    Curso Básico            & 2. El gerente hace click en el boton Reportes. \\
+                            & 2.1 El sistema muestra la pagina de Reportes. \\
+                            & 3. El gerente hace click en el reporte que desea generar. \\
+                            & 4. El sistema obtiene los resultados en base al reporte seleccionado. \\
+                            & 5. El sistema devuelve el reporte generado. \\ \cmidrule{1-2}
+    Excepciones             & El sistema falla en consultar los datos necesarios para el reporte en caso de una falla en la conexion con la base de datos.\\ \bottomrule
+   \caption{Caso de Uso - Generar Reporte} \label{tab:tabcu-coin}  \\
+   \end{longtable}
 
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{chapter10/uc-reporte}
+        \caption{Diagrama de Caso de Uso - Generar Reporte}
+        \label{fig:uc-reporte}
+    \end{figure}
+          \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{chapter10/int-reporte-mensual-placas}
+        \caption{Interfaz de Usuario Tentativa - Gestionar Reporte (1)}
+        \label{fig:int-reporte-mensual-placas}
+    \end{figure}
+           \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{chapter10/int-reporte-visitantes}
+        \caption{Interfaz de Usuario Tentativa - Gestionar Reporte (2)}
+        \label{fig:int-reporte-visitantes}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\textwidth]{chapter10/rob-reporte}
+        \caption{Diagrama de Robustez - Generar Reporte}
+        \label{fig:rob-reporte}
+    \end{figure}
+     \begin{landscape}
 
-\section{Diagrama de Despliegue}
-
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1.3\textwidth]{chapter10/seq-reporte}
+        \caption{Diagrama de Secuencia - Generar Reporte }
+        \label{fig:seq-reporte}
+    \end{figure}
+    \end{landscape}
+    
 \addtocontents{toc}{\protect\setlength{\cftsecnumwidth}{10mm}}

@@ -17,7 +17,7 @@ La figura \ref{fig:worldcarplates} muestra claramente cómo las matrículas de u
 \section{Detección vs. Reconocimiento}
 La\textit{ detección} de objetos consiste en determinar si en una imagen o video arbitrarios hay un objeto determinado (un rostro, un auto) y, en caso haberlo, en qué posición se encuentra. Por otro lado, el \textit{reconocimiento }de objetos (el rostro de Juan, el auto de Pedro) consiste en comparar el objeto detectado contra una base de datos para saber si existe alguna asociación con alguno registrado. Vale mencionar que es usualmente más difícil la detección de objetos en la escena compleja de una imagen que el reconocimiento de los mismos. Dado lo anterior, la mayoría de los algoritmos de reconocimiento pueden ser usados para la detección de objetos. Sin embargo, dependiendo del objeto a detectar, unos métodos pueden ser más adecuados que otros \cite{Ekvall2005-ut}.
 \section{OpenALPR}
-OpenALPR es una librería open-source de visión artificial que se encarga de la tarea del reconocimiento automático de matrículas utilizando los módulos de OpenCV para realizar el procesamiento de imágenes..
+OpenALPR es una librería open-source de visión artificial que se encarga de la tarea del reconocimiento automático de matrículas utilizando los módulos de OpenCV para realizar el procesamiento de imágenes.
   
   \begin{figure}[H]
         \centering
@@ -121,7 +121,7 @@ Se utiliza esta lista de líneas y la altura de los caracteres (computada en An�
 \section{Enderezamiento}
 Dados los bordes de la matrícula, la fase de Enderezamiento reorganiza la región de la placa a un tamaño y orientación estándar. Idealmente, esto devuelve una matrícula orientada correctamente (sin rotación o propio enderezamiento).
 
-\section{Enderezamiento}
+\section{Segmentación de Caracteres}
 La segmentación de caracteres intenta aislar todos los caracteres contenidos en la imagen de la matrícula. Utiliza un histograma vertical para encontrar los espacios entre los caracteres de la matrícula. Esta fase también limpia el caracteres removiendo las masas amorfas pequeñas y desconectadas y descalificando regiones de caracteres que no son lo suficientemente altos. De igual manera, intenta remover regiones “borde” para que el borde de la matrícula no sea clasificado equivocadamente como un número “1” o una letra “l”. 
 
 \section{Reconocimiento Óptico de Caracteres (OCR)}

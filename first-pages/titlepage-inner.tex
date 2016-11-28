@@ -1,6 +1,7 @@
+{
 \newgeometry{
     % top=0.5cm,
-    top=-1cm,
+    top=2.5cm,
     bottom=2.5cm,
     left=4cm,
     right=2.5cm,
@@ -8,15 +9,16 @@
     includehead,includefoot,
     heightrounded, % to avoid spurious underfull messages
 }
+\setstretch{1.0}
 
 \begin{titlepage}
-    \begin{tikzpicture}[remember picture, overlay]
-      \draw[line width = 1pt] ($(current page.north west) + (1.3in, -2cm)$) rectangle ($(current page.south east) + (-0.7in, 1in)$);
-    \end{tikzpicture}
+    % \begin{tikzpicture}[remember picture, overlay]
+    %   \draw[line width = 1pt] ($(current page.north west) + (1.3in, -2cm)$) rectangle ($(current page.south east) + (-0.7in, 1in)$);
+    % \end{tikzpicture}
     
-    \begin{tikzpicture}[remember picture, overlay]
-      \draw[line width = 1pt, rounded corners=10pt,] ($(current page.north west) + (1.6in, -5.45in)$) rectangle ($(current page.south east) + (-1in, 4.6in)$);
-    \end{tikzpicture}
+    % \begin{tikzpicture}[remember picture, overlay]
+    %   \draw[line width = 1pt, rounded corners=10pt,] ($(current page.north west) + (1.6in, -5.45in)$) rectangle ($(current page.south east) + (-1in, 4.6in)$);
+    % \end{tikzpicture}
     
     \begin{center}
         \includegraphics[width=0.6\textwidth]{upsa}
@@ -35,7 +37,7 @@
             \textbf{APLICACIÓN NATIVA DE LA NUBE CON ALPR PARA EL CONTROL VEHICULAR PARA LA EMPRESA QSS BOLIVIA}
         
         \vspace{1.5cm}
-            \normalsize
+            % \normalsize
             \textbf{Proyecto de Grado para optar al título de}
         
             \textbf{Licenciado en Ingeniería de Sistemas}
@@ -46,9 +48,11 @@
             \textbf{Reg.: 2012110606}
         
         \vfill
-            \textbf{Santa Cruz Bolivia}
+            \textbf{Santa Cruz de la Sierra - Bolivia}
             
             \textbf{2016}
     \end{center}
 \end{titlepage}
+
 \restoregeometry
+}

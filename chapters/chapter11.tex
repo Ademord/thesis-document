@@ -1,14 +1,19 @@
 \chapter{Implementación}
-Dado el nivel de las tecnologías descrito en los capítulos II-VI, el PFG utiliza:
-\textbf{Tecnologías del Negocio}
+Dado el nivel actual de las tecnologías descrito en los capítulos III-VI, para la implementación del PFG se utilizó las herramientas descritas a continuación.
+
+\section{Tecnologías del Negocio}
 \begin{itemize}
-    \item OpenCV para la implementación del servicio recolector.
-    \item OpenALPR para el reconocimiento de matriculas. Esta libreria ya que utiliza OpenCV que es la tecnología principal en computación visual, además de ser open-source, multiplataforma y ser utilizada por compañías como Microsoft, IBM, Intel, etc. \cite{Itseez2000-he}.
+    \item La capa de presentación se programó en PHP (con HTML y CSS para las páginas web) dada la tecnologia de soporte Laravel.
+    \item Los servicios Lugar, Cámara, Matricula, Propietario, Coincidencia, Recolector y Reconocedor se programaron en Python 3.5. 
+    \item La interfaz que expone cada servicio se programo con la libreria Flask
+     \footnote{http://flask.pocoo.org/}.
+    \item El Servicio Recolector recupera la entrada de vídeo a través de las funcionalidades de la librería OpenCV.
+    \item El Servicio Reconocedor utiliza OpenALPR para el reconocimiento de matriculas. Esta libreria utiliza OpenCV de manera subyacente. OpenCV es la tecnología principal en computación visual, además de ser open-source, multiplataforma y ser utilizada por compañías como Microsoft, IBM, Intel, etc. \cite{Itseez2000-he}.       
 \end{itemize}
 
-\textbf{Tecnologías de Soporte}
+\section{Tecnologías de Soporte}
 \begin{itemize}
-    \item Kubernetes para la gestión y configuración de contendedores, dados los casos de uso exitosos en producción en compañías como Google, SAP, Ebay, Box \cite{Kubernetes2016-ub}; y el poder de ser ejecutado en cualquier nube.
+    \item Kubernetes para la gestión y configuración de clusteres de contendedores, dados los casos de uso exitosos en producción en compañías como Google, SAP, Ebay, Box \cite{Kubernetes2016-ub}; y el poder de ser ejecutado en cualquier nube.
     
     \item Laravel como Framework de desarrollo web, elegido en base a la experiencia del equipo de programadores con esta herramienta, la documentación que provee Laravel y las capacidades que posee, descritas en el Capitulo 5.
         
@@ -16,4 +21,111 @@ Dado el nivel de las tecnologías descrito en los capítulos II-VI, el PFG utili
 
     \item PostgreSQL es la base de datos de preferencia, dada la experiencia del grupo de programadores con esta herramienta, y por ser open-source.
 \end{itemize}
-    
+
+\section{Programación de Servicios}
+En breve, para programar un servicio se debe:
+\begin{itemize}
+    \item Programar la interfaz del servicio y la lógica del mismo.
+    \item Definir la imagen Docker.
+    \item Definir el archivo de requerimientos.
+    \item Definir el archivo de despliegue en Kubernetes.
+    \item Definir el archivo de Servicio Kubernetes.
+\end{itemize}
+Dado lo anterior, la estructura de archivos de un servicio consiste en la siguiente:
+\vspace{0.5cm}
+
+\dirtree{%
+.1 /.
+.2 app.
+.3 app.py.
+.3 database.py.
+.3 Dockerfile.
+.3 requirements.txt. 
+.3 server.py.
+.2 deployment.json.
+.2 service.json.
+}
+Donde:
+\begin{itemize}
+\item \textit{app.py} contiene la logica del servicio.
+\item \textit{database.py} contiene la configuracion de la base de datos.
+\item \textit{Dockerfile} describe la implementacion del servicio en un contenedor Docker.
+\item \textit{requirements.txt} es un archivo que contiene todas las dependencias.
+\item \textit{server.py} es el encargado de ejecutar el micro servidor web para mapear las rutas 
+\item \textit{deployment.json} describe los metadatos necesarios para el despliegue del servicio en Kubernetes (cantidad de replicas, variables de entorno, puertos, etc.).
+\item \textit{service.json} describe el Servicio Kubernetes de tipo Balanceador de Carga que permite accesos al servicio desde el exterior.
+
+
+\end{itemize}
+
+Los servicios, al ser aislados e independientes, exponen una interfaz con la cual otros componentes pueden comunicarse con ellos. Esta interfaz se programo con Flask, que monta un micro servidor web que mapea las rutas permitidas a una funcion del servicio. Un ejemplo de un servicio es:
+
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               gobble=2,
+               frame=lines,
+               framesep=2mm]{csharp}
+
+# app.py
+# !flask/bin/python
+from flask import Flask, jsonify, abort, make_response, request
+from app import Lugar
+app = Flask(__name__)
+
+@app.route('/lugares', methods=['GET'])
+def index():
+    temp = Lugar.getall()
+    resultado = {}
+    resultado['lugares'] = temp
+    return jsonify(resultado)
+
+@app.route('/lugares/<int:id>', methods=['GET'])
+def show(id):
+    temp = Lugar.get(id)
+    if not temp: abort(404)
+    resultado = {}
+    resultado['lugar'] = temp
+    return jsonify(resultado)
+
+@app.route('/lugares', methods=['POST'])
+def store():
+    data = request.get_json()
+    if not request.json or not Lugar.valid(data):
+        abort(400)
+    result = Lugar.add(data)
+    return jsonify({'result': result}), 201
+
+@app.route('/lugares/<int:id>', methods=['PUT'])
+def update(id):
+    temp = Lugar.get(id)
+    data = request.get_json()
+    if not temp or not data or not Lugar.valid(data):
+        abort(404)
+    result = Lugar.update(id, data)
+    return jsonify({'result': result }), 201
+
+@app.route('/lugares/<int:id>', methods=['DELETE'])
+def destroy(id):
+    temp = Lugar.get(id)
+    if not temp: abort(404)
+    result = Lugar.remove(id)
+    return jsonify({'result': result }), 201
+
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({'error': 'Not found'}), 404)
+
+@app.before_first_request
+def _run_on_start():
+    Lugar.connect()
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=55550, debug=True)
+    # app.run(port=55555, debug=True)
+
+\end{minted}
+
+
+
+\section{Programación de Capa de Presentación}
