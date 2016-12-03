@@ -2,8 +2,10 @@
 
 \section{¿Qué es la Visión Artificial?}
 El objetivo de la visión artificial es utilizar cámaras para analizar o entender escenas del mundo real. Es una disciplina que estudia problemas metodológicos y algorítmicos, además de la implementación de soluciones diseñadas \cite{Klette2014-oo}.
-La visión artificial nos permite saber si un auto se encuentra en su carril, cuantas personas se encuentran en un lugar, cual es la distancia desde una cámara a un edificio y, reconocer una persona específica; basado en imágenes o video.
-Recientemente ha habido un avance sólido en la visión artificial, con lo que las áreas de aplicación han aumentado. En productos modernos, se utiliza en aplicaciones para teléfonos inteligentes, asistencia para conductores de vehiculos, vehiculos auto-manejados (self-driving cars), o en la interacción usuario-videojuego.  Por otro lado, en la automatización industrial, se utiliza para el control de calidad o de proceso y, en la industria del cine, para la creación de avatares y mundos basados en imágenes o video, entre otros.  Estos son unos cuantos ejemplos de áreas en las que se satisface una necesidad de procesar información almacenada en imágenes o video. 
+
+La visión artificial nos permite saber si un auto se encuentra en su carril, cuantas personas se encuentran en un lugar, cual es la distancia desde una cámara a un edificio y, reconocer una persona específica; basado en imágenes (estáticas) o vídeo.
+
+Recientemente ha habido un avance sólido en la visión artificial, con lo que las áreas de aplicación han aumentado. En productos modernos, se utiliza en aplicaciones para teléfonos inteligentes, asistencia para conductores de vehículos, vehículos auto-conducidos (self-driving cars), o en la interacción usuario-videojuego.  Por otro lado, en la automatización industrial, se utiliza para el control de calidad o de proceso y, en la industria del cine, para la creación de avatares y mundos basados en imágenes o video, entre otros.  Estos son unos cuantos ejemplos de áreas en las que se satisface una necesidad de procesar información almacenada en imágenes o vídeo. 
 
 
 \section{Características de un Sistema de Visión}
@@ -15,7 +17,7 @@ Por ejemplo, un dispositivo de control de parqueo. Este sistema observa un espac
     \item Las condiciones de luz afectan la detección de color y la distinción del vehículo del fondo.
     \item La ligera variación del lugar de parqueo del vehículo puede dificultar la detección del vehículo contra un espacio desocupado. 
     \item El vehículo puede estar sucio, dificultando la detección de un vehículo autorizado o de un vehículo no autorizado. 
-    \item El lugar de parqueo puede estar cubierto de nieve, dificultando saber si el espacio se encuentra desocupado.
+    \item El lugar de parqueo puede estar obstruido, por ejemplo, con nieve, dificultando saber si el espacio se encuentra desocupado.
 \end{itemize}
 Para encarar las complejidades mencionadas, un sistema de visión usualmente realiza dos tareas: filtrar la entrada para reducir el rango de información a procesar y, extraer las características relevantes de la(s) imágen(es) \cite{Demaagd2012-qb}.
 
@@ -39,7 +41,7 @@ El especificación ONVIF define una capa de red de dispositivos de seguridad IP,
         \label{fig:onvif-arch}
     \end{figure}
     
-Cada dispositivo integrado en una red conforme al protocolo ONVIF debe implementa un servicio que es categorizado en cuatro clases:
+Cada dispositivo integrado en una red conforme al protocolo ONVIF debe implementa un servicio que es categorizado en una de cuatro clases:
 
 \begin{itemize}
 \item \textbf{Transmisor de Vídeo en Red (NVT):} provee uno o más flujos de vídeo, como una cámara o una caja que combina los flujos de vídeo de múltiples cámaras.
@@ -56,7 +58,7 @@ Los valores numéricos que representan a una imagen son llamados Descriptores o 
 
 Los descriptores comúnmente utilizados en el análisis de matrículas incluyen descriptores de forma, simetría \cite{Kim2001-yv}, proporción de altura y ancho \cite{Naito2000-im}, color \cite{Kim1996-js}, variación de valores de intensidad \cite{Draghici1997-gz}, etc.. Por otro lado, los descriptores de caracteres incluyen: línea \cite{Yu2000-tm}, masas amorfas (blobs) \cite{Hontani2001-lk}, relación de aspecto de los caracteres \cite{Hermida1997-ds}, distribución de intervalos entre caracteres \cite{Poon1995-pw} y el alineamiento de los mismos \cite{Soh1994-mc}. En la práctica, un pequeño conjunto de descriptores de un objeto que sean robustos, confiables y fáciles de detectar son suficientes para describir al mismo \cite{Chang2004-kg}. 
 
-En el análisis de imágenes se extrae descriptores (información relevante de las imágenes) a través de técnicas de procesamiento de imágenes digitales para realizar posteriormente el reconocimiento y clasificación de los mismos. Las tareas de análisis de imágenes pueden ser tan simples como leer un código de barras como identificar una persona por su rostro. \cite{Solomon2011-xz}
+En el análisis de imágenes se extrae descriptores (información relevante de las imágenes) a través de técnicas de procesamiento de imágenes digitales para realizar posteriormente el reconocimiento y clasificación de los mismos. Las tareas de análisis de imágenes pueden ser tan simples como leer un código de barras o tan complejas como identificar una persona por su rostro. \cite{Solomon2011-xz}
 
 
 \section{Segmentación de Imágenes Digitales}
@@ -91,13 +93,13 @@ El umbral de intensidad es el método más sencillo para la tarea de segmentaci�
 
 
 \section{Clasificación de Características (Detección)}
-\subsection{El propósito de la clasificación 0automática}
+\subsection{El propósito de la clasificación automática}
 La clasificación de células sanas o anormales, separación de frutas de calidad en una planta de empaquetamiento, etc, son ejemplos de clasificación. 
 
 La clasificación sucede en todos los aspectos de la vida y es uno de los primeros pasos necesarios para tomar decisiones. En procesamiento de imágenes, el objetivo de la clasificación es identificar características, patrones o estructuras en una imagen y asignarlos a una clase específica (detección). A pesar de que el ser humano es completamente capaz de realizar tareas de clasificación con bastante precisión, es la única aproximación realista y costo-efectiva la de automatizar la clasificación de grandes volúmenes de datos. Sin embargo, en el momento de hacer esto, la intervención humana es necesaria en dos áreas clave \cite{Solomon2011-xz}: 
 
 \begin{itemize}
-\item \textbf{Especificación de la tarea: }Que se quiere explícitamente que el clasificador logre? Se deben determinar las clases que serán consideradas y que parámetros o variables se consideran importantes para realizar la clasificación. Por ejemplo, a la hora de clasificar células estas se pueden clasificar en normales o anormales, pero un clasificador más complejo que tenga más clases y observe más información y podría también catalogar a los pacientes en categorías como anemia, infección viral, etc.
+\item \textbf{Especificación de la tarea: }¿Qué se quiere explícitamente que el clasificador logre? Se deben determinar las clases que serán consideradas y que parámetros o variables se consideran importantes para realizar la clasificación. Por ejemplo, a la hora de clasificar células estas se pueden clasificar en normales o anormales, pero un clasificador más complejo que tenga más clases y observe más información, podría también catalogar a los pacientes en categorías como anemia, infección viral, etc.
 \item \textbf{Nombramiento de clases: }El proceso de entrenar a un clasificador automático usualmente requiere “nombramiento manual” en las primeras etapas; consiste en asignar ejemplos a clases específicas en base a propiedades seleccionadas y sobresalientes. Esto forma parte del proceso de los llamados “clasificadores supervisados”.
 \end{itemize}
 
@@ -108,7 +110,7 @@ La clasificación no supervisada utiliza técnicas de agrupamiento para clasific
 
 \subsection{Diseño de Módulos de Clasificación }
 
-Los sistemas de clasificación siguen el siguiente diseño, que también puede observarse en la figura \ref{fig:classifier-design}, son: 
+Como se observa en la Figura \ref{fig:classifier-design} los clasificadores siguen el siguiente diseño: 
 \begin{enumerate}
     \item Definición de clases de interés para el problema
 \item Exploración de datos, identificando posibles atributos que permitan distinguir óptimamente entre clases

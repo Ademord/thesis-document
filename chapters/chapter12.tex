@@ -1,68 +1,132 @@
 \chapter{Pruebas}
-Este capitulo detalla las pruebas de caja negra necesarias para asegurar que cada componente del PFG interactúa con los otros componentes como se espera. Las pruebas son importantes en el contexto del PFG debido a su naturaleza SOA.
+Este capitulo detalla las pruebas necesarias para asegurar que cada componente del PFG interactúa con los otros componentes como se espera. Las pruebas son importantes en el contexto del PFG debido a su naturaleza SOA.
+
+Se utilizó la herramienta Postman\footnote{\url{https://www.getpostman.com/}} para realizar consultas HTTP a la interfaz de cada servicio.
+De cada consulta se obtuvo las respuestas HTTP exitosas correspondientes a cada consulta.
 \pagebreak
 \section{Pruebas de Integración}
-
-\subsection{Comunicación de Mensaje Exitoso}
-Se utilizo la herramienta Postman \footnote{\url{https://www.getpostman.com/}} para realizar consultas HTTP a la interfaz de cada servicio.
-De cada consulta se obtuvo las respuestas HTTP exitosas correspondientes en base a la consulta.
-\
+\subsection{Comunicación de Mensajes Exitosa}
 \begin{longtable}{@{} p{3cm} p{10cm} @{}} \toprule
-\textbf{Propósito}                  & Gestionar Conexión a Cámara (Recolectar Vídeo, Reconocer Matrícula) \\ \midrule
-\textbf{Dependencias externas}      & Gerente \\ \cmidrule{1-2}
-\textbf{Descripción}                & El gerente inicia un Servicio Recolector para una cámara registrada. \\ \cmidrule{1-2}
-\textbf{Descripción de la Prueba}   & 1. El gerente inicia su navegador web. \\ 
-                                    & 2. Existe la cámara. \\
-                                    & 3. Existe un Servicio Recolector para la cámara (la conexión a la cámara esta establecida). \\
-                                    & 4. El gerente visita la página de Cámaras.  \\ \cmidrule{1-2} 
-\textbf{Resultados Esperados}       & 2.2. El sistema recolecta el flujo de vídeo y reenvía los cuadros del vídeo a un Servicio de Reconocimiento. \\ \bottomrule
-\caption{Prueba de Integración - Laravel - Interfaz de Servicio} \label{tab:tabcu-rec}  \\
+\textbf{Propósito}                  & Asegurar comunicación a la interfaz de un servicio tanto desde la capa de presentacion y desde consola (CLI). \\ \midrule
+\textbf{Dependencias externas}      & Asegurar que se tiene conectividad a la red. \\ \cmidrule{1-2}
+\textbf{Descripción }   & 1. Iniciar el servicio. \\
+\textbf{de la Prueba}                                    & 2. Enviar un mensaje REST a un servicio.  \\ \cmidrule{1-2} 
+\textbf{Resultados Esperados}       & Siempre y cuando exista conexión a la red, un servicio sera capaz de recibir un mensaje y ejecutar una acción al respecto. \\ \bottomrule
+\caption{Prueba de Integración - Comunicación de Mensajes} \label{tab:prueba-com}  \\
 \end{longtable}
    
-\pagebreak
-\subsection{Capa de Presentación - Interfaz de Servicio}
-\begin{longtable}{@{} p{3cm} p{10cm} @{}} \toprule
-\textbf{Propósito}                  & Gestionar Conexión a Cámara (Recolectar Vídeo, Reconocer Matrícula) \\ \midrule
-\textbf{Dependencias externas}      & Gerente \\ \cmidrule{1-2}
-\textbf{Descripción}                & El gerente inicia un Servicio Recolector para una cámara registrada. \\ \cmidrule{1-2}
-\textbf{Descripción de la Prueba}   & 1. El gerente inicia su navegador web. \\ 
-                                    & 2. Existe la cámara. \\
-                                    & 3. Existe un Servicio Recolector para la cámara (la conexión a la cámara esta establecida). \\
-                                    & 4. El gerente visita la página de Cámaras.  \\ \cmidrule{1-2} 
-\textbf{Resultados Esperados}       & 2.2. El sistema recolecta el flujo de vídeo y reenvía los cuadros del vídeo a un Servicio de Reconocimiento. \\ \bottomrule
-\caption{Prueba de Integración - Laravel - Interfaz de Servicio} \label{tab:tabcu-rec}  \\
-\end{longtable}
-
 \pagebreak       
 \subsection{Consultas Interfaz de Servicio - Base de Datos}
 \subsubsection{Resultado de Datos de una Consulta Invalida}
 \begin{longtable}{@{} p{3cm} p{10cm} @{}} \toprule
-\textbf{Propósito}                  & Gestionar Conexión a Cámara (Recolectar Vídeo, Reconocer Matrícula) \\ \midrule
-\textbf{Dependencias externas}      & Gerente \\ \cmidrule{1-2}
-\textbf{Descripción}                & El gerente inicia un Servicio Recolector para una cámara registrada. \\ \cmidrule{1-2}
-\textbf{Descripción de la Prueba}   & 1. El gerente inicia su navegador web. \\ 
-                                    & 2. Existe la cámara. \\
-                                    & 3. Existe un Servicio Recolector para la cámara (la conexión a la cámara esta establecida). \\
-                                    & 4. El gerente visita la página de Cámaras.  \\ \cmidrule{1-2} 
-\textbf{Resultados Esperados}       & 2.2. El sistema recolecta el flujo de vídeo y reenvía los cuadros del vídeo a un Servicio de Reconocimiento. \\ \bottomrule
-\caption{Prueba de Integración - Laravel - Interfaz de Servicio} \label{tab:tabcu-rec}  \\
+\textbf{Propósito}                  & El propósito de esta prueba es asegurar que la interfaz del servicio puede soportar introducción de una consulta REST invalida.  \\ \midrule
+\textbf{Dependencias externas}      &  - . \\ \cmidrule{1-2}
+\textbf{Descripción}   & 1. Iniciar Postman. \\ 
+\textbf{de la Prueba}                                    & 2. Introducir la URI, el metodo HTTP, las cabeceras y el cuerpo de la consulta. \\
+                                    & 3. Enviar una consulta cualquiera, o caracteres invalidos. \\ \cmidrule{1-2} 
+\textbf{Resultados Esperados}       &  El servicio retorna un mensaje con codigo HTTP 404, consulta sin respuesta debido a que no existe. \\ \bottomrule
+\caption{Prueba de Integración - Consulta Invalida} \label{tab:prueba-cons1}  \\
 \end{longtable}
   
  
 \pagebreak  
 \subsubsection{Consulta de Cero Resultados}
+\begin{longtable}{@{} p{3cm} p{10cm} @{}} \toprule
+\textbf{Propósito}                  & El propósito de esta prueba es asegurar que la interfaz del servicio puede soportar el caso en el que ninguna información en la base de datos concuerda con la consulta.  \\ \midrule
+\textbf{Dependencias externas}      & Encontrar un código o elemento que no existe en la base de datos. \\ \cmidrule{1-2}
+\textbf{Descripción}   & 1. Iniciar Postman. \\ 
+ \textbf{de la Prueba}                                   & 2. Ingresar y enviar una consulta para un código que no esta en la base de datos. \\ \cmidrule{1-2} 
+\textbf{Resultados Esperados}       &  El servicio despliega un mensaje con código HTTP 404, consulta sin respuesta debido a que no existe un elemento.\\ \bottomrule
+\caption{Prueba de Integración - Consulta de Cero Resultados} \label{tab:prueba-cons2}  \\
+\end{longtable}
+  
+ 
 \pagebreak
 \subsubsection{Consulta de Resultado Singular}
+\begin{longtable}{@{} p{3cm} p{10cm} @{}} \toprule
+\textbf{Propósito}                  & El propósito de esta prueba es asegurar que la interfaz del servicio puede soportar el caso en el que un solo elemento en la base de datos concuerda con la consulta.  \\ \midrule
+\textbf{Dependencias externas}      & Encontrar un código o elemento que solo tiene una entrada en la base de datos. \\ \cmidrule{1-2}
+\textbf{Descripción}   & 1. Iniciar Postman. \\ 
+\textbf{de la Prueba}                                    & 2. Ingresar y enviar la consulta con un código de un elemento que solo tiene una entrada en la base de datos..  \\ \cmidrule{1-2} 
+\textbf{Resultados Esperados}       &  El servicio retorna el resultado singular. \\ \bottomrule
+\caption{Prueba de Integración - Consulta de Resultado Singular} \label{tab:prueba-cons3}  \\
+\end{longtable}
+  
+
 \pagebreak
 \subsubsection{Consulta de Múltiples Resultados}
+\begin{longtable}{@{} p{3cm} p{10cm} @{}} \toprule
+\textbf{Propósito}                  & El propósito de esta prueba es asegurar que la interfaz del servicio puede soportar el caso en el que ultiples elementos concuerdan con la consulta.  \\ \midrule
+\textbf{Dependencias externas}      & Encontrar un nombre u otro atributo de elementos que existan apliquen a multiples entradas en la base de datos. \\ \cmidrule{1-2}
+\textbf{Descripción}   & 1. Iniciar Postman. \\ 
+\textbf{de la Prueba}                                    & 2. Ingresar y enviar la consulta con un nombre o atributo de un elemento con múltiples entradas en la base de datos. \\ \cmidrule{1-2} 
+\textbf{Resultados Esperados}       & El servicio retorna múltiples resultados. \\ \bottomrule
+\caption{Prueba de Integración - Consulta de Múltiples Resultados} \label{tab:cons4}  \\
+\end{longtable}
+  
+
 \pagebreak
 \subsection{Interfaz de Servicios - Base de Datos}
 \subsubsection{Envío de Datos con Formato Incorrecto}
+\begin{longtable}{@{} p{3cm} p{10cm} @{}} \toprule
+\textbf{Propósito}                  & El propósito de esta prueba es asegurar se soporta el ingreso de datos en formato invalido. \\ \midrule
+\textbf{Dependencias externas}      & - \\ \cmidrule{1-2}
+\textbf{Descripción }   & 1. Ingresar a la interfaz de usuario. \\ 
+\textbf{de la Prueba}                                    & 2. Ingresar a un formulario de un servicio. \\
+                                    & 3. Enviar un formulario con datos con formato invalido (para campos que requieran un formato especifico).\\ \cmidrule{1-2} 
+\textbf{Resultados Esperados}       &  El formulario no permite el envío de consultas con formato invalido. \\ \bottomrule
+\caption{Prueba de Integración - Formato Incorrecto} \label{tab:prueba-formato}  \\
+\end{longtable}
+  
+
 \pagebreak
 \subsubsection{Adición de Datos}
+\begin{longtable}{@{} p{3cm} p{10cm} @{}} \toprule
+\textbf{Propósito}                  & El propósito de esta prueba es asegurar se soporta el ingreso de datos nuevos para las entidades. \\ \midrule
+\textbf{Dependencias externas}      & Crear un (1) registro nuevo con datos no duplicados. \\ \cmidrule{1-2}
+\textbf{Descripción}   & 1. Ingresar a la interfaz de usuario. \\ 
+\textbf{de la Prueba}                                    & 2. Ingresar a un formulario de una entidad. \\
+                                    & 3. Enviar un nuevo formulario con datos no duplicados correctamente formateados. \\ \cmidrule{1-2} 
+\textbf{Resultados Esperados}       & Se observa el nuevo registro en el índice de la entidad. \\ \bottomrule
+\caption{Prueba de Integración - Adición de Datos} \label{tab:prueba-adicion}  \\
+\end{longtable}
+  
+
 \pagebreak
 \subsubsection{Adición de Datos Duplicados}
-\pagebreak
+\begin{longtable}{@{} p{3cm} p{10cm} @{}} \toprule
+\textbf{Propósito}                  & El propósito de esta prueba es asegurar se soporta el ingreso de datos duplicados de entidades. \\ \midrule
+\textbf{Dependencias externas}      & Encontrar un elemento que existe en la base de datos. \\ \cmidrule{1-2}
+\textbf{Descripción}   & 1. Ingresar a la interfaz de usuario. \\ 
+\textbf{de la Prueba}                                    & 2. Ingresar a un formulario de una entidad. \\
+                                    & 3. Enviar un nuevo formulario con datos duplicados. \\ \cmidrule{1-2} 
+\textbf{Resultados Esperados}       & El formulario no permite ser enviado debido a que el elemento ya existe en la base de datos. \\ \bottomrule
+\caption{Prueba de Integración - Adición de Datos Duplicados} \label{tab:prueba-duplicados}  \\
+\end{longtable}
+  
+  
+  \pagebreak
 \subsubsection{Modificación de Datos}
-\pagebreak
+\begin{longtable}{@{} p{3cm} p{10cm} @{}} \toprule
+\textbf{Propósito}                  & El propósito de esta prueba es asegurar que se soporta la modificación de datos de entidades.  \\ \midrule
+\textbf{Dependencias externas}      & Encontrar elemento que existe en la base de datos. \\ \cmidrule{1-2}
+\textbf{Descripción}   & 1. Ingresar a la interfaz de usuario. \\ 
+\textbf{de la Prueba}                                    & 2. Ingresar al formulario de modificación de un elemento existente. \\
+                                    & 3. Enviar el formulario con nuevos datos. \\ \cmidrule{1-2} 
+\textbf{Resultados Esperados}       & Se observa que el elemento ha sido modificado en el índice de elementos de la entidad. \\ \bottomrule
+\caption{Prueba de Integración - Modificación de Datos} \label{tab:prueba-mod}  \\
+\end{longtable}
+  
+  
+  \pagebreak
 \subsubsection{Eliminación de Datos}
+\begin{longtable}{@{} p{3cm} p{10cm} @{}} \toprule
+\textbf{Propósito}                  & El propósito de esta prueba es asegurar que se soporta la eliminación de datos de entidades.  \\ \midrule
+\textbf{Dependencias externas}      & Encontrar un código o elemento que existe en la base de datos. \\ \cmidrule{1-2}
+\textbf{Descripción}   & 1. Ingresar a la interfaz de usuario. \\ 
+\textbf{de la Prueba}                                    & 2. Ingresar a los detalles de un elemento existente. \\
+                                    & 3. Eliminar el elemento. \\ \cmidrule{1-2} 
+\textbf{Resultados Esperados}       & Se observa que el elemento ha sido eliminado del índice de elementos de la entidad. \\ \bottomrule
+\caption{Prueba de Integración - Eliminación de Datos} \label{tab:prueba-el}  \\
+\end{longtable}
+  

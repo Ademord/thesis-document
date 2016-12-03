@@ -3,6 +3,7 @@
 \chapter{Especificaciones de Cámaras Dahua}
 \label{appendix:dahua}
 
+\newpage
 \appendix
 \chapter{Estructura de un Proyecto Laravel}
 La capa de presentación consiste en vistas y controladores que solicitan información a los servicios externos, a los cuales acceden a través de sus APIs.
@@ -10,6 +11,7 @@ La capa de presentación consiste en vistas y controladores que solicitan inform
 La estructura de un proyecto de Laravel consiste en:
 
 \vspace{0.5cm}
+{\setstretch{1.0}
 \dirtree{%
 .1 project/.
     .2 \vdots.
@@ -45,6 +47,7 @@ La estructura de un proyecto de Laravel consiste en:
     .2 \vdots.
     .2 composer.json.
 }
+}
 Donde:
 
 \begin{itemize}
@@ -57,3 +60,23 @@ Donde:
 \item \textit{.env y composer.json} describen las variables de entorno y las dependencias necesarias para ejecutar la aplicación respectivamente.
 
 \end{itemize}
+
+\newpage
+\appendix
+\chapter{Diagrama de Paquetes}
+A continuación se adjunta un diagrama de paquetes del PFG, como alternativa para representar la distribucion del diagrama de clases.
+\begin{landscape}
+     \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\textwidth]{class-packages}
+        \caption{Modelo Conceptual - Paquetes}
+        \label{fig:CLASS-crop}
+    \end{figure}
+    
+        \begin{figure}[H]
+        \centering
+        \includegraphics[width=1.1\textwidth]{class-packages-extended}
+        \caption{Modelo Conceptual - Detalle}
+        \label{fig:CLASS-brief}
+    \end{figure}
+\end{landscape}

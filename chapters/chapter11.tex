@@ -31,8 +31,10 @@ En breve, para programar un servicio se debe:
     \item Definir el archivo de despliegue en Kubernetes.
     \item Definir el archivo de Servicio Kubernetes.
 \end{itemize}
+
 Dado lo anterior, la estructura de archivos de un servicio consiste en la siguiente:
 
+{\setstretch{1.0}
 \vspace{0.5cm}
 \dirtree{%
 .1 servicio/.
@@ -44,6 +46,7 @@ Dado lo anterior, la estructura de archivos de un servicio consiste en la siguie
         .3 server.py.
     .2 deployment.json.
     .2 service.json.
+}
 }
 \pagebreak
 Donde:
@@ -170,9 +173,9 @@ ENTRYPOINT ["python","/usr/src/app/server.py"]
 \begin{mdframed}[linecolor=black, topline=true, bottomline=true,
   leftline=false, rightline=false, backgroundcolor=LightGray,userdefinedwidth=\textwidth]
   \begin{minted}[fontsize=\normalsize, linenos, baselinestretch=1.2]{python}
- flask
- orator
- psycopg2
+flask
+orator
+psycopg2
 \end{minted}
 \end{mdframed}
 
@@ -296,7 +299,6 @@ if __name__ == '__main__':
 \end{minted}
 \end{mdframed}
 
-\pagebreak
 { \sffamily \textbf{service.json} }
 \begin{mdframed}[linecolor=black, topline=true, bottomline=true,
   leftline=false, rightline=false, backgroundcolor=LightGray,userdefinedwidth=\textwidth]
@@ -333,18 +335,487 @@ if __name__ == '__main__':
 \end{minted}
 \end{mdframed}
 
-Con estos archivos se puede montar un servicio en un cluster de Kubernetes \footnote{\url{http://kubernetes.io/docs/hellonode/}}. Cabe recordar que existen diversas alternativas de Infraestructura como Servicio (IaaS) en el momento de utilizar Kubernetes \footnote{\url{http://kubernetes.io/docs/getting-started-guides/}}:
+Con estos archivos se puede montar un servicio en un cluster de Kubernetes\footnote{\url{http://kubernetes.io/docs/hellonode/}}. Cabe recordar que existen diversas alternativas de Infraestructura como Servicio (IaaS) en el momento de utilizar Kubernetes\footnote{\url{http://kubernetes.io/docs/getting-started-guides/}}:
 \begin{itemize}
 \item \textbf{Nubes Públicas:} contratar un proveedor de IaaS y montar el cluster de Kubernetes sobre sus recursos de cómputo, almacenamiento, redes, etc. como AWS, Google Cloud, etc.
-\item \textbf{Nubes Privadas:} alojar la aplicación en servidores físicos en las instalaciones de la empres.
+\item \textbf{Nubes Privadas:} alojar la aplicación en servidores físicos en las instalaciones de la empresa.
 \item \textbf{Nubes Híbridas:} mantener cierta parte de la infraestructura in-situ (en las instalaciones), donde la estrategia general es desplegar los nodos de aplicación en la nube y mantener las bases de datos en los datacenter de la empresa.
  \end{itemize}
-Posterior a pruebas a través de despliegues en nubes públicas, se registró una latencia de 4 a 12 segundos en el envío de cuadros de vídeo. Esta latencia se encuentra presente debido a la infraestructura del internet de Bolivia y, se traduce en un requerimiento de desplegar la aplicación en una nube privada, donde no existe esta condicionante.
+A pesar de estas alternativas, posterior a pruebas en despliegues en nubes públicas, se registró una latencia de 4 a 12 segundos en el envío de cuadros de vídeo a través de Internet. Esta latencia se encuentra presente debido a la infraestructura del internet de Bolivia y, se traduce en un requerimiento de desplegar la aplicación en una nube privada, donde no existe esta condicionante.
 
-\section{Servicio Reconocedor}
+\section{Recolección, Reconocimiento y Almacenamiento}
 \subsection{Descripción}
 
 El Servicio Recolector, manipula los cuadros de vídeo en una estructura particular llamada arreglos de numpy. Estos arreglos son transformados a listas y enviados, con la IP de la cámara correspondiente, en formato JSON a través de HTTP a la interfaz correspondiente del Servicio Reconocedor.
-El servicio Reconocedor procesa cada cuadro y si encuentra una matricula la envía, con la IP de la cámara correspondiente, al Servicio de Coincidencias. Este servicio se encarga de almacenar la matricula de acuerdo a la descripción del diagrama de secuencia \ref{fig:seq-alma}.
+
+El servicio Reconocedor procesa cada cuadro y si encuentra una matricula la envía, con la IP de la cámara correspondiente, al Servicio de Coincidencias el cual se encarga de almacenar la matricula de acuerdo a la descripción del diagrama de secuencia \ref{fig:seq-alma}.
 
 \subsection{Implementación}
+
+Inicialmente, el servicio recolector y el servicio reconocedor fueron implementados con una arquitectura monolítica. Posterior a pruebas, se observó que la cantidad de cuadros generados saturaba al modulo de reconocimiento, por lo que se intento utilizar hilos para tener procesamiento en paralelo y solventar el problema generado por la tasa de servicio. Ante esto, se observó deficiencias en este nuevo modelo de proceso, debido a que:
+\pagebreak
+\begin{enumerate}
+\item no se podía utilizar el patrón de mensajería Dispersión\footnote{\url{http://www.ibm.com/support/knowledgecenter/SSCGGQ_1.2.0/com.ibm.ism.doc/Planning/ov00101_.html}} (en ingles, Fan Out), que permite el envió de un mensaje a múltiples destinos para realizar procesamiento en paralelo, sin implementaciones tediosas y robustas en conocimiento en patrones de hilos, 
+\item se observo que al ejecutar una solución que ejecute hilos, se obtenía un único proceso python que manejaba hilos donde cada uno lee cuadros de vídeo en mediana-alta calidad, los redirecciona y posteriormente los procesa para reconocer matriculas en los mismos. Esto incurría en un proceso python que utilizaban memoria ineficientemente principalmente debido al:
+    \begin{itemize}
+    \item \textit{overhead} generado en la ejecución de un solo proceso que a su vez ejecutaba hilos 
+    \item manejo de memoria compartida a través de hilos que realizan procesamiento costoso 
+    \end{itemize}
+\end{enumerate}
+
+La implementación del Servicio Recolector y el Servicio Reconocedor con contenedores permitió solventar este problema, debido a que capacidad de escalar la aplicación elimina la propuesta de utilización de hilos en una arquitectura monolítica. 
+Más aun, la implementación mediante contenedores permitió aislar los errores encontrados, desplegar sobre cualquier plataforma y maximizar desempeño optimizando el uso de recursos. A continuación se adjuntan el codigo fuente involucrado en la implementación de cada servicio, detallando un poco mas en el Servicio Reconocedor (archivos .json).
+% \pagebreak
+\subsubsection{Servicio Recolector}
+{\sffamily \textbf{server.py}}
+\begin{mdframed}[linecolor=black, topline=true, bottomline=true,
+  leftline=false, rightline=false, backgroundcolor=LightGray,userdefinedwidth=\textwidth]
+\begin{minted}[fontsize=\normalsize, linenos, baselinestretch=1]{python}
+#!flask/bin/python
+from flask import Flask, jsonify, make_response, request
+
+import cv2
+import numpy as np
+
+import requests
+import json
+import os
+from datetime import datetime
+
+app = Flask(__name__)
+
+config ={
+    "ip": "123.123.111"    
+}
+
+@app.route('/', methods=['GET'])
+def status():
+    return jsonify(config)
+@app.route('/<string:ip>', methods=['POST'])
+def set_ip(ip):
+    config['ip'] = ip
+    return jsonify(config)
+
+
+def send(data):
+    data ['timestamp'] = str(datetime.now())
+    url = os.environ.get('TARGET_SERVICE') + "/reconocer"
+    headers = {'Content-Type': 'application/json'}
+    r = requests.
+        post(url.strip(), data=json.dumps(data), headers=headers)
+    return jsonify({'result': 'sent to ' + url}), 201
+# <string:URI>
+
+@app.route('/read', methods=['GET'])
+def read():
+    img = cv2.imread('image.jpg', 0)
+    return send({'ip': config['ip'], 'frame': img.tolist()})
+
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({'error': 'Not found'}), 404)
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=55551, debug=True)
+
+\end{minted}
+\end{mdframed}
+
+\subsubsection{Servicio Reconocedor}
+{\sffamily \textbf{requirements.txt}}
+\begin{mdframed}[linecolor=black, topline=true, bottomline=true,
+  leftline=false, rightline=false, backgroundcolor=LightGray,userdefinedwidth=\textwidth]
+\begin{minted}[fontsize=\normalsize, linenos, baselinestretch=1]{vim}
+flask
+request
+numpy
+argparse
+\end{minted}
+\end{mdframed}
+
+{ \sffamily \textbf{Dockerfile}}
+\vspace{0.1cm}
+\begin{mdframed}[linecolor=black, topline=true, bottomline=true,
+  leftline=false, rightline=false, backgroundcolor=LightGray,userdefinedwidth=\textwidth]
+\begin{minted}[fontsize=\normalsize, linenos, baselinestretch=1]{vim}
+FROM tsutomu7/python-opencv
+USER root
+# Install prerequisites
+run apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
+    curl \
+    git \
+    libcurl3-dev \
+    libleptonica-dev \
+    liblog4cplus-dev \
+    libopencv-dev \
+    libtesseract-dev \
+    wget
+run apt-get update && sudo apt-get install -y \
+    openalpr openalpr-daemon openalpr-utils libopenalpr-dev
+EXPOSE 5000
+RUN apt-get update
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+COPY requirements.txt /usr/src/app/
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . /usr/src/app
+ENTRYPOINT ["python","/usr/src/app/server.py"]
+\end{minted}
+\end{mdframed}
+
+{\sffamily \textbf{server.py}}
+\begin{mdframed}[linecolor=black, topline=true, bottomline=true,
+  leftline=false, rightline=false, backgroundcolor=LightGray,userdefinedwidth=\textwidth]
+\begin{minted}[fontsize=\normalsize, linenos, baselinestretch=1]{python}
+#!flask/bin/python
+from flask import Flask, abort, jsonify, request
+from subprocess import check_output
+import subprocess
+app = Flask(__name__)
+import numpy as np
+import sys
+import io
+import re
+import functools
+import cv2
+
+URL = "/usr/src/app/image.jpg"
+logs = [{
+    "inicio": "mensaje inicial"	
+}]
+
+@app.route('/reconocer', methods=['POST'])
+def _reconocer():
+    logs.append({'reconocer':'hola'})
+    # reconocer = compose(forward, clean, format, process, save)
+    results = 
+        forward(
+            clean(
+                format(
+                    process(
+                        save(request.get_json()
+        )))))
+    return jsonify({'logs': logs})
+
+# @app.route('/save', methods=['POST'])
+def save(data):
+    logs.append({'save':'hola'})
+    frame = np.array(data['frame'])
+    cv2.imwrite(URL, frame); 
+    #test image is saved
+    # return jsonify({'logs': logs})
+    return data
+
+# @app.route('/process', methods=['GET'])
+def process(data):
+    logs.append({'process':'hola'})
+    # open frame with command line
+    # test alpr works, by bashing into container first
+    args = ["alpr", URL, "-c", "bo","--config",
+        "/usr/src/app/openalpr.conf", "-p","bo", "--clock"]
+    data['output'] = subprocess.Popen(args, stdout=subprocess.PIPE)
+    return data
+
+def format(data):
+    logs.append({'format':'hola'})
+    lines = []
+    regex = re.compile(r'[\n\r\t]')
+    for line in io.TextIOWrapper(data['output'].
+        stdout, encoding="utf-8"):
+        if not 'confidence' in line:
+            continue
+        line = regex.sub(' ', line)
+        plate = re.
+            findall ( '    - (.*?)  confidence', line, re.DOTALL)[0]
+        confidence = 
+            re.findall ( 'confidence: (.*?) ', line, re.DOTALL)[0]
+        # logs.append({"plate found": line})
+        lines.
+            append({"plate found": plate, "confidence": confidence})
+    try:
+        first_plate = lines[0]
+    except:
+        first_plate = lines
+    del data['output']
+    data['plate'] = first_plate
+    return data
+    # return jsonify({'logs': logs[0]})
+
+# @app.route('/delete', methods=['GET'])
+def clean(data):
+    logs.append({'clean':'hola'})
+    # # destroy frame
+    args = ["rm", URL]
+    subprocess.Popen(args, stdout=subprocess.PIPE)
+    # #test image is deleted
+    # return jsonify("Deleted")
+    return data
+
+def forward(data):
+    del data['frame']
+    logs.append({'data': data})
+    return jsonify({'data': data})
+	
+
+@app.route('/', methods=['GET'])
+def index():
+logs.append({'hola': 'no he recibido nada'})
+return jsonify({'logs': logs})
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)
+
+\end{minted}
+\end{mdframed}
+\pagebreak
+{\sffamily \textbf{deployment.json}}
+\begin{mdframed}[linecolor=black, topline=true, bottomline=true,
+  leftline=false, rightline=false, backgroundcolor=LightGray,userdefinedwidth=\textwidth]
+\begin{minted}[fontsize=\normalsize, linenos, baselinestretch=1]{json}
+{  
+   "kind":"Deployment",
+   "apiVersion":"extensions/v1beta1",
+   "metadata":{  
+      "name":"reconocedor",
+      "namespace":"panchito",
+      "creationTimestamp":null
+   },
+   "spec":{  
+      "replicas":1,
+      "template":{  
+         "metadata":{  
+            "creationTimestamp":null,
+            "labels":{  
+               "service":"reconocedor"
+            }
+         },
+         "spec":{  
+            "containers":[  
+               {  
+                  "name":"reconocedor",
+                  "image":"ademord/reconocedor:latest",
+                  "ports":[  
+                     {  
+                        "containerPort":5000,
+                        "protocol":"TCP"
+                     }
+                  ],
+                  "resources":{ }
+               }
+            ],
+            "restartPolicy":"Always"
+         }
+      },
+      "strategy":{ }
+   },
+   "status":{ }
+}
+\end{minted}
+\end{mdframed}
+
+{\sffamily \textbf{service.json}}
+\begin{mdframed}[linecolor=black, topline=true, bottomline=true,
+  leftline=false, rightline=false, backgroundcolor=LightGray,userdefinedwidth=\textwidth]
+\begin{minted}[fontsize=\normalsize, linenos, baselinestretch=1]{json}
+{  
+   "kind":"Service",
+   "apiVersion":"v1",
+   "metadata":{  
+      "name":"reconocedor",
+      "namespace":"panchito",
+      "creationTimestamp":null,
+      "labels":{  
+         "service":"reconocedor"
+      }
+   },
+   "spec":{  
+      "ports":[  
+         {  
+            "name":"5000",
+            "protocol":"TCP",
+            "port":80,
+            "targetPort":5000
+         }
+      ],
+      "selector":{  
+         "service":"reconocedor"
+      },
+      "type":"LoadBalancer"
+   },
+   "status":{  
+      "loadBalancer":{ }
+   }
+}
+\end{minted}
+\end{mdframed}
+
+{\sffamily \textbf{redeploy.bash}}
+\begin{mdframed}[linecolor=black, topline=true, bottomline=true,
+  leftline=false, rightline=false, backgroundcolor=LightGray,userdefinedwidth=\textwidth]
+\begin{minted}[fontsize=\normalsize, linenos, baselinestretch=1]{vim}
+kubectl delete deployment reconocedor && \
+    docker build -t ademord/reconocedor:latest ./app && \
+        docker push ademord/reconocedor:latest && \
+            kubectl create -f deployment.json
+
+\end{minted}
+\end{mdframed}
+
+\subsubsection{Servicio de Coincidencias}
+{\sffamily \textbf{server.py}}
+\begin{mdframed}[linecolor=black, topline=true, bottomline=true,
+  leftline=false, rightline=false, backgroundcolor=LightGray,userdefinedwidth=\textwidth]
+\begin{minted}[fontsize=\normalsize, linenos, baselinestretch=1]{python}
+#!flask/bin/python
+from flask import Flask, jsonify, abort, make_response, request
+from app import Coincidencia
+app = Flask(__name__)
+logs = [{
+    "inicial":"init"
+}
+]
+@app.route('/', methods=['GET'])
+def index():
+    return jsonify(Coincidencia.getall())
+
+@app.route('/<int:id>', methods=['GET'])
+def show(id):
+     return jsonify(Coincidencia.get(id))
+
+@app.route('/search/<string:q>', methods=['GET'])
+def search(q):
+    return jsonify(Coincidencia.buscar(q))
+
+@app.route('/', methods=['POST'])
+def store():
+    data = request.get_json()
+    if not request.json or not Coincidencia.valid(data):
+        abort(400)
+    return jsonify(Coincidencia.add(data)), 201
+
+@app.route('/<int:id>', methods=['DELETE'])
+def destroy(id):
+    temp = Coincidencia.get(id)
+    if not temp: abort(404)
+    result = Coincidencia.remove(id)
+    return jsonify({'result': result }), 201
+
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({'error': 'Not found'}), 404)
+
+@app.before_first_request
+def _run_on_start():
+    Coincidencia.connect()
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=55555, debug=True)
+    # app.run(port=55555, debug=True)
+
+\end{minted}
+\end{mdframed}
+
+{\sffamily \textbf{app.py}}
+\begin{mdframed}[linecolor=black, topline=true, bottomline=true,
+  leftline=false, rightline=false, backgroundcolor=LightGray,userdefinedwidth=\textwidth]
+\begin{minted}[fontsize=\normalsize, linenos, baselinestretch=1]{python}
+from orator import Model
+from database import db
+from flask import abort
+import uuid
+import re
+import json
+import requests
+import cv2
+import numpy as np
+
+#orator.orm.collection.Collection object at 0x000001AA82700978
+class Coincidencia(Model):
+    def connect():
+        Model.set_connection_resolver(db)
+    __table__ = 'coincidencias'
+
+    def get_external(url):
+        r = requests.get(url.strip())
+        return r.json()
+
+    def getall(): 
+        try:
+            return Coincidencia.all().serialize()
+        except:
+            return abort(404)
+
+    def get(id):
+        try:
+            return Coincidencia.find(id).serialize()
+        except:
+            return abort(404)
+
+    def buscar(param):
+        try:
+            return Coincidencia.where('matricula', 'like',
+                '%{}%'.format(param)).get().serialize();
+        except:
+            return abort(404)
+
+    def add(data):
+        coincidencia = Coincidencia()
+        # IP
+        coincidencia.camara = data['ip']
+        # LUGAR
+        lugar_id = Coincidencia.
+            get_external('http://camaras/search/{}'.
+                format(data['ip']))[0]['lugar_id']
+        lugar = Coincidencia.
+            get_external('http://lugares/{}'.format(lugar_id))
+        coincidencia.lugar = lugar['nombre']
+        # MATRICULA
+        coincidencia.matricula = data['plate']
+        pattern = re.compile(r"^\d{1,4}[A-Z]{3}$",re.I)
+        mismatch = True
+        if pattern.search(coincidencia.matricula): mismatch = False
+        coincidencia.mismatch = mismatch
+        # PROPIETARIO
+        coincidencia.propietario = "Desconocido" 
+        #se asume que es desconocido
+        if not mismatch:
+            id_propietario = Coincidencia.
+                get_external('http://matriculas/search/{}'.
+                    format(coincidencia.matricula))
+            if len(id_propietario):
+                id_propietario = id_propietario[0]['propietario_id']
+                propietario = Coincidencia.
+                    get_external('http://propietarios/{}'.
+                        format(id_propietario))
+                coincidencia.propietario = propietario['nombres'] 
+                    + propietario['apellidos']
+                
+        # CUADRO
+        filename = str(uuid.uuid4()) + ".png"
+        coincidencia.filename = filename
+        coincidencia.mime = "image/png"
+        cv2.imwrite('/usr/src/data/' + filename,
+            np.array(data['frame'])); 
+        del data['frame']
+
+        coincidencia.save()
+        return 200
+
+    def remove(id):
+        try:
+            Coincidencia.find(id).delete()
+            return 200
+        except:
+            return "No se pudo eliminar elemento."
+
+    def valid(temp):
+        if 'ip' in temp and 
+        not isinstance(temp['plate'], str): #cambiar
+            return False
+        return True
+\end{minted}
+\end{mdframed}
+
+El resto del código fuente para el PFG puede encontrarse en Github\footnote{\url{https://github.com/Ademord/control-vehicular-SOA}}.

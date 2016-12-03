@@ -1,10 +1,18 @@
 \chapter{Reconocimiento Automático de Matrículas}
-Figura X. Ejemplo de Sistema Inteligente de Transporte con Cámaras de Seguridad \cite{TechFAQ2016-oi}
 
-El reconocimiento automático de matrículas (en inglés, Automatic License Plate Recognition o ALPR) es uno de los módulos (importantes de los Sistemas Inteligentes de Transporte (ITS). Investigaciones de \cite{Anagnostopoulos2008-uh} y \cite{TechTarget2016-gw} mencionan múltiples aplicaciones de ALPR, tales como la determinación de qué vehículos pertenecen o no en un parqueo, disposición de pases parqueo eliminando la necesidad de confirmación humana, recuperación de autos robados, control de tráfico, etc..
+El reconocimiento automático de matrículas (en inglés, Automatic License Plate Recognition o ALPR) es uno de los módulos importantes en los Sistemas Inteligentes de Transporte (ITS), como se observa en la Figura \ref{fig:its}. \citeA{Anagnostopoulos2008-uh} y \citeA{TechTarget2016-gw} mencionan múltiples aplicaciones de ALPR, tales como la determinación de qué vehículos tienen acceso o no a un parqueo, disposición de pases parqueo eliminando la necesidad de confirmación humana, recuperación de autos robados, control de tráfico, etc.
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.80\textwidth]{its}
+        \caption{Ejemplo de Sistema Inteligente de Transporte con Cámaras de Seguridad \protect\cite{TechFAQ2016-oi}}
+        \label{fig:its}
+\end{figure}   
 
-Usualmente, un módulo de ALPR se divide en tres etapas principales: detección de la matrícula de una imagen o video, segmentación de caracteres y, reconocimiento de caracteres. Entre estos, la detección de la matrícula es la parte más importante y la más difícil; los módulos ALPR deben enfrentar factores no problemáticos como: imágenes fuera de foco, condiciones de iluminación no deseadas, matriculas pequeñas, sombras y diferentes condiciones climáticas \cite{Mahini2006-us}.
-A pesar de que se han realizado muchas investigaciones en el área del ALPR, los sistemas actuales tienen un buen desempeño bajo condiciones específicas \cite{Anagnostopoulos2006-is}, tales como: distancia de la cámara \cite{Martin2002-zu,Guo2008-qk}, velocidad del vehículo \cite{Garibotto2001-lu}, condiciones de iluminación \cite{Xiong2004-qv,Mahini2006-us}, posiciones de la cámara \cite{Chang2004-kg}, etc. No olvidemos que los módulos ALPR pueden fallar en el borde de dos países debido a las variaciones en los patrones patrones de los caracteres en matrículas \cite{Anagnostopoulos2006-is,Shapiro2006-rv,Mecocci2006-nt}.
+Usualmente, un módulo de ALPR se divide en tres etapas principales: detección de la matrícula de una imagen o vídeo, segmentación de caracteres y, reconocimiento de caracteres. Entre estos, la detección de la matrícula es la parte más importante y la más difícil; los módulos ALPR deben enfrentar factores problemáticos como: imágenes fuera de foco, condiciones de iluminación no deseadas, matriculas pequeñas, sombras y diferentes condiciones climáticas \cite{Mahini2006-us}.
+
+A pesar de que se han realizado muchas investigaciones en el área del ALPR, los sistemas actuales tienen un buen desempeño bajo condiciones específicas \cite{Anagnostopoulos2006-is}, tales como: distancia de la cámara \cite{Martin2002-zu,Guo2008-qk}, velocidad del vehículo \cite{Garibotto2001-lu}, condiciones de iluminación \cite{Xiong2004-qv,Mahini2006-us}, posiciones de la cámara \cite{Chang2004-kg}, etc. 
+
+Cabe mencionar que los módulos ALPR pueden fallar al usarse en diferentes países debido a las variaciones en la distribución alfanumérica de los caracteres en sus matrículas \cite{Anagnostopoulos2006-is,Shapiro2006-rv,Mecocci2006-nt}.
 
   \begin{figure}[H]
         \centering
@@ -14,8 +22,10 @@ A pesar de que se han realizado muchas investigaciones en el área del ALPR, los
 \end{figure}  
 
 La figura \ref{fig:worldcarplates} muestra claramente cómo las matrículas de un país a otro varían bastante. Por esta razón no es efectivo utilizar un módulo ALPR desarrollado para un país, en otro, sin antes haberlo adaptado.
+
 \section{Detección vs. Reconocimiento}
-La\textit{ detección} de objetos consiste en determinar si en una imagen o video arbitrarios hay un objeto determinado (un rostro, un auto) y, en caso haberlo, en qué posición se encuentra. Por otro lado, el \textit{reconocimiento }de objetos (el rostro de Juan, el auto de Pedro) consiste en comparar el objeto detectado contra una base de datos para saber si existe alguna asociación con alguno registrado. Vale mencionar que es usualmente más difícil la detección de objetos en la escena compleja de una imagen que el reconocimiento de los mismos. Dado lo anterior, la mayoría de los algoritmos de reconocimiento pueden ser usados para la detección de objetos. Sin embargo, dependiendo del objeto a detectar, unos métodos pueden ser más adecuados que otros \cite{Ekvall2005-ut}.
+La\textit{ detección} de objetos consiste en determinar si en una imagen o vídeo arbitrarios hay un objeto determinado (un rostro, un auto) y, en caso haberlo, en qué posición se encuentra. Por otro lado, el \textit{reconocimiento }de objetos (el rostro de Juan, el auto de Pedro) consiste en comparar el objeto detectado contra una base de datos para saber si existe alguna asociación con alguno registrado. Vale mencionar que es usualmente más difícil la detección de objetos en la escena compleja de una imagen que el reconocimiento de los mismos. Dado lo anterior, la mayoría de los algoritmos de reconocimiento pueden ser usados para la detección de objetos. Sin embargo, dependiendo del objeto a detectar, unos métodos pueden ser más adecuados que otros \cite{Ekvall2005-ut}.
+
 \section{OpenALPR}
 OpenALPR es una librería open-source de visión artificial que se encarga de la tarea del reconocimiento automático de matrículas utilizando los módulos de OpenCV para realizar el procesamiento de imágenes.
   
@@ -26,7 +36,7 @@ OpenALPR es una librería open-source de visión artificial que se encarga de la
         \label{fig:openalpr-pipeline}
 \end{figure}
     
-A continuación se describe cada uno de los subprocesos que realiza la librería OpenALPR para el reconocimiento de una matrícula a partir de una entrada, sea una imagen o un video. 
+A continuación se describe cada uno de los subprocesos que realiza la librería OpenALPR para el reconocimiento de una matrícula a partir de una entrada, sea una imagen o un vídeo. 
 
 \subsection{OpenCV}
 OpenCV es una librería open-source bajo la licencia BSD que contiene cientos de algoritmos de visión artificial, utilizada por Google, Microsoft, IBM, Intel, etc. \cite{OpenCV2016-bv}. OpenCV tiene una estructura modular distribuida de la siguiente manera:
@@ -35,9 +45,9 @@ OpenCV es una librería open-source bajo la licencia BSD que contiene cientos de
 \item \textbf{imgproc} - módulo de procesamiento de imágenes que incluye filtros lineales y no lineales, transformaciones geométricas (resize, affine y perspective warping, generic table-based remapping), inversión del espacio de colores, histogramas, etc.
 \item \textbf{video} - módulo de análisis de video que incluye estimación de movimiento, sustracción de fondo y algoritmos de seguimiento de objetos.
 \item \textbf{calib3d} - módulo de algoritmos básicos de multiple-view geometry, calibración singular y estéreo de cámaras, estimación de pose de objeto, algoritmos de correspondencia estéreo y, reconstrucción de elementos 3D.
-\item \textbf{features2d} - módulo de detectores de características sobresalientes, descriptores y, igualadores de descriptores.
+\item \textbf{features2d} - módulo de detectores de características sobresalientes, descriptores e igualadores de descriptores.
 \item \textbf{objdetect} - módulo de detección de objetos e instancias de clases predefinidas (por ejemplo, rostros, ojos, tazas, personas, autos, etc.)
-\item \textbf{highgui} - módulo con una interfaz intuitiva para la captura de video, codecs de imágenes y video y capacidades de UI sencillas
+\item \textbf{highgui} - módulo con una interfaz intuitiva para la captura de video, codecs de imágenes o vídeo y capacidades de UI sencillas
 \item \textbf{gpu} - módulo con algoritmos acelerados para el GPU de diferentes módulos de OpenCV
 \item ... y otros módulos de ayuda como FLANN y envoltorios de pruebas de Google, bindings para Python, etc.    
 \end{itemize}
@@ -66,7 +76,7 @@ El reconocimiento de objetos mediante visión artificial involucra dos aspectos 
 \item Existir en un espacio de baja dimensionalidad para evitar el uso de clasificadores costosos
 \end{itemize}
 
-En el momento de su creación, el algoritmo LBP tuvo el propósito de ser utilizado para la describir texturas y en representación de rostros \cite{Ahonen2006-gg}; vale mencionar que a lo largo de los años se ha observado un mayor interés en su uso para la representación facial.
+En el momento de su creación, el algoritmo LBP tuvo el propósito de ser utilizado para describir texturas y en representación de rostros \cite{Ahonen2006-gg}; vale mencionar que a lo largo de los años se ha observado un mayor interés en su uso para la representación facial.
 
 El operador LBP, introducido por \cite{Ojala1996-el}, codifica los pixeles de una imagen comparándolo con sus ocho pixeles vecinos en un área de 3x3 partiendo de la esquina superior izquierda. Los valores menores son codificados con 0 y los otros con 1. Los números se concatenan en sentido del reloj partiendo de la esquina superior izquierda para generar un número binario, del cual se obtiene el equivalente en decimal. Este número decimal es conocido como el código LBP. 
 
@@ -95,18 +105,18 @@ Después de que el clasificador es entrenado, puede ser aplicado a una región d
 \subsection{Cascada de Clasificadores Impulsados}
 Para determinar si en una imagen se encuentra una objeto o no, el algoritmo divide la imagen integral en subregiones de tamaños diferentes. Cada subregión es procesada por una serie de clasificadores donde cada uno evalúa si la subregión es el objeto buscado o no.
 
-La palabra “cascada” en el clasificador significa que el clasificador resultante está compuesto por múltiples clasificadores más simples que trabajan en cadena (cascada) sobre una región de interés hasta que una región candidata es rechazada o todos los clasificadores generan resultados positivos. La palabra “impulsado” (boosted) significa que los clasificadores en cada etapa de la cascada son por sí mismos complejos y están compuestos por clasificadores básicos, utilizando un métodos de boosting. El más conocido históricamente es Adaboost. Los clasificadores básicos son clasificadores por árbol de decisión compuestos de por lo menos dos hojas.
+La palabra “cascada” en el clasificador significa que el clasificador resultante está compuesto por múltiples clasificadores más simples que trabajan en cadena (cascada) sobre una región de interés hasta que una región candidata es rechazada o todos los clasificadores generan resultados positivos. La palabra “impulsado” (boosted) significa que los clasificadores en cada etapa de la cascada son por sí mismos complejos y están compuestos por clasificadores básicos, utilizando un método de boosting. El más conocido históricamente es Adaboost. Los clasificadores básicos son clasificadores por árbol de decisión compuestos de por lo menos dos hojas.
 
 La utilización de este algoritmo supone un ahorro de tiempo considerable ya que no serán procesadas subregiones de la imagen que no se sepa con certeza que contienen al objeto y sólo se invertirá tiempo en aquellas subregiones que posiblemente si lo contengan. \cite{Viola2001-rh}
 
 \section{Binarización}
-Como fue descrito en el Cap. Procesamiento de Imagenes Digitales bajo la seccion de Segmentacion de Imagenes Digitales, para la binarización de la imagen se elige un umbral de intensidad y se asigna los valores de los pixeles para distinguir regiones en la imagen.
+Como fue descrito en el Capitulo Procesamiento de Imágenes Digitales bajo la sección de Segmentación de Imágenes Digitales, para la binarización de la imagen se elige un umbral de intensidad y se asigna los valores de los píxeles para distinguir regiones en la imagen.
 
 Esta fase y todas las subsiguientes, ocurren múltiples veces (una por cada región que posiblemente contenga una matrícula)
 
 En este caso, se generan múltiples imágenes binarias para no perder información sobre los caracteres en la imagen. La binarización utiliza el método Wolf-Jolion y el método Sauovola con varios parámetros \cite{Wolf2004-so,Oliveira2009-io}. Cada una de las imágenes binarias son procesadas en las fases subsiguientes.
 \section{Análisis de Caracteres}
-El análisis de caracteres intenta encontrar regiones de tamanhos de caracteres en la región de la matrícula. Primero encuentra todas las masas amorfas (blobs) en la región de la matrícula. Luego, busca las masas amorfas que son aproximadamente del tamaño y ancho de un carácter de una matrícula y tienen “bases y alturas” que están en una línea recta con las otras masas amorfas que tengan un ancho/alto similar.
+El análisis de caracteres intenta encontrar regiones de tamaños de caracteres en la región de la matrícula. Primero encuentra todas las masas amorfas (blobs) en la región de la matrícula. Luego, busca las masas amorfas que son aproximadamente del tamaño y ancho de un carácter de una matrícula y tienen “bases y alturas” que están en una línea recta con las otras masas amorfas que tengan un ancho/alto similar.
 
 Este análisis se hace múltiples veces en la región; comienza primero con caracteres pequeños y luego busca caracteres más grandes.
 
@@ -122,7 +132,7 @@ Se utiliza esta lista de líneas y la altura de los caracteres (computada en An�
 Dados los bordes de la matrícula, la fase de Enderezamiento reorganiza la región de la placa a un tamaño y orientación estándar. Idealmente, esto devuelve una matrícula orientada correctamente (sin rotación o propio enderezamiento).
 
 \section{Segmentación de Caracteres}
-La segmentación de caracteres intenta aislar todos los caracteres contenidos en la imagen de la matrícula. Utiliza un histograma vertical para encontrar los espacios entre los caracteres de la matrícula. Esta fase también limpia el caracteres removiendo las masas amorfas pequeñas y desconectadas y descalificando regiones de caracteres que no son lo suficientemente altos. De igual manera, intenta remover regiones “borde” para que el borde de la matrícula no sea clasificado equivocadamente como un número “1” o una letra “l”. 
+La segmentación de caracteres intenta aislar todos los caracteres contenidos en la imagen de la matrícula. Utiliza un histograma vertical para encontrar los espacios entre los caracteres de la matrícula. Esta fase también limpia los caracteres removiendo las masas amorfas pequeñas que se encuentran desconectadas y descartando regiones de caracteres que no son lo suficientemente altos. De igual manera, intenta remover regiones “borde” para que el borde de la matrícula no sea clasificado equivocadamente como un número “1” o una letra “l”. 
 
 \section{Reconocimiento Óptico de Caracteres (OCR)}
 El reconocimiento óptico de caracteres permite reconocer caracteres en texto escrito \cite{Mithe2013-yn}. La fase de OCR analiza cada carácter independientemente: para cada imagen segmentada, computa todos los caracteres posibles  y sus grados de confianza a través de Tesseract \cite{Tesseract-OCR2016-fe}.

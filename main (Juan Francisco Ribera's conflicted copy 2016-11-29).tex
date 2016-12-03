@@ -1,19 +1,4 @@
 \documentclass[12pt, letterpaper, spanish]{report} % to have chapters
-\usepackage{fontspec}
-% \setmainfont{Arial}
-% \setmainfont[
-% BoldFont=timesbd.ttf,
-% ItalicFont=timesi.ttf,
-% BoldItalicFont=timesbi.ttf,
-% ]{times.ttf}
-% % Arial
-\setmainfont[
-% SizeFeatures={Size=12},
-Scale=1.0909,
-BoldFont=arialbd.ttf,
-ItalicFont=ariali.ttf,
-BoldItalicFont=arialbi.ttf
-]{arial.ttf}
 % \renewcommand{\familydefault}{\sfdefault}
 % % Courier New
 % \setmonofont[Scale=0.90,
@@ -77,8 +62,8 @@ BoldItalicFont=arialbi.ttf
 %     ntilde={ñ},
 %     Euro={€}
 %     }
-% \usepackage{helvet}
-% \renewcommand{\familydefault}{\sfdefault}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
 % IMAGES AND FIGURES
 \usepackage{graphicx}
 \graphicspath{ {images/} }
@@ -127,11 +112,12 @@ BoldItalicFont=arialbi.ttf
 ]{geometry} 
 
 \fancyhf{}
-\fancyhead[R]{\footnotesize\leftmark}
+\fancyhead[R]{\leftmark}
 \fancyhead[C,L]{}
 \fancyfoot[R]{\thepage}
 \fancyfoot[C]{}
-\fancyfoot[L]{\textit{\footnotesize Aplicación Nativa de la Nube con ALPR para el Control Vehicular para QSS Bolivia
+\fancyfoot[L]{\textit{
+    Aplicacion Nativa de la Nube con ALPR para el Control Vehicular \\ para la Empresa QSS Bolivia
 }}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
@@ -142,20 +128,10 @@ BoldItalicFont=arialbi.ttf
     \fancyhead[C,L]{}
     \fancyfoot[R]{\thepage}
     \fancyfoot[C]{}
-    \fancyfoot[L]{\textit{\footnotesize Aplicación Nativa de la Nube con ALPR para el Control Vehicular para QSS Bolivia
+    \fancyfoot[L]{\textit{
+        Aplicacion Nativa de la Nube con ALPR para el Control Vehicular \\ para la Empresa QSS Bolivia
     }}
     \renewcommand{\headrulewidth}{0pt}
-}
-%FIRST PAGES
-\fancypagestyle{first-pages}{
-    \fancyhf{}
-    \fancyhead[R]{}
-    \fancyhead[C,L]{}
-    \fancyfoot[R]{\thepage}
-    \fancyfoot[C]{}
-    \fancyfoot[L]{}
-    \renewcommand{\headrulewidth}{0pt}
-    \renewcommand{\footrulewidth}{0pt}
 }
 
 % OTHER STYLINGS
@@ -191,11 +167,6 @@ BoldItalicFont=arialbi.ttf
 % \setlength{\cfttablenumwidth}{20mm}
 \addtolength\cftfignumwidth{1em}
 \addtolength\cfttabnumwidth{1em}
-\addtolength\cftchapnumwidth{1em}
-\addtolength\cftsecnumwidth{1em}
-\addtolength\cftsubsecnumwidth{1em}
-\addtolength\cftsubsubsecnumwidth{1em}
-\addtolength\cftsecindent{1em}
 
 %   \renewcommand\cfttoctitlefont{\normalsize\normalfont}
 %   \renewcommand\cftbeforetoctitleskip{0pt}
@@ -215,9 +186,6 @@ BoldItalicFont=arialbi.ttf
 \usepackage{minted}
 \usepackage{setspace}
 \usepackage[bottom]{footmisc}
-\usepackage{xcolor}
-\definecolor{LightGray}{rgb}{0.95,0.95,0.95}
-\usepackage{mdframed}
 % \setmainfont[
 % BoldFont=arialbd.ttf,
 % ItalicFont=ariali.ttf,
@@ -229,41 +197,8 @@ BoldItalicFont=arialbi.ttf
 % \setmonofont{Consolas}
     \renewcommand{\baselinestretch}{1.6} 
 
-\usepackage{abstract}
-\renewcommand{\abstractname}{}    % clear the title
-\renewcommand{\absnamepos}{empty} % originally center
-
-\newcolumntype{M}{>{\centering\arraybackslash}m{\dimexpr.5\linewidth-2\tabcolsep}}
-
-\makeatletter
-
-\newcommand\frontmatter{%
-    \cleardoublepage
-  %\@mainmatterfalse
-  \pagenumbering{Roman}}
-
-\newcommand\mainmatter{%
- % \@mainmattertrue
-  \pagenumbering{arabic}}
-
-\newcommand\backmatter{%
-  \if@openright
-    \cleardoublepage
-  \else
-    \clearpage
-  \fi
- % \@mainmatterfalse
-   }
-\newcommand*\NewPage{\newpage\null\thispagestyle{first-pages}\newpage}
-\makeatother
-
-\usepackage{epigraph}
-  \setlength\epigraphwidth{.6\textwidth}
-\setlength\epigraphrule{0pt}
-\usepackage{caption}
-\captionsetup[figure]{font={stretch=1.6}}    %% change 1.2 as you like
 % DOCUMENT
-\title{Aplicación Nativa de la Nube con ALPR para el Control Vehicular para la Empresa QSS Bolivia}
+\title{Aplicacion Nativa de la Nube con ALPR para el Control Vehicular para la Empresa QSS Bolivia}
 \author{Juan Francisco Ribera Laszkowski}
 \begin{document}
 
@@ -284,13 +219,12 @@ BoldItalicFont=arialbi.ttf
     \afterpage{\blankpage}
     \input{first-pages/titlepage-inner}
     \input{first-pages/pre-acknoledgements}
-    \afterpage{\blankpage}
+
     \input{first-pages/acknoledgements}
 
-    \frontmatter % The pages after this command and before the command \mainmatter, will be numbered with lowercase Roman numerals.
     \input{first-pages/abstract}
-    % \afterpage{\blankpage{first-pages}}
-    \NewPage
+    \afterpage{\blankpage}
+
     \input{first-pages/executive-summary}
     
     % TOC
@@ -305,11 +239,10 @@ BoldItalicFont=arialbi.ttf
     % \addcontentsline{toc}{chapter}{List of Tables}
 
     % CHAPTERS
-    % \addtocontents{toc}{\protect\setlength{\cftchapnumwidth}{8mm}}
-    % \addtocontents{toc}{\protect\setlength{\cftsecnumwidth}{10mm}}
-    % \addtocontents{toc}{\protect\setlength{\cftsecindent}{10mm}}
-    \pagebreak
-    \mainmatter % T
+    \addtocontents{toc}{\protect\setlength{\cftchapnumwidth}{8mm}}
+    \addtocontents{toc}{\protect\setlength{\cftsecnumwidth}{10mm}}
+    \addtocontents{toc}{\protect\setlength{\cftsecindent}{10mm}}
+
     \foreach \c in {1,...,9}{\import{chapters/}{chapter0\c.tex} }
     \foreach \c in {0,...,4}{\import{chapters/}{chapter1\c.tex} }
     % APPENDIXES

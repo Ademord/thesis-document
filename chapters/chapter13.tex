@@ -1,1 +1,13 @@
 \chapter{Conclusión}
+El PFG, proporciona una solución que automatiza el proceso de identificación de matrículas con cámaras de seguridad bajo condiciones controladas, haciendo uso de herramientas de visión artificial con el fin de reducir costos de personal innecesarios e incrementar la seguridad dentro de las empresas. Más aún, aprovecha las capacidades de procesamiento del hardware que se dispone, al tener una Arquitectura Orientada a Servicios, que toma en cuenta los factores de  fiabilidad, tolerancia a fallos y escalabilidad, mejorando la calidad del software.
+
+El “prototipo de Aplicación Nativa de la Nube con Reconocimiento Automático de Matrículas para el Control Vehicular para la empresa QSS Bolivia” presentó desafíos y beneficios en su desarrollo e implementación, dada la investigación necesaria para llevar a cabo el trabajo.
+
+No obstante, el éxito de la aplicación recae en:
+\begin{itemize}
+    \item La metodología ICONIX que resultó ser efectiva para la incepción, elaboración y construcción del software a partir de sus requerimientos, utilizando diagramas de robustez para salvar la brecha que existe entre las fases de análisis y diseño. Más aún, se encontró las fortalezas de ICONIX en el desarrollo ágil de una aplicación con arquitectura orientada a servicios. 
+\item Una Arquitectura Orientada a Servicios que introdujo los conceptos de servicios independientes, de bajo acoplamiento y autónomos (entre otros), y permitió desarrollar componentes completamente reusables y tolerantes a fallos, aislando completamente los errores en la aplicación.
+\item A pesar de la curva de aprendizaje requerida, en las librerías de OpenCV y OpenALPR que fueron capaces de implementar las funcionalidades de visión artificial \textit{out-of-the-box} y por lo tanto, permitieron implementar el reconocimiento de matrículas óptimamente.
+\item Kubernetes que fue una herramienta que simplificó la construcción, despliegue, configuración y enlace de contenedores. Más aún, el uso de múltiples contenedores de reconocimiento, permitió reducir cuellos de botella en el procesamiento de imágenes digitales que no se pudo solventar mediante el manejo de hilos.
+\end{itemize}
+El desarrollo de una aplicación nativa de la nube posiciona a QSS Bolivia como pionero en el uso de arquitecturas orientadas a servicios utilizando contenedores, contrastando con el desarrollo de aplicaciones monolíticas, ya que permite satisfacer una demanda de consumidores flexible, permite reutilizar componentes y no depende de una plataforma específica.

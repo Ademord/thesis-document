@@ -1,5 +1,66 @@
-\thispagestyle{empty}
+% \newgeometry{
+%     % top=0.5cm,
+%     top=2.5cm,
+%     bottom=2.5cm,
+%     left=4cm,
+%     right=2.5cm,
+%     headheight=17pt, % as per the warning by fancyhdr
+%     includehead,includefoot,
+%     heightrounded, % to avoid spurious underfull messages
+% }
+{
+\setstretch{1.2}
+\thispagestyle{first-pages}
 
-ABSTRACT...
+\Large \textbf{Abstract}
+\normalsize
+% \parbox{0pt}{\rule{0pt}{5ex+\baselineskip}}\\ \hline
+\capstartfalse
+\begin{table}[h]
+\begin{center}
+\renewcommand{\arraystretch}{0.8}% Tighter
+\begin{tabular}{| >{\centering\arraybackslash}m{1in} | >{\centering\arraybackslash}m{4in} |}
+\hline
+\vspace{0.1cm}
+\textbf{TITULO}  & Aplicacion Nativa de la Nube con ALPR para el Control Vehicular para QSS Bolivia \\ \hline
+\vspace{0.1cm}
+\textbf{AUTOR}  & Juan Francisco Ribera Laszkowski \\ \hline
 
-\clearpage
+\end{tabular}
+\label{tabular:UKJPNdata}
+\end{center}
+\end{table}
+
+\textbf{PROBLEMÁTICA}
+
+El presente proyecto plantea una solución ante la necesidad de automatizar el proceso de identificación de matriculas con cámaras de seguridad, utilizando una arquitectura orientada a servicios con las consideraciones necesarias dados los procesos de visión artificial requeridos y bajo condiciones controladas.
+
+\textbf{OBJETIVO}
+
+Desarrollar un prototipo de Aplicación Nativa de la Nube con Reconocimiento Automático de Matriculas para el Control Vehicular para la empresa QSS Bolivia, y utilizando Kubernetes y las librerías open-source de computación visual OpenCV y OpenALPR, aplicable a un contexto operacional realista.
+
+\textbf{CONTENIDO}
+
+I. Problema de Investigación y Definición del Problema, II. QSS Bolivia, III. Aplicaciones Nativas de la Nube, IV. Procesamiento de Imágenes Digitales, V. Reconocimiento Automático de Matrículas, VI. Arquitectura de Aplicaciones SaaS, VII. Escenario del Problema, VIII. Análisis Preliminar, IX. Análisis y Diseño, X. Implementación, XI. Pruebas, XII. Conclusión, XIII. Recomendaciones, Anexos
+\capstartfalse
+\begin{table}[h]
+\begin{center}
+\renewcommand{\arraystretch}{0.8}% Tighter
+\begin{tabular}{| >{\centering\arraybackslash}m{1.5in} | >{\centering\arraybackslash}m{3.5in} |}
+\hline
+
+\vspace{0.1cm}\textbf{TUTOR}  & José Antonio Benavente Blacutt \\ \hline
+\vspace{0.1cm}\textbf{CARRERA}  & Juan Francisco Ribera Laszkowski \\ \hline
+\vspace{0.1cm}\textbf{DESCRIPTORES}  & Ingeniería de Sistemas \\ \hline
+\vspace{0.1cm}\textbf{E-MAIL}  & j.francisco.ribera@gmail.com \\ \hline
+\vspace{0.1cm}\textbf{FECHA}  & 2016 \\ \hline
+
+\end{tabular}
+\label{tabular:UKJPNdata}
+\end{center}
+\end{table}
+
+% \clearpage
+% \pagebreak
+}
+% \restoregeometry

@@ -4,7 +4,7 @@ La arquitectura de software describe como están conectados los subsistemas que 
 \section{Patrones de Diseño SaaS} 
 Dado el concepto de patrón de diseño:
 \begin{displayquote}
-Los patrones de diseño son estructuras reutilizables, comportamientos, estrategias o técnicas que contienen una solución demostrada para un conjunto de problemas similares, separando las cosas que dinámicas de las estáticas.
+Los patrones de diseño son estructuras reutilizables, comportamientos, estrategias o técnicas que contienen una solución demostrada para un conjunto de problemas similares, separando las cosas que son dinámicas de las estáticas.
 \cite{Fox2013-ct}
 \end{displayquote}
     
@@ -30,7 +30,7 @@ Los patrones de diseño son estructuras reutilizables, comportamientos, estrateg
 En la figura \ref{fig:saas-arch} se observan la estructura de una arquitectura SaaS por niveles y los patrones de diseño que se aplican en cada uno. Estos patrones se describen en las secciones subsiguientes.
 \subsection{Arquitectura Cliente-Servidor}
     
-En la arquitectura cliente-servidor, lo estático es la separación de responsabilidades entre el cliente y el servidor, independiente de la implementación de ambos. Un cliente (navegador web) se encarga interactuar con el usuario y de enviar pedidos al servidor; y, un servidor responde a los pedidos de muchos clientes. 
+En la arquitectura cliente-servidor, lo estático es la separación de responsabilidades entre el cliente y el servidor, independiente de la implementación de ambos. Un cliente (navegador web) se encarga interactuar de con el usuario y de enviar pedidos al servidor; y, un servidor responde a los pedidos de muchos clientes. 
 \subsection{Arquitectura de 3 Niveles y Escalabilidad Horizontal}
 
 Una aplicacion SaaS suele dividirse tres capas lógicas:
@@ -45,7 +45,7 @@ Una aplicacion SaaS suele dividirse tres capas lógicas:
         \caption{Arquitectura en tres capas \protect\cite{Fox2013-ct}}
         \label{fig:three-tier-arch}
     \end{figure}
-La capa de presentación consiste usualmente de un servidor web que acepta pedidos de los usuarios y las reenvía a la capa lógica y crea las vistas. Luego, la capa lógica se ejecuta en un servidor de aplicación y es  donde se ejecuta la aplicación que genera contenido dinámico. Finalmente, la capa de persistencia consiste en una base de datos que contiene la información de la aplicación. En esta arquitectura, como muestra la figura X, las entidades dentro de una capa no se comunican entre ellos, lo que permite escalar los recursos para satisfacer variaciones de demanda con tecnologías de Cloud Computing.
+La capa de presentación consiste usualmente de un servidor web que acepta pedidos de los usuarios y los reenvía a la capa lógica para retornar las vistas que conforman la interfaz de usuario. Luego, la capa lógica se ejecuta en un servidor de aplicación, que es donde se genera el contenido dinámico. Finalmente, la capa de persistencia consiste en una base de datos que contiene la información de la aplicación. En esta arquitectura, como muestra la figura \ref{fig:three-tier-arch}, las entidades dentro de una capa no se comunican entre ellos, lo que permite escalar los recursos para satisfacer variaciones de demanda con tecnologías de Cloud Computing.
 
 \subsection{Arquitectura Modelo-Vista-Controlador}
 
@@ -71,10 +71,10 @@ El patrón Modelo-Vista-Controlador (MVC) es un patrón de arquitectura que orga
         \label{fig:active-record}
     \end{figure}
 \begin{displayquote}
-Un objeto que envuelve una fila en una tabla o vista de una base de datos, encapsula el acceso a la base de datos y agrega lógica del negocio sobre esos datos. 
+"Un objeto que envuelve una fila en una tabla o vista de una base de datos, encapsula el acceso a la base de datos y agrega lógica del negocio sobre esos datos. "
 \cite{Fowler2012-az}
 \end{displayquote}
-Active Record es un patrón de diseño para el manejo de base de datos. Permite que una clase sea capaz de crear, modificar, leer y eliminar (en inglés, CRUD) instancias de si misma en una base de datos, dado que una instancia de un objeto de la clase corresponde a una fila de la tabla de la base de datos. Es aqui que los modelos son capaces de 
+Active Record es un patrón de diseño para el manejo de base de datos. Permite que una clase sea capaz de crear, modificar, leer y eliminar (en inglés, CRUD) instancias de si misma en una base de datos, dado que una instancia de un objeto de la clase corresponde a una fila de la tabla de la base de datos.
 
 \subsection{Routeo mediante REST}
 
@@ -117,9 +117,9 @@ En este sentido, se desarrollaron los frameworks de desarrollo web que proveen u
 
 
 \subsection{Laravel}
-Laravel es un framework de desarrollo web open-source escrito en PHP que sigue una arquitectura Modelo-Vista-Controlador, que refuerza la separación de la logica del negocio de la lógica de presentación asociada a la interfaz de usuario. Laravel soporta transacciones RESTful, plantillas, JSON APIs and gestión de paquetes con Composer \cite{Bean2015-zt}.
-Laravel fue reportado ser ser el Framework de desarrollo web para PHP más popular en 2015 \cite{SitePoint2015-yl}.
-Laravel utiliza una máquina virtual basada en Vagrant, llamada Homestead, que maneja y configura el ambiente de desarrollo. La virtualización consiste en utilizar una máquina virtual para correr un servidor web, una base de datos y scripts; es decir, desarrollar aplicaciones y sitios web dinámicos. Se pueden crear múltiples máquinas virtuales para varios proyectos, las cuales también pueden ser borradas cuando no se necesiten sin afectar al resto.  De igual manera, pueden ser re-creadas en poco tiempo \cite{Wu2016-ws}. Un sitio que vale la pena mencionar que \cite{Tumblr2016-mn} experimentó drásticos cambios de desempeño al migrar a PHP 7. 
+Laravel es un framework de desarrollo web open-source escrito en PHP que sigue una arquitectura Modelo-Vista-Controlador, que refuerza la separación de la logica del negocio de la lógica de presentación asociada a la interfaz de usuario. Laravel soporta transacciones RESTful, plantillas, JSON APIs y gestión de paquetes con Composer \cite{Bean2015-zt}. Laravel fue reportado ser el Framework de desarrollo web para PHP más popular en 2015 \cite{SitePoint2015-yl}.
+
+Laravel utiliza una máquina virtual basada en Vagrant, llamada Homestead, que maneja y configura el ambiente de desarrollo. La virtualización consiste en utilizar una máquina virtual para correr un servidor web, una base de datos y scripts; es decir, desarrollar aplicaciones y sitios web dinámicos. Se pueden crear múltiples máquinas virtuales para varios proyectos, las cuales también pueden ser borradas cuando no se necesiten sin afectar al resto.  De igual manera, pueden ser re-creadas en poco tiempo \cite{Wu2016-ws}. Un sitio que vale la pena mencionar es \citeA{Tumblr2016-mn}, que experimentó drásticos mejoras de desempeño al migrar a PHP 7. 
 
 \subsection{Django}
 Django es un framework de desarrollo web open-source escrito en Python, que sigue la arquitectura Modelo-Vista-Plantilla. El principal objetivo de Django es facilitar la creación de sitios web complejos. Enfatiza la reusabilidad y la capacidad de “enchufar” componentes, desarrollo rápido y el principio de DRY (en  inglés, Don’t Repeat Yourself) \cite{Holovaty2009-jr}. Algunos sitios web desarrollados con Django son:
