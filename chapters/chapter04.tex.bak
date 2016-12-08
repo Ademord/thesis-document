@@ -86,7 +86,7 @@ El umbral de intensidad es el método más sencillo para la tarea de segmentaci�
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.80\textwidth]{umbral-intensidad}
-        \caption{Segmentación bajo diferentes métodos para la determinación del Umbral de Intensidad  \protect\cite{Solomon2011-xz}}
+        \caption{Segmentacion bajo diferentes métodos para la determinación del Umbral de Intensidad  \protect\cite{Solomon2011-xz}}
         \label{fig:umbral-intensidad}
     \end{figure}
     

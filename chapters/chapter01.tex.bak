@@ -13,7 +13,7 @@
 \section{Definición del Problema}
 Previa recopilación de datos se pudo recolectar información acerca de las falencias en cuanto a la utilización de sistemas de seguridad para el control vehicular. Las falencias encontradas son las siguientes:
 \begin{itemize}
-  \item En un contexto local, no se utilizan tecnologías de la nube para el desarrollo de servicios o aplicaciones en la nube (privada o pública), ni se promueve el desarrollo utilizando Arquitecturas Orientadas a Servicios, lo cual es una deficiencia pues no se considera ni refuerza la interoperabilidad, reusabilidad/bajo acoplamiento, aislamiento de errores, aprovechamiento de recursos tanto virtuales como físicos, etc.. 
+  \item En un contexto local, no se utilizan tecnologias de la nube para el desarrollo de servicios o aplicaciones en la nube (privada o pública), ni se promueve el desarrollo utilizando Arquitecturas Orientadas a Servicios, lo cual es una deficiencia pues no se considera ni refuerza la interoperabilidad, reusabilidad/bajo acoplamiento, aislamiento de errores, aprovechamiento de recursos tanto virtuales como físicos, etc.. 
   \item Las instituciones locales no suelen contar con soluciones que proporcionen descriptores visuales para el manejo de la información registrada en los vídeos de las cámaras de seguridad. 
   \item No existen soluciones que identifiquen matriculas o cumplan con la tarea del punto anterior a bajo costo y adaptadas al mercado local que aporten a la seguridad de las instituciones.
   \item También se tiene deficiencias en cuanto a la recopilación de información correspondiente a los vehículos que ingresan a la institución, generación de reportes y monitoreo de los vehículos.
@@ -56,7 +56,7 @@ Previa recopilación de datos se pudo recolectar información acerca de las fale
     
 
     \end{itemize}
-\section{Metodología}
+\section{Metodologia}
 \subsection{Contexto de Ágil}
 En el momento de definir la metodología más adecuada para el Proyecto Final de Grado (PFG) es esencial tomar en cuenta la naturaleza del mismo.
 
@@ -80,7 +80,7 @@ Dado esto, surge la necesidad de una metodología de software que pueda lidiar c
             \label{fig:pp-sw-small}
         \end{figure}
 
-En este sentido, se alcanza una armonía entre la naturaleza SaaS del PFG y las características de las metodologías ágiles, al estar el PFG  bajo una perspectiva de descomposición en componentes con interfaces bien definidas (Capítulos II y VI), la constante interacción con el cliente y entrega de prototipos.
+En este sentido, se alcanza una armonía entre la naturaleza SaaS del PFG y las características de las metodologías ágiles, al estar el PFG  bajo una perspectiva de descomposición en componentes con interfaces bien definidas (Capítulos II y VI), la constante interaccion con el cliente y entrega de prototipos.
 
 \subsection{ICONIX}
 Dado el contexto de ágil, descrito en la sección anterior y la experiencia en proyectos pasados utilizando el Proceso Unificado de Rational (RUP), se definió que la metodología ágil más adecuada para el PFG es ICONIX, basado en lo que establecen \citeA{Rosen05-ct}, en \textit{Agile Development with ICONIX Process: People, Process, and Pragmatism}. 

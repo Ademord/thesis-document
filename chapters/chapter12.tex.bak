@@ -22,9 +22,9 @@ De cada consulta se obtuvo las respuestas HTTP exitosas correspondientes a cada 
 \textbf{Propósito}                  & El propósito de esta prueba es asegurar que la interfaz del servicio puede soportar introducción de una consulta REST invalida.  \\ \midrule
 \textbf{Dependencias externas}      &  - . \\ \cmidrule{1-2}
 \textbf{Descripción}   & 1. Iniciar Postman. \\ 
-\textbf{de la Prueba}                                    & 2. Introducir la URI, el método HTTP, las cabeceras y el cuerpo de la consulta. \\
-                                    & 3. Enviar una consulta cualquiera, o caracteres inválidos. \\ \cmidrule{1-2} 
-\textbf{Resultados Esperados}       &  El servicio retorna un mensaje con código HTTP 404, consulta sin respuesta debido a que no existe. \\ \bottomrule
+\textbf{de la Prueba}                                    & 2. Introducir la URI, el metodo HTTP, las cabeceras y el cuerpo de la consulta. \\
+                                    & 3. Enviar una consulta cualquiera, o caracteres invalidos. \\ \cmidrule{1-2} 
+\textbf{Resultados Esperados}       &  El servicio retorna un mensaje con codigo HTTP 404, consulta sin respuesta debido a que no existe. \\ \bottomrule
 \caption{Prueba de Integración - Consulta Invalida} \label{tab:prueba-cons1}  \\
 \end{longtable}
   
@@ -56,8 +56,8 @@ De cada consulta se obtuvo las respuestas HTTP exitosas correspondientes a cada 
 \pagebreak
 \subsubsection{Consulta de Múltiples Resultados}
 \begin{longtable}{@{} p{3cm} p{10cm} @{}} \toprule
-\textbf{Propósito}                  & El propósito de esta prueba es asegurar que la interfaz del servicio puede soportar el caso en el que múltiples elementos concuerdan con la consulta.  \\ \midrule
-\textbf{Dependencias externas}      & Encontrar un nombre u otro atributo de elementos que existan apliquen a múltiples entradas en la base de datos. \\ \cmidrule{1-2}
+\textbf{Propósito}                  & El propósito de esta prueba es asegurar que la interfaz del servicio puede soportar el caso en el que ultiples elementos concuerdan con la consulta.  \\ \midrule
+\textbf{Dependencias externas}      & Encontrar un nombre u otro atributo de elementos que existan apliquen a multiples entradas en la base de datos. \\ \cmidrule{1-2}
 \textbf{Descripción}   & 1. Iniciar Postman. \\ 
 \textbf{de la Prueba}                                    & 2. Ingresar y enviar la consulta con un nombre o atributo de un elemento con múltiples entradas en la base de datos. \\ \cmidrule{1-2} 
 \textbf{Resultados Esperados}       & El servicio retorna múltiples resultados. \\ \bottomrule

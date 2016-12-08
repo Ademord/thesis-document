@@ -67,7 +67,7 @@ El patrón Modelo-Vista-Controlador (MVC) es un patrón de arquitectura que orga
 \begin{figure}[H]
         \centering
         \includegraphics[width=0.55\textwidth]{active-record}
-        \caption{Patrón de Arquitectura MVC \protect\cite{Fowler2012-az}}
+        \caption{Patron de Arquitectura MVC \protect\cite{Fowler2012-az}}
         \label{fig:active-record}
     \end{figure}
 \begin{displayquote}
@@ -78,7 +78,7 @@ Active Record es un patrón de diseño para el manejo de base de datos. Permite 
 
 \subsection{Routeo mediante REST}
 
-Los controladores son los encargados de mapear las solicitudes HTTP al correspondiente método en el modelo. Este mapeo se llama rutas o routeo. Las solicitudes HTTP están compuestas de su URI y de su método HTTP. En su tesis doctoral, \citeA{Fielding-rt} propuso una manera de describir en las solicitudes HTTP las acciones que se desea ejecutar y sobre que recursos.
+Los controladores son los encargados de mapear las solicitudes HTTP al correspondiente metodo en el modelo. Este mapeo se llama rutas o routeo. Las solicitudes HTTP estan compuestas de su URI y de su método HTTP. En su tesis doctoral, \citeA{Fielding-rt} propuso una manera de describir en las solicitudes HTTP las acciones que se desea ejecutar y sobre que recursos.
 
 \begin{figure}[H]
         \centering

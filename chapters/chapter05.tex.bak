@@ -32,7 +32,7 @@ OpenALPR es una librería open-source de visión artificial que se encarga de la
   \begin{figure}[H]
         \centering
         \includegraphics[width=0.90\textwidth]{openalpr-pipeline}
-        \caption{Representación gráfica de una cadena de procesos (en inglés, Pipeline) \protect\cite{Saini2015-yp}}
+        \caption{Representación gráfica de una cadena de procesos (en ingles, Pipeline) \protect\cite{Saini2015-yp}}
         \label{fig:openalpr-pipeline}
 \end{figure}
     
@@ -43,20 +43,20 @@ OpenCV es una librería open-source bajo la licencia BSD que contiene cientos de
 \begin{itemize}
 \item \textbf{core} - define las estructuras de datos y las funciones básicas utilizadas por todos los otros módulos.
 \item \textbf{imgproc} - módulo de procesamiento de imágenes que incluye filtros lineales y no lineales, transformaciones geométricas (resize, affine y perspective warping, generic table-based remapping), inversión del espacio de colores, histogramas, etc.
-\item \textbf{video} - módulo de análisis de vídeo que incluye estimación de movimiento, sustracción de fondo y algoritmos de seguimiento de objetos.
+\item \textbf{video} - módulo de análisis de video que incluye estimación de movimiento, sustracción de fondo y algoritmos de seguimiento de objetos.
 \item \textbf{calib3d} - módulo de algoritmos básicos de multiple-view geometry, calibración singular y estéreo de cámaras, estimación de pose de objeto, algoritmos de correspondencia estéreo y, reconstrucción de elementos 3D.
 \item \textbf{features2d} - módulo de detectores de características sobresalientes, descriptores e igualadores de descriptores.
 \item \textbf{objdetect} - módulo de detección de objetos e instancias de clases predefinidas (por ejemplo, rostros, ojos, tazas, personas, autos, etc.)
-\item \textbf{highgui} - módulo con una interfaz intuitiva para la captura de vídeo, codecs de imágenes o vídeo y capacidades de UI sencillas
+\item \textbf{highgui} - módulo con una interfaz intuitiva para la captura de video, codecs de imágenes o vídeo y capacidades de UI sencillas
 \item \textbf{gpu} - módulo con algoritmos acelerados para el GPU de diferentes módulos de OpenCV
 \item ... y otros módulos de ayuda como FLANN y envoltorios de pruebas de Google, bindings para Python, etc.    
 \end{itemize}
 
 
 \section{Pre-Procesamiento}
-El pre-procesamiento puede ser útil para acelerar el proceso de cómputo a la hora de detectar un objeto. Por ejemplo, si se quiere realizar un reconocimiento de rostros en tiempo real a través de una transmisión de vídeo en alta calidad, la computadora debe manejar grandes cantidades de píxeles por segundo y, presentarlos a un algoritmo de reconocimiento de patrones puede ser computacionalmente factible. 
+El pre-procesamiento puede ser útil para acelerar el proceso de cómputo a la hora de detectar un objeto. Por ejemplo, si se quiere realizar un reconocimiento de rostros en tiempo real a través de una transmisión de video en alta calidad, la computadora debe manejar grandes cantidades de pixeles por segundo y, presentarlos a un algoritmo de reconocimiento de patrones puede ser computacionalmente factible. 
 
-El objetivo del pre-procesamiento es encontrar características que se obtengan rápidamente y que mantengan información útil para la discriminación de clases. Por ejemplo, el valor medio de la intensidad en una subregión rectangular en una imagen puede ser calculado de una manera muy eficiente \cite{Viola2004-bx}, y un conjunto de estos descriptores puede ser muy efectiva para la rápida detección de rostros.
+El objetivo del pre-procesamiento es encontrar características que se obtengan rápidamente y que mantengan información útil para la discriminación de clases. Por ejemplo, el valor medio de la intensidad en una subregión rectangular en una imagen puede ser calculado de una manera muy eficiente \cite{Viola2004-bx}, y un conjunto de estos descriptores puede ser muy efectiva para la rapida deteccion de rostros.
 
 No obstante, se debe tener cuidado con los métodos de preprocesamiento porque frecuentemente se descarta información; y, cuando esta información es importante para las solución del problema entonces la precisión total del sistema puede fallar \cite{Bishop2007-am}.
 
@@ -64,6 +64,8 @@ No obstante, se debe tener cuidado con los métodos de preprocesamiento porque f
 La fase de detección sucede una vez por cada imagen recibida (entrada). OpenALPR utiliza el algoritmo LBP (usualmente utilizado para la detección de rostros) para encontrar regiones posibles que contengan matrículas (x, y, ancho, alto). Luego, cada una de estas regiones se envía a los siguientes subprocesos de la cadena.
 
 La fase de detección es usualmente la de mayor intensidad computacional; para solventar esto se la puede acelerar por GPU para mejorar el desempeño. 
+
+\subsection{Medida de Error de un Detector}
 
 \subsection{Algoritmo del Patrón Binario Local}
 El reconocimiento de objetos mediante visión artificial involucra dos aspectos importantes \cite{Huang2011-ud}: representación del objeto \cite{Ahonen2006-gg} y diseño del clasificador \cite{Cover1967-vb,Wright2009-en,Cortes1995-qx}. La representación del objeto consiste en obtener un conjunto de características relevantes que describan el objeto, a partir de las imágenes originales. Las características “buenas” deben \cite{Hadid2004-dk}:
@@ -75,31 +77,11 @@ El reconocimiento de objetos mediante visión artificial involucra dos aspectos 
 \end{itemize}
 
 En el momento de su creación, el algoritmo LBP tuvo el propósito de ser utilizado para describir texturas y en representación de rostros \cite{Ahonen2006-gg}; vale mencionar que a lo largo de los años se ha observado un mayor interés en su uso para la representación facial.
-\begin{figure}[H]
-        \centering
-        \includegraphics[width=0.9\textwidth]{lbp-operator}
-        \caption{El operador LBP inicial \protect\cite{Ahonen2006-gg}}
-        \label{fig:lbp-operator}
-    \end{figure}
-    
-El operador LBP (Figura \ref{fig:lbp-operator}), introducido por \cite{Ojala1996-el}, codifica los píxeles de una imagen comparándolo con sus ocho píxeles vecinos en un área de 3x3 partiendo de la esquina superior izquierda. Los valores menores son codificados con 0 y los otros con 1. Los números se concatenan en sentido del reloj partiendo de la esquina superior izquierda para generar un número binario, del cual se obtiene el equivalente en decimal. Este número decimal es conocido como el código LBP. 
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.85\textwidth]{lbp-representacion-facial}
-        \caption{Representación facial con LBP \protect\cite{Chang2004-ieee}}
-        \label{fig:lbp-representacion-facial}
-    \end{figure}
-Como se observa en la figura \ref{fig:lbp-representacion-facial}, a partir de una imagen, o región de una imagen, se puede obtener un histograma de los códigos LBP observados en los píxeles de la región. Este histograma es también llamado un descriptor LBP o patrón LBP.
+El operador LBP, introducido por \cite{Ojala1996-el}, codifica los pixeles de una imagen comparándolo con sus ocho pixeles vecinos en un área de 3x3 partiendo de la esquina superior izquierda. Los valores menores son codificados con 0 y los otros con 1. Los números se concatenan en sentido del reloj partiendo de la esquina superior izquierda para generar un número binario, del cual se obtiene el equivalente en decimal. Este número decimal es conocido como el código LBP. 
 
-Posteriormente, \cite{Ojala2002-pl} propusieron dos extensiones al operador original. Primero, el operador fue extendido para poder cambiar el radio de la vecindad y la cantidad de vecinos y así poder capturar características dominantes en diferentes escalas. Segundo, propusieron utilizar un subconjunto de los $2^P$ patrones generados por LBP en una región para describir la textura de las imágenes. Estos patrones, llamados patrones uniformes, contenían como máximo dos transiciones de 0 a 1 en su cadena de bits, donde 00111000 tiene dos transiciones y 00010011 no. La idea de utilizar únicamente estos patrones uniformes es debido a que en ellos se encuentra la mayor parte de la información de las texturas en una imagen. La figura \ref{fig:lbp-texturas-primitivas} muestra las texturas primitivas que se encuentran a partir de los patrones LBP.
-
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.85\textwidth]{lbp-texturas-primitivas}
-        \caption{Texturas Primitivas con LBP \protect\cite{Chang2004-ieee}}
-        \label{fig:lbp-texturas-primitivas}
-    \end{figure}
+A partir de una imagen, o región de una imagen, se puede obtener un histograma de los códigos LBP observados en los pixeles de la región. Este histograma es también llamado un descriptor LBP o patrón LBP.
+Posteriormente, \cite{Ojala2002-pl} propusieron dos extensiones al operador original. Primero, el operador fue extendido para poder cambiar el radio de la vecindad y la cantidad de vecinos y así poder capturar características dominantes en diferentes escalas. Segundo, propusieron utilizar un subconjunto de los $2^P$ patrones generados por LBP en una región para describir la textura de las imágenes. Estos patrones, llamados patrones uniformes, contenían como máximo dos transiciones de 0 a 1 en su cadena de bits, donde 00111000 tiene dos transiciones y 00010011 no. La idea de utilizar únicamente estos patrones uniformes es debido a que en ellos se encuentra la mayor parte de la información de las texturas en una imagen. 
 
 \subsection{Descriptores LBP}
 La imagen de un objeto puede considerarse como una composición de los micro-patrones LPB. Al generar un histograma LBP a partir de la imagen, se obtiene las ocurrencias de los micro-patrones pero no su ubicación en la imagen. 
@@ -122,12 +104,7 @@ Después de que el clasificador es entrenado, puede ser aplicado a una región d
 
 \subsection{Cascada de Clasificadores Impulsados}
 Para determinar si en una imagen se encuentra una objeto o no, el algoritmo divide la imagen integral en subregiones de tamaños diferentes. Cada subregión es procesada por una serie de clasificadores donde cada uno evalúa si la subregión es el objeto buscado o no.
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.85\textwidth]{lbp-detection-cascade}
-        \caption{Esquema de la Detección en Cascada\protect\cite{Chang2004-ieee}}
-        \label{fig:lbp-detection-cascade}
-    \end{figure}
+
 La palabra “cascada” en el clasificador significa que el clasificador resultante está compuesto por múltiples clasificadores más simples que trabajan en cadena (cascada) sobre una región de interés hasta que una región candidata es rechazada o todos los clasificadores generan resultados positivos. La palabra “impulsado” (boosted) significa que los clasificadores en cada etapa de la cascada son por sí mismos complejos y están compuestos por clasificadores básicos, utilizando un método de boosting. El más conocido históricamente es Adaboost. Los clasificadores básicos son clasificadores por árbol de decisión compuestos de por lo menos dos hojas.
 
 La utilización de este algoritmo supone un ahorro de tiempo considerable ya que no serán procesadas subregiones de la imagen que no se sepa con certeza que contienen al objeto y sólo se invertirá tiempo en aquellas subregiones que posiblemente si lo contengan. \cite{Viola2001-rh}

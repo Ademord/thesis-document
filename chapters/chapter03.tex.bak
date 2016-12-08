@@ -17,7 +17,7 @@
     
     Este tipo de aplicaciones muestran comportamientos y características comunes, pero cabe mencionar que es la arquitectura de la aplicación y no la plataforma destino lo que la convierte en una aplicación nativa de la nube. De acuerdo con los principios de aplicaciones orientadas a servicios, la arquitectura de una aplicación debe tener bajo acoplamiento y hacer uso de patrones de comunicación asíncronos y sin bloqueo. 
     
-    Más aún, es clave para un diseño nativo de la nube exitoso incluir funcionalidades como pooling de recursos, tenencia múltiple, “a pedido” (on-demand) y auto-abastecimiento, y principalmente escalabilidad. El último, por ejemplo, se basa en métricas a partir de monitoreo mientras se añaden o eliminan recursos. Cuando estas métricas indican que la demanda aumenta, nuevos recursos son automáticamente añadidos en base a acciones pro-activas y/o reactivas. Esto se conoce como escalar hacia fuera. El inverso también existe: cuando la demanda disminuye, los recursos son eliminados, esto se conoce como escalar hacia dentro. Este comportamiento de escalabilidad proporcionan confiabilidad pues la aplicación no percibe ningún tiempo muerto o degradación en la calidad del servicio. De la misma manera, una aplicación nativa de la nube expone actualizaciones sin ninguna percepción de tiempo muerto. 
+    Más aún, es clave para un diseño nativo de la nube exitoso incluir funcionalidades como pooling de recursos, tenencia múltiple, “a pedido” (on-demand) y autoabastecimiento, y principalmente escalabilidad. El último, por ejemplo, se basa en métricas a partir de monitoreo mientras se añaden o eliminan recursos. Cuando estas métricas indican que la demanda aumenta, nuevos recursos son automáticamente añadidos en base a acciones proactivas y/o reactivas. Esto se conoce como escalar hacia fuera. El inverso también existe: cuando la demanda disminuye, los recursos son eliminados, esto se conoce como escalar hacia dentro. Este comportamiento de escalabilidad proporcionan confiabilidad pues la aplicación no percibe ningún tiempo muerto o degradación en la calidad del servicio. De la misma manera, una aplicación nativa de la nube expone actualizaciones sin ninguna percepción de tiempo muerto. 
     
     De manera que las acciones de escalabilidad suceden cuando la aplicación se está ejecutando, surge la oportunidad de realizar optimizaciones tales como reducir el costo al reducir el número de recursos utilizados o el cambio de ubicación de recursos para proporcionar una menor latencia. Una aplicación nativa de la nube debe respetar los principios de computación en la nube que se describen a continuación.
 	
@@ -107,7 +107,7 @@
             \label{fig:fowler2}
         \end{figure}
 
-        Los microservicios pueden utilizar diferentes lenguajes de programación o tecnologías de bases de datos el momento de conformar servicios compuestos. Los microservicios son típicamente provistos y manejados por un proveedor de aplicaciones único, pero también pueden ser provistos por proveedores externos (ante lo último es necesario mantener los mismos principios de gestión para alcanzar los mismos objetivos generales de confiabilidad).
+        Los microservicios pueden utilizar diferentes lenguajes de programación o tecnologías de bases de datos el momento de conformar servicios compuestos. Los microservicios son típicamente provistos y manejados por un proveedor de aplicaciones único, pero también pueden ser provistos por proveedores externos (ante lo último es necesario mantener los mismos principios de gestion para alcanzar los mismos objetivos generales de confiabilidad).
         
         Por otro lado, en las arquitecturas de microservicios, varios patrones pueden ser utilizados para garantizar un comportamiento resistente y de rápida reacción al fracaso. Por ejemplo, el patrón de diseño "Circuit-breaker" \cite{Nygard2007-ed} o balanceo de carga (load balancing) en el lado del cliente como el "Netflix Ribbon" \cite{Netflix2016-ri}. El típico escenario de despliegue tiene múltiples instancias del mismo microservicio ejecutándose simultáneamente (posiblemente con mecanismos de sincronización para servicios con estados). La lógica subyacente involucra: 
         \begin{itemize}
@@ -197,7 +197,7 @@ Cloudify aporta a la comunidad open-source publicando una de las capacidades pri
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.80\textwidth]{cloudify-mgr}
-    \caption{Resumen de la Arquitectura del Manager de Cloudify \protect\cite{Cloudify2016-ze}}
+    \caption{Resumen de la Arquitectura de  Manager de Cloudify \protect\cite{Cloudify2016-ze}}
     \label{fig:cloudify-mgr}
 \end{figure}
 

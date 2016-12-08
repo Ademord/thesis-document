@@ -13,7 +13,7 @@ Dado el nivel actual de las tecnologías descrito en los capítulos III-VI, para
 
 \section{Tecnologías de Soporte}
 \begin{itemize}
-    \item Kubernetes para la gestión y configuración de clústeres de contendedores, dados los casos de uso exitosos en producción en compañías como Google, SAP, Ebay, Box \cite{Kubernetes2016-ub}; y el poder de ser ejecutado en cualquier nube.
+    \item Kubernetes para la gestión y configuración de clusteres de contendedores, dados los casos de uso exitosos en producción en compañías como Google, SAP, Ebay, Box \cite{Kubernetes2016-ub}; y el poder de ser ejecutado en cualquier nube.
     
     \item Laravel como Framework de desarrollo web, elegido en base a la experiencia del equipo de programadores con esta herramienta, la documentación que provee Laravel y las capacidades que posee, descritas en el Capitulo 5.
         
@@ -335,13 +335,13 @@ if __name__ == '__main__':
 \end{minted}
 \end{mdframed}
 
-Con estos archivos se puede montar un servicio en un clúster de Kubernetes\footnote{\url{http://kubernetes.io/docs/hellonode/}}. Cabe recordar que existen diversas alternativas de Infraestructura como Servicio (IaaS) en el momento de utilizar Kubernetes\footnote{\url{http://kubernetes.io/docs/getting-started-guides/}}:
+Con estos archivos se puede montar un servicio en un cluster de Kubernetes\footnote{\url{http://kubernetes.io/docs/hellonode/}}. Cabe recordar que existen diversas alternativas de Infraestructura como Servicio (IaaS) en el momento de utilizar Kubernetes\footnote{\url{http://kubernetes.io/docs/getting-started-guides/}}:
 \begin{itemize}
 \item \textbf{Nubes Públicas:} contratar un proveedor de IaaS y montar el cluster de Kubernetes sobre sus recursos de cómputo, almacenamiento, redes, etc. como AWS, Google Cloud, etc.
 \item \textbf{Nubes Privadas:} alojar la aplicación en servidores físicos en las instalaciones de la empresa.
 \item \textbf{Nubes Híbridas:} mantener cierta parte de la infraestructura in-situ (en las instalaciones), donde la estrategia general es desplegar los nodos de aplicación en la nube y mantener las bases de datos en los datacenter de la empresa.
  \end{itemize}
-A pesar de estas alternativas, posterior a pruebas de despliegue en nubes públicas, se registró una latencia de 4 a 12 segundos en el envío de cuadros de vídeo a través de Internet. Esta latencia se encuentra presente debido a la infraestructura del internet de Bolivia y, se traduce en un requerimiento de desplegar la aplicación en una nube privada, donde no existe esta condicionante.
+A pesar de estas alternativas, posterior a pruebas en despliegues en nubes públicas, se registró una latencia de 4 a 12 segundos en el envío de cuadros de vídeo a través de Internet. Esta latencia se encuentra presente debido a la infraestructura del internet de Bolivia y, se traduce en un requerimiento de desplegar la aplicación en una nube privada, donde no existe esta condicionante.
 
 \section{Recolección, Reconocimiento y Almacenamiento}
 \subsection{Descripción}
@@ -355,19 +355,16 @@ El servicio Reconocedor procesa cada cuadro y si encuentra una matricula la env�
 Inicialmente, el servicio recolector y el servicio reconocedor fueron implementados con una arquitectura monolítica. Posterior a pruebas, se observó que la cantidad de cuadros generados saturaba al modulo de reconocimiento, por lo que se intento utilizar hilos para tener procesamiento en paralelo y solventar el problema generado por la tasa de servicio. Ante esto, se observó deficiencias en este nuevo modelo de proceso, debido a que:
 \pagebreak
 \begin{enumerate}
-\item no se podía utilizar el patrón de mensajería Dispersión (en ingles, Fan Out\footnote{\url{http://www.ibm.com/support/knowledgecenter/SSCGGQ_1.2.0/com.ibm.ism.doc/Planning/ov00101_.html}}), que permite el envío de un mensaje a múltiples destinos para realizar procesamiento en paralelo, sin implementaciones tediosas y robustas en conocimiento en patrones de hilos, 
-\item se observó que al ejecutar una solución que ejecute hilos, se obtenía un único proceso python que manejaba hilos donde cada uno lee cuadros de vídeo en mediana-alta calidad, los redirecciona y posteriormente los procesa para reconocer matriculas en los mismos. Esto incurría en un proceso python que hacía alto uso de memoria, ineficientemente, principalmente debido al:
+\item no se podía utilizar el patrón de mensajería Dispersión\footnote{\url{http://www.ibm.com/support/knowledgecenter/SSCGGQ_1.2.0/com.ibm.ism.doc/Planning/ov00101_.html}} (en ingles, Fan Out), que permite el envió de un mensaje a múltiples destinos para realizar procesamiento en paralelo, sin implementaciones tediosas y robustas en conocimiento en patrones de hilos, 
+\item se observo que al ejecutar una solución que ejecute hilos, se obtenía un único proceso python que manejaba hilos donde cada uno lee cuadros de vídeo en mediana-alta calidad, los redirecciona y posteriormente los procesa para reconocer matriculas en los mismos. Esto incurría en un proceso python que utilizaban memoria ineficientemente principalmente debido al:
     \begin{itemize}
-    \item \textit{overhead} generado en la ejecución de un solo proceso que a su vez ejecutaba hilos\footnote{\url{https://wiki.python.org/moin/GlobalInterpreterLock}} que se turnaban para ser ejecutados 
+    \item \textit{overhead} generado en la ejecución de un solo proceso que a su vez ejecutaba hilos 
     \item manejo de memoria compartida a través de hilos que realizan procesamiento costoso 
     \end{itemize}
 \end{enumerate}
 
-Una alternativa al problema de los hilos es la utilización de múltiples nodos con múltiples procesos Python intercomunicados. Aquí es donde se considera al contenedor como la unidad básica de multiprocesamiento (entre otras cosas), tanto como para obtener un ambiente de comunicación homogéneo como para reducir la complejidad de la solución al no utilizar múltiples abstracciones para delegar responsabilidades; y principalmente, se realiza la migración de una arquitectura monolítica a una arquitectura orientada a servicios.
-
-Cabe recalcar que la implementación mediante contenedores también permitió aislar errores encontrados, desplegar sobre cualquier plataforma y maximizar el rendimiento optimizando el uso de recursos. 
-
-A continuación se adjuntan el código fuente involucrado en la implementación de cada servicio, detallando un poco mas en el Servicio Reconocedor (archivos .json).
+La implementación del Servicio Recolector y el Servicio Reconocedor con contenedores permitió solventar este problema, debido a que capacidad de escalar la aplicación elimina la propuesta de utilización de hilos en una arquitectura monolítica. 
+Más aun, la implementación mediante contenedores permitió aislar los errores encontrados, desplegar sobre cualquier plataforma y maximizar desempeño optimizando el uso de recursos. A continuación se adjuntan el codigo fuente involucrado en la implementación de cada servicio, detallando un poco mas en el Servicio Reconocedor (archivos .json).
 % \pagebreak
 \subsubsection{Servicio Recolector}
 {\sffamily \textbf{server.py}}
@@ -435,7 +432,7 @@ numpy
 argparse
 \end{minted}
 \end{mdframed}
-\pagebreak
+
 { \sffamily \textbf{Dockerfile}}
 \vspace{0.1cm}
 \begin{mdframed}[linecolor=black, topline=true, bottomline=true,
@@ -572,7 +569,7 @@ if __name__ == '__main__':
 
 \end{minted}
 \end{mdframed}
-
+\pagebreak
 {\sffamily \textbf{deployment.json}}
 \begin{mdframed}[linecolor=black, topline=true, bottomline=true,
   leftline=false, rightline=false, backgroundcolor=LightGray,userdefinedwidth=\textwidth]
